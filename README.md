@@ -67,4 +67,21 @@ create table User_Group(
 	status varchar(1),
 	"joinAt" Date
 );
+
 ---------------------------------------------------------------------
+
+USAGE:
+1. Run in the fitnesschallengeapp_backend folder first.
+$npm run start:dev
+2. Example code below
+'''
+const url = "http://localhost:3210/api";
+export const  = data => {
+  return axios
+  .post(url + "/user", {
+  })
+  .then(res => {
+    console.log(res);
+  });
+}
+'''
