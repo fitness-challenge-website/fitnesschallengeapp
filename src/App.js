@@ -4,6 +4,7 @@ import firebase from "firebase"
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 import Modal from "react-responsive-modal";
 import Button from 'react-bootstrap/Button'
+import UserDash from './components/UserDash'
 
 
 
@@ -52,7 +53,7 @@ class App extends Component {
       <div className="App">
         <h1> Welcome to Fitness Challenge App! </h1>
         <h3> version 1.0 </h3>
-
+        <UserDash />
 { /* ------------ LOGIN SECTION ------------ */ }
         <Button varient="primary" onClick={this.onOpenModal}>Login</Button>
         <Modal open={open} onClose={this.onCloseModal} center>
