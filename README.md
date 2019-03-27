@@ -1,7 +1,8 @@
 1. Install PostgreSQL online (https://www.postgresql.org/download/)
 2. In ./fitnesschallengeapp_backend/server/config/config.json, put your password of postgres
 3. Setting up database. DDL is below
----------------------------------------------------------------------
+
+```
 create database fitness;
 
 create table "User"(
@@ -68,13 +69,13 @@ create table User_Group(
 	"joinAt" Date
 );
 
----------------------------------------------------------------------
+```
 
 USAGE:
 1. Run in the fitnesschallengeapp_backend folder first.
 $npm run start:dev
 2. Example code below
-'''
+```
 const url = "http://localhost:3210/api";
 export const  = data => {
   return axios
@@ -84,4 +85,4 @@ export const  = data => {
     console.log(res);
   });
 }
-'''
+```
