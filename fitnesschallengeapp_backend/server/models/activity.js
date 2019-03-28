@@ -4,6 +4,10 @@ module.exports = (sequelize, DataTypes) => {
           primaryKey: true,
           autoIncrement: true},
     a_name: DataTypes.STRING,
+    a_description: DataTypes.STRING,
+    a_type: DataTypes.STRING,
+    a_duration: DataTypes.INTEGER,
+    a_distance: DataTypes.INTEGER,
     avg_calorie: DataTypes.INTEGER
   }, {
     tableName: 'activity',

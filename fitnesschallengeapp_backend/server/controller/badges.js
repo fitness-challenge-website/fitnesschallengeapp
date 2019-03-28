@@ -8,6 +8,5 @@ module.exports = {
   update(req, res){
   },
   getData(req, res){
-
   }
 }
