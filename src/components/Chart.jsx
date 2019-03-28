@@ -37,7 +37,7 @@ class Chart extends Component {
             dailyLog[i] = Math.floor(Math.random() * 10);
         }
         for (let i = 0; i < 12; i++) {
-            monthlyLog[i] = Math.floor(Math.random() * 10);
+            monthlyLog[i] = Math.floor(Math.random() * 100);
         }
 
         //Update state with activity logs and update the chart
@@ -63,18 +63,26 @@ class Chart extends Component {
             for (let i = 0; i < 7; i++) {
                 labels[7 - i] = moment()
                     .subtract(i, 'day')
-                    .format('l');
-                data[i] = this.getNumActivities('Month', i + 23);
+                    .format('dddd');
+                data[i] = this.getNumActivities('Day', i + 23);
             }
             dataLabel = 'Week';
         } else if (timescale === 'Month') {
             for (let i = 0; i < 30; i++) {
                 labels[30 - i] = moment()
                     .subtract(i, 'day')
-                    .format('l');
-                data[i] = this.getNumActivities('Month', i);
+                    .format('MMM Do');
+                data[i] = this.getNumActivities('Day', i);
             }
             dataLabel = 'Month';
+        } else if (timescale === 'Year') {
+            for (let i = 0; i < 12; i++) {
+                labels[12 - i] = moment()
+                    .subtract(i, 'month')
+                    .format('MMMM YY');
+                data[i] = this.getNumActivities('Month', i);
+            }
+            dataLabel = 'Year';
         }
         this.updateChartData(labels, dataLabel, data);
     };
@@ -100,7 +108,7 @@ class Chart extends Component {
         if (timescale === 'Day') {
             return this.state.dailyLog[date];
         } else if (timescale === 'Month') {
-            return this.state.dailyLog[date];
+            return this.state.monthlyLog[date];
         }
     };
 
