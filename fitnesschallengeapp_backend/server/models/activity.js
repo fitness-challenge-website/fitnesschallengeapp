@@ -7,8 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     a_description: DataTypes.STRING,
     a_type: DataTypes.STRING,
     a_duration: DataTypes.INTEGER,
-    a_distance: DataTypes.INTEGER,
-    avg_calorie: DataTypes.INTEGER
+    a_distance: DataTypes.INTEGER
   }, {
     tableName: 'activity',
     freezeTableName: true,
