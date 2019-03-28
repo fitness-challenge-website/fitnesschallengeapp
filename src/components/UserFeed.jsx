@@ -27,6 +27,7 @@ class UserFeed extends Component {
                 {this.fetchRecentActivities().map(activity => {
                     return (
                         <ActivityCard
+                            key={activity.activityName}
                             activityName={activity.activityName}
                             parameters={activity.parameters}
                         />
