@@ -8,11 +8,18 @@ class ActivityCard extends Component {
         return (
             <div className='container'>
                 <p>{this.props.activityName}</p>
-                <p>
+                <div>
                     {this.props.parameters.map(param => {
-                        return <p id={param.parameterName}>{param.value}</p>;
+                        return (
+                            <p
+                                id={param.parameterName}
+                                key={param.parameterName}
+                            >
+                                {param.value}
+                            </p>
+                        );
                     })}
-                </p>
+                </div>
             </div>
         );
     }
