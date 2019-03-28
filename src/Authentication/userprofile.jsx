@@ -32,16 +32,13 @@ class Login extends Component {
           <div className="SignIn">
             {this.state.isSignedIn ? (
               <span>
-                <div><h2>Signed In!</h2></div>
-                <h2>Welcome {firebase.auth().currentUser.displayName}</h2>
-                <Button variant="primary" onClick={() => firebase.auth().signOut()}>Sign out!</Button>
+                <h1> User Profile </h1>
+                <h4> Display Name: {firebase.auth().currentUser.displayName} </h4>
+                <h4> Email Address: {firebase.auth().currentUser.email} </h4>
               </span>
             ) : (
-              <div><h2> Please Sign in Below </h2>
-              <StyledFirebaseAuth
-                uiConfig={this.uiConfig}
-                firebaseAuth={firebase.auth()}
-              />
+              <div>
+                <h3>You must be signed in to view this page. </h3>
               </div>
             )}
           </div>

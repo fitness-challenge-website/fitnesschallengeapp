@@ -4,7 +4,7 @@ var config = {
     authDomain: "fitness-challenge-app.firebaseapp.com",
     databaseURL: "https://fitness-challenge-app.firebaseio.com",
     projectId: "fitness-challenge-app",
-    storageBucket: "",
+    storageBucket: "fitness-challenge-app.appspot.com",
     messagingSenderId: "127507442538"
 };
 firebase.initializeApp(config);

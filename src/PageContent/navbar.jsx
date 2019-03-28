@@ -1,13 +1,20 @@
 import React, { Component } from "react"
 import "../App.css"
+import { Navbar, Nav, Button } from 'react-bootstrap'
 import firebase from "firebase"
-import Login from '../Authentication/login'
-import {BrowserRouter, Switch, Route, Link} from 'react-router-dom'
-import UserDash from '../components/UserDash'
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Form, FormControl, Button } from 'react-bootstrap'
+
 
 
 class NavBar extends Component {
+  state = { isSignedIn: false }
+
+  componentDidMount = () => {
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ isSignedIn: !!user })
+      console.log("user", user)
+    })
+  }
+
   render() {
     return (
         <div className="App">
@@ -21,10 +28,21 @@ class NavBar extends Component {
               </Nav>
             </Navbar.Collapse>
             <Navbar.Collapse className="justify-content-end">
-            {/*  <Navbar.Text>
-                Signed in as: <a href="/login">Test</a>
-              </Navbar.Text> */}
-              <Nav.Link href="/login">Login</Nav.Link>
+            {this.state.isSignedIn ? (
+              <span>
+                <Navbar.Text>
+                    Signed in as: <a href="/login">{firebase.auth().currentUser.displayName}</a>
+                </Navbar.Text>
+              </span>
+            ) : (
+              <div>
+                <Navbar.Text>
+                  <Button variant="primary" href="/login">Login</Button>
+                </Navbar.Text>
+              </div>
+            )}
+
+              { /* <Nav.Link href="/login">Login</Nav.Link> */ }
             </Navbar.Collapse>
           </Navbar>
 
