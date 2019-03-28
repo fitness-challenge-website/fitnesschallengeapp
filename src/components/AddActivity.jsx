@@ -81,60 +81,60 @@ class AddActivity extends Component {
       <div>
         <h3>Add New Activity</h3>
         <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label>Activity Title</label>
+
+          <div>
+            <label>Activity Name</label>
             <input  type="text"
-              className="form-control"
-              value={this.state.a_title}
-              onChange={this.onChangeId}
+              value={this.state.a_name}
+              onChange={this.onChangeName}
             />
           </div>
 
-          <div className="form-group">
+          <div>
             <label>Activity Description</label>
-            <input
+            <textarea
               type="text"
-              className="form-control"
-              value={this.state.c_title}
-              onChange={this.onChangeTitle}
-            />
+              rows="5"
+              value={this.state.a_description}
+              onChange={this.onChangeDescription}
+            ></textarea>
           </div>
 
-          <div className="form-group">
+          <div>
             <label>Activity Type</label>
             <br/>
             <label>
-              <select value={this.state.a_rating} onChange={this.onChangeRating}>
-                <option value="A">Running</option>
-                <option value="AB">Biking</option>
-                <option value="B">Lifting</option>
+              <select value={this.state.a_type} onChange={this.onChangeType}>
+                <option value="run">Run</option>
+                <option value="bike">Bike</option>
+                <option value="swim">Swim</option>
+                <option value="lift">Lift</option>
               </select>
             </label>
           </div>
 
-          <div className="form-group">
+          <div>
             <label>Activity Duration</label>
             <input
               type="text"
-              className="form-control"
-              value={this.state.c_title}
-              onChange={this.onChangeTitle}
+              value={this.state.a_duration}
+              onChange={this.onChangeDuration}
             />
           </div>
 
-          <div className="form-group">
+          <div>
             <label>Activity Distance</label>
             <input
               type="text"
-              className="form-control"
-              value={this.state.c_title}
-              onChange={this.onChangeTitle}
+              value={this.state.a_distance}
+              onChange={this.onChangeDistance}
             />
           </div>
 
-          <div className="form-group">
-            <input type="submit" value="Add Activity" className="btn btn-primary" />
+          <div>
+            <input type="submit" value="Add Activity"/>
           </div>
+
         </form>
       </div>
 		);
