@@ -1,6 +1,9 @@
 import React, { Component } from "react"
-import "./App.css"
+import {BrowserRouter, Switch, Route, Link} from 'react-router-dom'
 import firebase from "firebase"
+
+import "./App.css";
+
 import Login from './Authentication/login'
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import UserDash from './components/UserDash'
@@ -18,20 +21,19 @@ firebase.initializeApp({
 class App extends Component {
   render() {
     return (
+      <BrowserRouter>
+        <div className="App">
+        <Link to='/login'>Login (WIP)</Link>
+        <Link to='/userdash'>User Dash (WIP)</Link>
+        <Link to='/addactivity'>Add Activity (WIP)</Link>
+          <Switch>
+            <Route path='/login' component={Login} />
+            <Route path='/userdash' component={UserDash} />
+            <Route path='/addactivity' component={AddActivity} />
+          </Switch>
 
-      <div className="App">
-        <NavBar />
-        <BrowserRouter>
-              <Switch>
-                <Route exact path='/' component={MainDashBoard} />
-                <Route path='/login' component={Login} />
-                <Route path='/userdash' component={UserDash} />
-                <Route path='/profile' component={UserProfile} />
-                <Route path='/test' component={ProfilePage} />
-              </Switch>
-        </BrowserRouter>
-      </div>
-
+        </div>
+      </BrowserRouter>
     )
   }
 }
