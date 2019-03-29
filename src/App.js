@@ -4,6 +4,7 @@ import firebase from "firebase"
 import Login from './Authentication/login'
 import {BrowserRouter, Switch, Route, Link} from 'react-router-dom'
 import UserDash from './components/UserDash'
+import Sample from './components/Sample'
 
 
 
@@ -19,9 +20,11 @@ class App extends Component {
         <div className="App">
         <Link to='/login'>Login (WIP)</Link>
         <Link to='/userdash'>User Dash (WIP)</Link>
+        <Link to='/sample'>Sample Page by Cho</Link>
           <Switch>
             <Route path='/login' component={Login} />
             <Route path='/userdash' component={UserDash} />
+            <Route path='/sample' component={Sample} />
           </Switch>
 
 

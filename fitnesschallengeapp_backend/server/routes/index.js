@@ -9,9 +9,11 @@ const usergrpCtrl = require("../controller").user_group;
 
 
 module.exports = (app) => {
+  /*
   app.get('/api', (req, res) => res.status(200).send({
     message: "Hello World"
   }));
+  */
 
   //User
   app.post("/api/getUserData", userCtrl.getUserData);
