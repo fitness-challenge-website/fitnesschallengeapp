@@ -19,12 +19,25 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate = function(models) {
     // associations can be defined here
-    User.hasMany(models.Group, {
-      foreignKey:'GID',
-      as: 'Group'
+    User.hasMany(models.User_Group, {
+      foreignKey:'uid',
+      as: 'User_Group'
     });
+
+    /*
+    User.hasMany(models.User_Badges, {
+
+    });
+
+    User.hasMany(models.User_Activity, {
+
+    });
+
+    User.hasMany(models.Friends, {
+
+    });
+    */
   };
 
-  //User.sync({force:false}).then(()=>{console.log("Sync")})
   return User;
 };

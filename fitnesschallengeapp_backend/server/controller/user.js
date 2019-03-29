@@ -1,17 +1,71 @@
 const User = require("../models").User;
+const User_Badge = require("../models").User_Badge;
 
 module.exports = {
-  create(req, res){
+  createAccount(req, res){
+    var data = {
+      username: req.body.username,
+      f_name: req.body.f_name,
+      l_name: req.body.l_name,
+      email: req.body.email,
+      weight: req.body.weight,
+      height: req.body.height,
+      age: req.body.age,
+      password: req.body.password
+    }
+
+    return User.create(data).then(uid =>{
+      res.status(200).send(uid);
+    }).catch(err => {
+      res.status(400).send(err);
+      console.log(err);
+    });
   },
-  delete(req, res){
+  editProfile(req, res){
+    var data = {
+      f_name: req.body.f_name,
+      l_name: req.body.l_name,
+      weight: req.body.weight,
+      height: req.body.height,
+      age: req.body.age,
+      password: req.body.password
+    }
+    return User.update(data, {
+      where: {
+        uid: req.body.uid
+      }
+    }).then(() => {
+      res.status(200).send("Success");
+    }).catch(err => {
+      res.status(400).send(err);
+      console.log(err);
+    });
   },
-  update(req, res){
+  delUser(req, res){
+    return User.destory({
+      where:{
+        uid: req.body.uid
+      }
+    }).then(() => {
+      res.status(200).send("Success");
+    }).catch(err => {
+      res.status(400).send(err);
+      console.log(err);
+    })
   },
-  login(req, res){
+  getUserData(req, res){
+    return User.findOne({
+      where:{
+        uid: req.body.uid
+      }
+    }).then(data => {
+      res.status(200).send(data);
+    }).catch(err => {
+      res.status(400).send(err);
+      console.log(err);
+    })
   },
-  getData(req, res){
-    //test
-    return User.findAll({
-    }).then(data => {return res.send(data)})
+  getLeaders(req, res){
+
   }
 }

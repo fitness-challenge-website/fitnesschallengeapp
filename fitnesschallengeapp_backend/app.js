@@ -7,11 +7,9 @@ const logger = require("morgan");
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(cors());
 
 require('./server/routes')(app);
-app.get('*', (req, res) => res.status(200).send({
-  message: "Hello World"
-}));
 
 app.listen(3210, ()=>{
   console.log('Server @port 3210!');
