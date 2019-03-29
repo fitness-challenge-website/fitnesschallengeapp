@@ -31,7 +31,7 @@ class NavBar extends Component {
             {this.state.isSignedIn ? (
               <span>
                 <Navbar.Text>
-                    Signed in as: <a href="/login">{firebase.auth().currentUser.displayName}</a>
+                    Signed in as: <a href="/profile">{firebase.auth().currentUser.displayName}</a>
                 </Navbar.Text>
               </span>
             ) : (
