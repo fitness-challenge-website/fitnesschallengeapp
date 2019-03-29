@@ -1,5 +1,6 @@
 const userCtrl = require("../controller").user;
 const actCtrl = require("../controller").activity;
+const useractCtrl = require("../controller").user_activity;
 
 let Activity = require("../models").activity;
 
@@ -13,6 +14,8 @@ module.exports = (app) => {
   }));
 
   app.post("/api/user", userCtrl.getData);
+
+  //Activity
   app.post("/api/activity", actCtrl.getData);
 
   app.post("/api/addactivity", (req, res) => {
