@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import UserFeed from './UserFeed';
-import Chart from './Chart';
+import Charts from './Charts';
 class UserDash extends Component {
 	state = {};
 	render() {
 		return (
 			<div className='container'>
-				<Chart />
-				<UserFeed />
+				<div className='row'>
+					<Charts />
+				</div>
+				<div className='row'>
+					<UserFeed />
+				</div>
 			</div>
 		);
 	}
