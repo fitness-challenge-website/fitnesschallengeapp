@@ -11,6 +11,11 @@ module.exports = (sequelize, DataTypes) => {
   });
   Group.associate = function(models) {
     // associations can be defined here
+    Group.hasMany(models.User_Group, {
+      foreignKey: 'gid',
+      as: "User_Group"
+    });
+    
   };
   return Group;
 };

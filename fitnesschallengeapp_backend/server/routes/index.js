@@ -1,6 +1,12 @@
 const userCtrl = require("../controller").user;
 const actCtrl = require("../controller").activity;
+const grpCtrl = require("../controller").group;
+const bgCtrl = require("../controller").badges;
+const frCtrl = require("../controller").friends;
 const useractCtrl = require("../controller").user_activity;
+const userbgCtrl = require("../controller").user_badges;
+const usergrpCtrl = require("../controller").user_group;
+
 
 module.exports = (app) => {
   app.get('/api', (req, res) => res.status(200).send({
@@ -8,7 +14,7 @@ module.exports = (app) => {
   }));
 
   //User
-  app.post("/api/user", userCtrl.getData);
+  app.post("/api/getUserData", userCtrl.getUserData);
 
   //Activity
   app.post("/api/activity", actCtrl.getData);
