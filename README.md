@@ -22,7 +22,10 @@ create table "User"(
 create table Activity(
 	aid serial primary key,
 	a_name varchar(255) not null,
-	avg_calorie integer
+	a_description varchar(255) not null,
+	a_type varchar(255) not null,
+	a_duration integer,
+	a_distance integer
 );
 
 create table "Group"(
