@@ -8,6 +8,8 @@ const userbgCtrl = require("../controller").user_badges;
 const usergrpCtrl = require("../controller").user_group;
 
 
+let Activity = require("../models").activity;
+
 module.exports = (app) => {
   /*
   app.get('/api', (req, res) => res.status(200).send({
