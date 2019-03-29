@@ -3,14 +3,15 @@ const User = require("../models").User;
 module.exports = {
   request(req, res){
     var data = {
-      req_uid: req.uid,
-      res_uid: req.res_uid,
+      req_uid: req.body.req_uid,
+      res_uid: req.body.res_uid,
       status: 'P'
     }
     return Friends.create(data).then(fid => {
       res.status(200).send(fid);
     }).catch(err =>{
       res.status(400).send(err);
+      console.log(err);
     });
   },
   response(req, res){
@@ -21,24 +22,26 @@ module.exports = {
     var isFriend = false;
     Friends.findOne({
       where:{
-        req_uid: req.req_uid,
-        res_uid: req.res_uid
+        req_uid: req.body.req_uid,
+        res_uid: req.body.res_uid
       }
     }).then(data =>{
       return True;
     }).catch(err =>{
       res.status(400).send(err);
+      console.log(err);
     });
 
     Friends.findOne({
       where:{
-        req_uid: req.res_uid,
-        res_uid: req.req_uid
+        req_uid: req.body.res_uid,
+        res_uid: req.body.req_uid
       }
     }).then(data =>{
       return True;
     }).catch(err =>{
       res.status(400).send(err);
+      console.log(err);
     });
 
     return False;
