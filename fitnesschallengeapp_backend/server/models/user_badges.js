@@ -12,6 +12,16 @@ module.exports = (sequelize, DataTypes) => {
   });
   User_Badges.associate = function(models) {
     // associations can be defined here
+
+    User_Badges.belongsTo(models.User, {
+      foreignKey: 'uid',
+      as: 'User'
+    });
+
+    User_Badges.belongsTo(models.Badges, {
+      foreignKey: 'bid',
+      as: 'Badges'
+    })
   };
   return User_Badges;
 };

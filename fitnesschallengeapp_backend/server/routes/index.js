@@ -1,6 +1,12 @@
 const userCtrl = require("../controller").user;
 const actCtrl = require("../controller").activity;
+const grpCtrl = require("../controller").group;
+const bgCtrl = require("../controller").badges;
+const frCtrl = require("../controller").friends;
 const useractCtrl = require("../controller").user_activity;
+const userbgCtrl = require("../controller").user_badges;
+const usergrpCtrl = require("../controller").user_group;
+
 
 let Activity = require("../models").activity;
 
@@ -9,11 +15,8 @@ module.exports = (app) => {
     message: "Hello World"
   }));
 
-  app.get('/api2', (req, res) => res.status(200).send({
-    message: "Hello World2"
-  }));
-
-  app.post("/api/user", userCtrl.getData);
+  //User
+  app.post("/api/getUserData", userCtrl.getUserData);
 
   //Activity
   app.post("/api/activity", actCtrl.getData);
