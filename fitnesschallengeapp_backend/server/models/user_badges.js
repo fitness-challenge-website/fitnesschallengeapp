@@ -1,9 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
   const User_Badges = sequelize.define('User_Badges', {
+    ubid: {type:DataTypes.INTEGER,
+          primaryKey: true,
+          autoIncrement: true},
     uid: DataTypes.INTEGER,
     bid: DataTypes.INTEGER
   }, {
-    tableName: 'activity',
+    tableName: 'user_badges',
     freezeTableName: true,
     createdAt: false
   });

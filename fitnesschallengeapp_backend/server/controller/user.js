@@ -13,5 +13,10 @@ module.exports = {
     //test
     return User.findAll({
     }).then(data => {return res.send(data)})
+  },
+  getLeaders(req, res){
+    return User.findAll({
+      
+    })
   }
 }

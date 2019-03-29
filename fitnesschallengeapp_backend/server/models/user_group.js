@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.STRING,
     joinAt: DataTypes.DATE
   }, {
-    tableName: 'activity',
+    tableName: 'user_group',
     freezeTableName: true,
     createdAt: false,
     updatedAt: false
