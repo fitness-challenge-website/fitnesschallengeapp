@@ -69,8 +69,10 @@ class Login extends Component {
                 <h1> User Profile </h1>
                 <h4> Display Name: {firebase.auth().currentUser.displayName} </h4>
                 <h4> Email Address: {firebase.auth().currentUser.email} </h4>
-
+                <Button variant="primary" onClick={() => firebase.auth().signOut()}>Sign out!</Button>
+                <br/>
                 <div>
+
                   <form>
                     <label style={{backgroundColor: 'steelblue', color: 'white', padding: 10, borderRadius: 4, pointer: 'cursor'}}>
                       Select your avatar
@@ -87,7 +89,7 @@ class Login extends Component {
                     </label>
                     <h3> Avatar: </h3>
                     {this.state.avatarURL && <img src={this.state.avatarURL} />}
-                    {console.log(this.state.avatarURL)}
+                    {/*console.log(this.state.avatarURL)*/}
                     {/*<img src={firebase.storage().ref('images/' + firebase.auth().currentUser.uid + '.png')} />*/}
                   </form>
                 </div>
