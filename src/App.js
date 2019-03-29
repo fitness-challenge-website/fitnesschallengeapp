@@ -1,16 +1,15 @@
 import React, { Component } from "react"
 import {BrowserRouter, Switch, Route, Link} from 'react-router-dom'
 import firebase from "firebase"
-
 import "./App.css";
-
 import Login from './Authentication/login'
-import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import UserDash from './components/UserDash'
 import NavBar from './PageContent/navbar'
 import MainDashBoard from './PageContent/MainDashBoard'
 import UserProfile from './Authentication/userprofile'
 import ProfilePage from './Authentication/test'
+import ActivityCard from './components/ActivityCard'
+import AddActivity from './components/AddActivity'
 
 firebase.initializeApp({
   apiKey: "AIzaSyAYdZGv2f-0gvWOyQ8zkk8HjbsJqmcKwOM",
@@ -31,6 +30,8 @@ class App extends Component {
                 <Route path='/userdash' component={UserDash} />
                 <Route path='/profile' component={UserProfile} />
                 <Route path='/test' component={ProfilePage} />
+                <Route path='/ActivityCard' component={ActivityCard} />
+                <Route path='/AddActivity' component={AddActivity} />
               </Switch>
         </BrowserRouter>
       </div>
