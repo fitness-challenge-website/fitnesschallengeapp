@@ -25,6 +25,7 @@ class MainDashBoard extends Component {
           <h3> This is the temporary main page dashboard </h3>
           <h4> You are logged in as: {firebase.auth().currentUser.displayName} </h4>
           <Button variant="primary" href="/profile">View Profile</Button>
+          <Button variant="secondary" onClick={() => firebase.auth().signOut()}>Sign out!</Button>
         </span>
       ) : (
         <div>
