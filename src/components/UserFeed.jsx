@@ -23,6 +23,7 @@ class UserFeed extends Component {
     render() {
         return (
             <div className='container'>
+                <h5>Activity Feed</h5>
                 {/* Get recent activities from database and display cards of each of them */}
                 {this.fetchRecentActivities().map(activity => {
                     return (
