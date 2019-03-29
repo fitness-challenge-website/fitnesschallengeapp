@@ -1,3 +1,14 @@
+# Fitness Challenge App
+This repository is the home of the fitness challenge app code. The app is a website running with React.
+
+## Instructions for Running
+Clone the repository to local machine and navigate to the directory in terminal. Run the following commands:
+- npm install (sudo may be necessary)
+- npm start (to run the server)
+	- The server should start in terminal and automatically open the localhost page.
+	- If localhost does not automatically load, navigate to localhost:3000 in your browser
+
+## Instructions for Backend:
 
 1. Install PostgreSQL online (https://www.postgresql.org/download/)
 2. In ./fitnesschallengeapp_backend/server/config/config.json, put your password of postgres
