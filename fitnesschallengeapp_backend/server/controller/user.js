@@ -1,4 +1,5 @@
 const User = require("../models").User;
+const User_Badge = require("../models").User_Badge;
 
 module.exports = {
   createAccount(req, res){

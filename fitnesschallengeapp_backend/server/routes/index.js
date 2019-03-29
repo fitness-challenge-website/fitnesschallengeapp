@@ -15,13 +15,38 @@ module.exports = (app) => {
 
   //User
   app.post("/api/getUserData", userCtrl.getUserData);
+  app.post("/api/createAccount", userCtrl.createAccount);
+  app.post("/api/editProfile", userCtrl.editProfile);
+  app.post("/api/delUser", userCtrl.delUser);
 
   //Activity
-  app.post("/api/activity", actCtrl.getData);
+  //app.post("/api/addActivity", actCtrl.addActivity);
+
+  //Group
+  app.post("/api/createGroup", grpCtrl.createGroup);
+  app.post("/api/delGroup", grpCtrl.delGroup);
+  app.post("/api/getGroupData", grpCtrl.getGroupData);
+
+  //Friend
+  app.post("/api/reqFriend", frCtrl.request);
+  app.post("/api/resFriend", frCtrl.response);
+  app.post("/api/isFriend", frCtrl.isFriend);
+
+  //Badge
+  app.post("/api/addBadge", bgCtrl.addBadge);
+  app.post("/api/delBadge", bgCtrl.delBadge);
+  app.post("/api/getBadgeData", bgCtrl.getBadgeData);
+  app.post("/api/getAllBadges", bgCtrl.getAllBadges);
 
   //User_Activity
   app.post("/api/addStat", useractCtrl.addStat);
   app.post("/api/delStat", useractCtrl.delStat);
   app.post("/api/getUserStats", useractCtrl.getUserStats);
   app.post("/api/getLeaders", useractCtrl.getLeaders);
+
+  //User_Badge
+  app.post("/api/earnBadge", userbgCtrl.earnBadge);
+
+  //User_Group
+  app.post("/api/activity", actCtrl.getData);
 }
