@@ -48,5 +48,9 @@ module.exports = (app) => {
   app.post("/api/earnBadge", userbgCtrl.earnBadge);
 
   //User_Group
-  app.post("/api/activity", actCtrl.getData);
+  app.post("/api/reqGroup", usergrpCtrl.request);
+  app.post("/api/resGroup", usergrpCtrl.response);
+  app.post("/api/leaveGroup", usergrpCtrl.leaveGroup);
+  app.post("/api/isBelongTo", usergrpCtrl.isBelongTo);
+  app.post("/api/getMyGroups", usergrpCtrl.getMyGroups);
 }
