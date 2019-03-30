@@ -2,7 +2,8 @@
 This repository is the home of the fitness challenge app code. The app is a website running with React.
 
 ## Instructions for Running
-Clone the repository to local machine and navigate to the directory in terminal. Run the following commands:
+Clone the repository to local machine and navigate to the directory in terminal.  
+Run the following commands:
 - `$npm install` (sudo may be necessary)
 - `$./modules_to_install` to install the needed dependencies via script
 - `$npm start` (to run the server)
@@ -19,7 +20,7 @@ Clone the repository to local machine and navigate to the directory in terminal.
 - Put your postgres password into the config.json file
 - Set up database using newly installed psql application. Copy and paste the contents of DDL.txt into the cli window.
 
-This will set up the database for the backend code to communicate with.
+This will set up the database for the backend code to communicate with.  
 If you edit the database, make sure to run `\c fitness;` to connect to the fitness database instead of postgres default database.
 
 There is some sample code for interacting with the database in ./src/components/Sample.jsx.
