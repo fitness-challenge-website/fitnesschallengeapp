@@ -3,107 +3,32 @@ This repository is the home of the fitness challenge app code. The app is a webs
 
 ## Instructions for Running
 Clone the repository to local machine and navigate to the directory in terminal. Run the following commands:
-- npm install (sudo may be necessary)
-- npm start (to run the server)
+- `$npm install` (sudo may be necessary)
+- `$./modules_to_install` to install the needed dependencies via script
+- `$npm start` (to run the server)
 	- The server should start in terminal and automatically open the localhost page.
 	- If localhost does not automatically load, navigate to localhost:3000 in your browser
 
-## Instructions for Backend:
+## Instructions for Running Backend:
+- Navigate to ./fitnesschallengeapp_backend folder first
+- Run `$npm run start:dev`
 
-1. Install PostgreSQL online (https://www.postgresql.org/download/)
-2. In ./fitnesschallengeapp_backend/server/config/config.json, put your password of postgres
-3. Setting up database. DDL is below
+## Instructions for Database Setup:
+- Install PostgreSQL online [here](https://www.postgresql.org/download/)
+- Navigate to ./fitnesschallengeapp_backend/server/config/config.json
+- Put your postgres password into the config.json file
+- Set up database using newly installed psql application. Copy and paste the contents of DDL.txt into the cli window.
 
-RUN ```\c fitness;``` to connect to the fitness db instead of postgres defualt db 
+This will set up the database for the backend code to communicate with.
+If you edit the database, make sure to run `\c fitness;` to connect to the fitness database instead of postgres default database.
 
-```
-create database fitness;
-\c fitness;
+There is some sample code for interacting with the database in ./src/components/Sample.jsx.
 
-create table "User"(
-	uid serial primary key,
-	username varchar(100) not null,
-	Password varchar(255) not null,
-	f_name varchar(100) not null,
-	l_name varchar(100) not null,
-	email varchar(255),
-	age integer,
-	weight float,
-	height float,
-	"createdAt" Date
-);
+If editing the backend, must include changes to the routes, models, and controllers.
 
-create table Activity(
-	aid serial primary key,
-	a_name varchar(255) not null,
-	a_description varchar(255) not null,
-	a_type varchar(255) not null,
-	a_duration integer,
-	a_distance integer
-);
+This database setup only needs to be ran one time initially, unless changes are made to the database.
 
-create table "Group"(
-	gid serial primary key,
-	g_name varchar(255) not null,
-	"createdAt" Date
-);
-
-create table Badges(
-	bid serial primary key,
-	b_name varchar(355),
-	"level" integer
-);
-
-create table Friends(
-	fid serial primary key,
-	req_uid integer references "User"(UID),
-	res_uid integer references "User"(UID),
-	status varchar(1) not null,
-	"createdAt" Date
-);
-
-create table User_Badges(
-	uid integer references "User"(UID),
-	bid integer references Badges(BID),
-	"updatedAt" Date
-);
-
-create table user_activity(
-	uid integer references "User"(UID),
-	aid integer references activity(AID),
-	duration integer,
-	weight integer,
-	rep integer,
-	distance integer,
-	speed float
-);
-
-create table User_Group(
-	ugid serial primary key,
-	req_uid integer references "User"(UID),
-	res_uid integer references "User"(UID),
-	gid integer references "Group"(GID),
-	status varchar(1),
-	"joinAt" Date
-);
-
-
-const url = "http://localhost:3210/api";
-export const  = data => {
-  return axios
-  .post(url + "/user", {
-  })
-  .then(res => {
-    console.log(res);
-  });
-}
-
-
-USAGE:
-1. Run in the fitnesschallengeapp_backend folder first.
-$npm run start:dev
-2. Example code below
-
+## React README Initialization
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
