@@ -29,6 +29,13 @@ If editing the backend, must include changes to the routes, models, and controll
 
 This database setup only needs to be ran one time initially, unless changes are made to the database.
 
+## Branching Structure
+Development is done in individual branches. When you are ready to add a feature, merge your branch into the "staging" branch. If everything in "staging" is looking good, then merge "staging" into "master".
+
+Branches will be made for each iteration to be turned in.
+
+---
+
 ## React README Initialization
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
