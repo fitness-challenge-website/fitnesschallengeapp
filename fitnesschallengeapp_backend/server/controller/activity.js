@@ -1,7 +1,22 @@
 const Activity = require("../models").Activity;
 
 module.exports = {
-  create(req, res){
+  addActivity(req, res){
+    var data = {
+      aid: req.body.aid,
+      a_name: req.body.a_name,
+      a_description: req.body.a_description,
+      a_type: req.body.a_type,
+      a_duration: req.body.a_duration,
+      a_distance: req.body.a_distance
+    }
+
+    return Activity.create(data).then(id => {
+      res.status(200).send("Success");
+    }).catch(err =>{
+      res.status(400).send(err);
+      console.log(err)
+    });
   },
   delete(req, res){
   },
