@@ -7,9 +7,6 @@ const useractCtrl = require("../controller").user_activity;
 const userbgCtrl = require("../controller").user_badges;
 const usergrpCtrl = require("../controller").user_group;
 
-
-let Activity = require("../models").activity;
-
 module.exports = (app) => {
   app.get('/api', (req, res) => res.status(200).send({
     message: "Hello World"
@@ -22,7 +19,7 @@ module.exports = (app) => {
   app.post("/api/delUser", userCtrl.delUser);
 
   //Activity
-  //app.post("/api/addActivity", actCtrl.addActivity);
+  app.post("/api/addActivity", actCtrl.addActivity);
 
   //Group
   app.post("/api/createGroup", grpCtrl.createGroup);

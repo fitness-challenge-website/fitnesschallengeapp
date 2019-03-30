@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import axios from 'axios'
 
 class AddActivity extends Component {
 
@@ -62,8 +63,9 @@ class AddActivity extends Component {
       a_distance: this.state.a_distance,
     };
 
-//    axios.post('http://localhost:4000/courses/add', newCourse)
-//      .then(res => console.log(res.data));
+    console.log(newActivity);
+    axios.post('http://localhost:3210/api/addActivity', newActivity)
+      .then(res => console.log(res.data));
 
     this.setState({
       a_name: '',
