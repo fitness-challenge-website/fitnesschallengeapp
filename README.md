@@ -3,8 +3,11 @@
 2. In ./fitnesschallengeapp_backend/server/config/config.json, put your password of postgres
 3. Setting up database. DDL is below
 
+RUN ```\c fitness;``` to connect to the fitness db instead of postgres defualt db 
+
 ```
 create database fitness;
+\c fitness;
 
 create table "User"(
 	uid serial primary key,
