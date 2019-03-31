@@ -48,7 +48,7 @@ class ProfilePage extends Component {
             />
           </label>
           <h3> Avatar: </h3>
-          {this.state.avatarURL && <img src={this.state.avatarURL} />}
+          {this.state.avatarURL && <img src={this.state.avatarURL}alt="User Avatar" />}
 
         </form>
       </div>

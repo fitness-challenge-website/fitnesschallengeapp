@@ -1,7 +1,7 @@
 import React, { Component } from "react"
-import "../App.css"
+// import "../App.css"
+import "./userprofile.css"
 import firebase from "firebase"
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Container from 'react-bootstrap/Container'
@@ -60,20 +60,20 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="MainContent">
 
 { /* ------------ LOGIN SECTION ------------ */ }
           <div className="SignIn">
             {this.state.isSignedIn ? (
-              <span>
-                <h1> User Profile </h1>
-                <h4> Display Name: {firebase.auth().currentUser.displayName} </h4>
-                <h4> Email Address: {firebase.auth().currentUser.email} </h4>
-                <Button variant="primary" onClick={() => firebase.auth().signOut()}>Sign out!</Button>
-                <br/>
-                <div>
 
-                  <form>
+              <Container>
+                <Row>
+                  <Col sm={5}>
+                  <h4> User Profile </h4>
+                  <h4> Display Name: {firebase.auth().currentUser.displayName} </h4>
+                  <h4> Email Address: {firebase.auth().currentUser.email} </h4>
+                  <Button variant="primary" onClick={() => firebase.auth().signOut()}>Sign out!</Button>
+                  <form className="UploadButton">
                     <label style={{backgroundColor: 'steelblue', color: 'white', padding: 10, borderRadius: 4, pointer: 'cursor'}}>
                       Select your avatar
                       <FileUploader
@@ -88,62 +88,83 @@ class Login extends Component {
                       />
                     </label>
                     <h3> Avatar: </h3>
-                    {this.state.avatarURL && <img src={this.state.avatarURL} />}
-                    {/*console.log(this.state.avatarURL)*/}
-                    {/*<img src={firebase.storage().ref('images/' + firebase.auth().currentUser.uid + '.png')} />*/}
+                    {this.state.avatarURL && <img src={this.state.avatarURL} alt="User Avatar" />}
                   </form>
-                </div>
+                  </Col>
 
-                <Container>
-                  <Row>
-                    <Col sm={4}>
-                      <h4>Temporary Update User Info</h4>
-                      <Form>
-                        <Form.Group controlId="formBasicEmail">
-                          <Form.Label>Height</Form.Label>
-                          {/*<Form.Control type="email" placeholder="Enter email" />*/}
-                          <Form.Control as="select" multiple>
-                            <option>4'10"</option>
-                            <option>4'11"</option>
-                            <option>5'0"</option>
-                            <option>5'1"</option>
-                            <option>5'2'</option>
-                          </Form.Control>
-                        </Form.Group>
+                  <Col sm={1}>
+                  </Col>
 
-                        <Form.Group controlId="formWeight">
-                          <Form.Label>Weight</Form.Label>
-                          <Form.Control type="weight" placeholder="Weight (in lbs)" />
-                        </Form.Group>
-                        <Col sm={10}>
-                                <Form.Check
-                                  type="radio"
-                                  label="Male"
-                                  name="formHorizontalRadios"
-                                  id=""
-                                />
-                                <Form.Check
-                                  type="radio"
-                                  label="Female"
-                                  name="formHorizontalRadios"
-                                  id=""
-                                />
-                                <Form.Check
-                                  type="radio"
-                                  label="Prefer not to answer"
-                                  name="formHorizontalRadios"
-                                  id=""
-                                />
-                              </Col>
-                        <Button variant="primary" type="submit">
-                          Submit
-                        </Button>
-                      </Form>
+                  <Col sm={5}>
+                    <h4>Update Your Health Info</h4>
+                    <Form>
+                      <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Height</Form.Label>
+                        <Form.Control as="select" multiple>
+                          <option>4'7"</option>
+                          <option>4'8"</option>
+                          <option>4'9"</option>
+                          <option>4'10"</option>
+                          <option>4'11"</option>
+                          <option>5'0"</option>
+                          <option>5'1"</option>
+                          <option>5'2'</option>
+                          <option>5'3'</option>
+                          <option>5'4'</option>
+                          <option>5'5'</option>
+                          <option>5'6'</option>
+                          <option>5'7'</option>
+                          <option>5'8'</option>
+                          <option>5'9'</option>
+                          <option>5'10'</option>
+                          <option>5'11'</option>
+                          <option>6'0'</option>
+                          <option>6'1'</option>
+                          <option>6'2'</option>
+                          <option>6'3'</option>
+                          <option>6'4'</option>
+                          <option>6'5'</option>
+                          <option>6'6'</option>
+                          <option>6'7'</option>
+                          <option>6'8'</option>
+                          <option>6'9'</option>
+                          <option>6'10'</option>
+                          <option>6'11'</option>
+                        </Form.Control>
+                      </Form.Group>
+
+                      <Form.Group controlId="formWeight">
+                        <Form.Label>Weight</Form.Label>
+                        <Form.Control type="weight" placeholder="Weight (in lbs)" />
+                      </Form.Group>
+                      <p> Select Gender </p>
+                      <Col sm={10} className="Gender">
+                              <Form.Check
+                                type="radio"
+                                label="Male"
+                                name="formHorizontalRadios"
+                                id=""
+                              />
+                              <Form.Check
+                                type="radio"
+                                label="Female"
+                                name="formHorizontalRadios"
+                                id=""
+                              />
+                              <Form.Check
+                                type="radio"
+                                label="Other"
+                                name="formHorizontalRadios"
+                                id=""
+                              />
                       </Col>
-                    </Row>
-                </Container>
-
-              </span>
+                      <Button variant="primary" type="submit">
+                        Submit
+                      </Button>
+                    </Form>
+                    </Col>
+                  </Row>
+              </Container>
             ) : (
               <div>
                 <h3>You must be signed in to view this page. </h3>

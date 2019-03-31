@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import {BrowserRouter, Switch, Route, Link} from 'react-router-dom'
+import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import firebase from "firebase"
 import "./App.css";
 import Login from './Authentication/login'
