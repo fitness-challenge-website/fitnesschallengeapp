@@ -5,3 +5,29 @@
 .UploadButton {
   padding-top: 5px;
 }
+
+.HealthInfo {
+  background-color: #9DA3A4;
+  border-radius: 5px;
+  color: white;
+}
+
+.Friends {
+    background-color: #9DA3A4;
+    border-radius: 5px;
+    color: white;
+    /* padding-top: 30px; */
+    margin-top: 20px;
+}
+
+.UserInfo {
+  background-color: #9DA3A4;
+  border-radius: 5px;
+  min-height: 425px;
+  color: white;
+}
+
+.MainInfo {
+  padding-top: 20px;
+
+}

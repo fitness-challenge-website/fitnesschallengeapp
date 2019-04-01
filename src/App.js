@@ -10,6 +10,10 @@ import UserProfile from './Authentication/userprofile'
 import ProfilePage from './Authentication/test'
 import ActivityCard from './components/ActivityCard'
 import AddActivity from './components/AddActivity'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+
 
 firebase.initializeApp({
   apiKey: "AIzaSyAYdZGv2f-0gvWOyQ8zkk8HjbsJqmcKwOM",
@@ -18,6 +22,13 @@ firebase.initializeApp({
 })
 
 class App extends Component {
+  state = { isSignedIn: false }
+  componentDidMount = () => {
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ isSignedIn: !!user })
+      console.log("user", user)
+    })
+  }
   render() {
     return (
       <BrowserRouter>
@@ -31,19 +42,36 @@ class App extends Component {
             <Route path='/addactivity' component={AddActivity} />
           </Switch>
 
+
+
+
       <div className="App">
-        <NavBar />
-        <BrowserRouter>
-              <Switch>
-                <Route exact path='/' component={MainDashBoard} />
-                <Route path='/login' component={Login} />
-                <Route path='/userdash' component={UserDash} />
-                <Route path='/profile' component={UserProfile} />
-                <Route path='/test' component={ProfilePage} />
-                <Route path='/ActivityCard' component={ActivityCard} />
-                <Route path='/AddActivity' component={AddActivity} />
-              </Switch>
-        </BrowserRouter>
+      {this.state.isSignedIn ? (
+        <div>
+          <NavBar />
+          <BrowserRouter>
+                <Switch>
+                  <Route exact path='/' component={UserDash} />
+                  <Route path='/login' component={Login} />
+                  <Route path='/userdash' component={UserDash} />
+                  <Route path='/profile' component={UserProfile} />
+                  <Route path='/test' component={ProfilePage} />
+                  <Route path='/ActivityCard' component={ActivityCard} />
+                  <Route path='/AddActivity' component={AddActivity} />
+                </Switch>
+          </BrowserRouter>
+        </div>
+
+      ) : (
+        <div>
+          <BrowserRouter>
+                <Switch>
+                  <Route exact path='/' component={Login} />
+                </Switch>
+          </BrowserRouter>
+        </div>
+      )}
+
       </div>
 
     )
