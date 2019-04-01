@@ -66,9 +66,9 @@ class Login extends Component {
           <div className="SignIn">
             {this.state.isSignedIn ? (
 
-              <Container>
+              <Container className="MainInfo">
                 <Row>
-                  <Col sm={5}>
+                  <Col sm={5} className="UserInfo">
                   <h4> User Profile </h4>
                   <h4> Display Name: {firebase.auth().currentUser.displayName} </h4>
                   <h4> Email Address: {firebase.auth().currentUser.email} </h4>
@@ -92,10 +92,10 @@ class Login extends Component {
                   </form>
                   </Col>
 
-                  <Col sm={1}>
+                  <Col sm={2}>
                   </Col>
 
-                  <Col sm={5}>
+                  <Col sm={5} className="HealthInfo">
                     <h4>Update Your Health Info</h4>
                     <Form>
                       <Form.Group controlId="formBasicEmail">
@@ -164,6 +164,13 @@ class Login extends Component {
                     </Form>
                     </Col>
                   </Row>
+
+                  <Row>
+                    <Col className="Friends">
+                    <h3>Friends list will populate here</h3>
+                    </Col>
+                  </Row>
+
               </Container>
             ) : (
               <div>

@@ -1,16 +1,24 @@
 import React, { Component } from "react"
-import "../App.css"
+// import "../App.css"
+import "./login.css"
 import firebase from "firebase"
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 class Login extends Component {
   state = { isSignedIn: false }
   uiConfig = {
     signInFlow: "popup",
     signInOptions: [
+      firebase.auth.EmailAuthProvider.PROVIDER_ID,
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      firebase.auth.EmailAuthProvider.PROVIDER_ID
+      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+      firebase.auth.GithubAuthProvider.PROVIDER_ID,
+      firebase.auth.TwitterAuthProvider.PROVIDER_ID
+
     ],
     callbacks: {
       signInSuccess: () => false
@@ -27,9 +35,6 @@ class Login extends Component {
   render() {
     return (
       <div className="App">
-
-{ /* ------------ LOGIN SECTION ------------ */ }
-          <div className="SignIn">
             {this.state.isSignedIn ? (
               <span>
                 <div><h2>Signed In!</h2></div>
@@ -37,16 +42,30 @@ class Login extends Component {
                 <Button variant="primary" onClick={() => firebase.auth().signOut()}>Sign out!</Button>
               </span>
             ) : (
-              <div><h2> Please Sign in Below </h2>
-              <StyledFirebaseAuth
-                uiConfig={this.uiConfig}
-                firebaseAuth={firebase.auth()}
-              />
-              </div>
-            )}
-          </div>
-{ /* ------------ LOGIN SECTION ------------ */ }
+                <Container className="rounded">
+                  <Row>
+                    <Col>
+                    <h1>Welcome to the Fitness Challenge WebApp!</h1>
+                    <h2>You must be signed in to use this website</h2>
+                    <h2> Please Sign in Below </h2>
+                    </Col>
+                  </Row>
 
+                  <Row>
+                    <Col sm={4}>
+                    </Col>
+                    <Col sm={4} className="Login_Data">
+                      <StyledFirebaseAuth
+                        uiConfig={this.uiConfig}
+                        firebaseAuth={firebase.auth()}
+                      />
+                    </Col>
+                    <Col sm={4}>
+                    </Col>
+                  </Row>
+
+                </Container>
+            )}
       </div>
     )
   }
