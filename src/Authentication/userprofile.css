@@ -1,33 +1,22 @@
-.Gender {
-  text-align: left;
+.displayInfo {
+  padding-top: 40px;
 }
 
-.UploadButton {
-  padding-top: 5px;
+.mainDisplay {
+  padding-top: 150px;
 }
 
-.HealthInfo {
-  background-color: #9DA3A4;
-  border-radius: 5px;
-  color: white;
+.contentDiv {
+  min-height: 300px;
 }
 
-.Friends {
-    background-color: #9DA3A4;
-    border-radius: 5px;
-    color: white;
-    /* padding-top: 30px; */
-    margin-top: 20px;
+.profPic {
+  transform: translateX(50px);
 }
 
-.UserInfo {
-  background-color: #9DA3A4;
-  border-radius: 5px;
-  min-height: 425px;
-  color: white;
-}
-
-.MainInfo {
+.name {
   padding-top: 20px;
-
+}
+.editButton {
+  padding-top: 20px;
 }

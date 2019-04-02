@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import "../App.css"
-import { Navbar, Nav, Button } from 'react-bootstrap'
+import { Navbar, Nav, Button, Form, FormControl, NavDropdown } from 'react-bootstrap'
 import firebase from "firebase"
 
 
@@ -31,9 +31,23 @@ class NavBar extends Component {
             <Navbar.Collapse className="justify-content-end">
             {this.state.isSignedIn ? (
               <span>
+              <Nav className="mr-auto">
+                <NavDropdown title={firebase.auth().currentUser.displayName} id="basic-nav-dropdown">
+                 <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+                 <NavDropdown.Item href="">Add Friends</NavDropdown.Item>
+                 <NavDropdown.Divider />
+                 <NavDropdown.Item onClick={() => firebase.auth().signOut()}>Sign Out</NavDropdown.Item>
+               </NavDropdown>
+              </Nav>
+             {/*
+              <Form inline>
+                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                <Button variant="outline-success">Search</Button>
+              </Form>
                 <Navbar.Text>
                     Signed in as: <a href="/profile">{firebase.auth().currentUser.displayName}</a>
                 </Navbar.Text>
+                */}
               </span>
             ) : (
               <div>
@@ -42,8 +56,6 @@ class NavBar extends Component {
                 </Navbar.Text>
               </div>
             )}
-
-              { /* <Nav.Link href="/login">Login</Nav.Link> */ }
             </Navbar.Collapse>
           </Navbar>
 
