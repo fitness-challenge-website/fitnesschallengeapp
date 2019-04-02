@@ -54,7 +54,7 @@ class Login extends Component {
                   <Row>
                     <Col sm={4}>
                     </Col>
-                    <Col sm={4} className="Login_Data">
+                    <Col sm={4} className="shadow-lg p-3 mb-5 bg-white">
                       <StyledFirebaseAuth
                         uiConfig={this.uiConfig}
                         firebaseAuth={firebase.auth()}

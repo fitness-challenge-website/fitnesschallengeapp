@@ -5,14 +5,9 @@ import "./App.css";
 import Login from './Authentication/login'
 import UserDash from './components/UserDash'
 import NavBar from './PageContent/navbar'
-import MainDashBoard from './PageContent/MainDashBoard'
 import UserProfile from './Authentication/userprofile'
-import ProfilePage from './Authentication/test'
 import ActivityCard from './components/ActivityCard'
 import AddActivity from './components/AddActivity'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
 firebase.initializeApp({
   apiKey: "AIzaSyAYdZGv2f-0gvWOyQ8zkk8HjbsJqmcKwOM",
