@@ -14,7 +14,6 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-
 firebase.initializeApp({
   apiKey: "AIzaSyAYdZGv2f-0gvWOyQ8zkk8HjbsJqmcKwOM",
   authDomain: "fitness-challenge-app.firebaseapp.com",
@@ -45,7 +44,6 @@ class App extends Component {
                   <Route path='/login' component={Login} />
                   <Route path='/userdash' component={UserDash} />
                   <Route path='/profile' component={UserProfile} />
-                  <Route path='/test' component={ProfilePage} />
                   <Route path='/ActivityCard' component={ActivityCard} />
                   <Route path='/AddActivity' component={AddActivity} />
                 </Switch>
