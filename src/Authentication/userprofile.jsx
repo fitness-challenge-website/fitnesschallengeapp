@@ -11,17 +11,37 @@ class UserProfile extends Component {
 
     this.handleShowHealth = this.handleShowHealth.bind(this);
     this.handleShowProfile = this.handleShowProfile.bind(this);
+    this.handleShowDeleteUser = this.handleShowDeleteUser.bind(this);
+    this.handleShowPassword = this.handleShowPassword.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.showDeleteUserModal = this.showDeleteUserModal.bind(this);
+    this.authenticatePassword = this.authenticatePassword.bind(this);
 
     this.state = {
+      isSignedIn: false,
       showHealth: false,
       showProfile: false,
+      showDeleteUser: false,
+      showPassword: false,
     };
   }
 
   handleClose() {
     this.setState({ showHealth: false });
     this.setState({ showProfile: false });
+    this.setState({ showDeleteUser: false });
+    this.setState({ showPassword: false });
+  }
+
+  showDeleteUserModal() {
+    this.handleClose();
+    this.handleShowDeleteUser();
+  }
+
+  authenticatePassword() {
+    this.reauthenticate();
+    this.handleClose();
+    this.handleShowProfile();
   }
 
   handleShowHealth() {
@@ -32,17 +52,16 @@ class UserProfile extends Component {
     this.setState({ showProfile: true });
   }
 
-  state = {
-    isSignedIn: false,
-    username: "",
-    avatar: "",
-    isUploading: false,
-    progress: 0,
-    avatarURL: "",
-    input: "",
-  };
+  handleShowDeleteUser() {
+    this.setState({ showDeleteUser: true });
+  }
+
+  handleShowPassword() {
+    this.setState({ showPassword: true });
+  }
 
   reauthenticate = (currentPassword) => {
+    currentPassword = document.getElementById("currentPassword").value;
     var user = firebase.auth().currentUser;
     var cred = firebase.auth.EmailAuthProvider.credential(
         user.email, currentPassword);
@@ -50,23 +69,42 @@ class UserProfile extends Component {
   }
 
   changePassword = (currentPassword, newPassword) => {
-    currentPassword = document.getElementById("currentPassword").value;
     newPassword = document.getElementById("newPasswordOne").value;
     var newPasswordCheck = document.getElementById("newPasswordTwo").value;
+    var newEmail = document.getElementById("newEmail").value;
 
-    if (newPassword === newPasswordCheck) {
-      this.reauthenticate(currentPassword).then(() => {
+    if (newPassword != null ) {
+      if (newPassword === newPasswordCheck) {
+          var user = firebase.auth().currentUser;
+          user.updatePassword(newPassword).then(() => {
+            this.handleClose();
+            alert("Password Updated!");
+          }).catch((error) => { });
+      } else {
+        alert("Passwords must match!");
+      }
+    }
+
+    if (newEmail != null) {
         var user = firebase.auth().currentUser;
-        user.updatePassword(newPassword).then(() => {
+        user.updateEmail(newEmail).then(() => {
           this.handleClose();
-          alert("Password Updated!");
+          alert("Email Updated!");
+        }).catch((error) => { });
+    }
+  }
+
+  deleteAccount = (currentPassword) => {
+    currentPassword = document.getElementById("currentPasswordDeleteAccount").value;
+    this.reauthenticate(currentPassword).then(() => {
+        var user = firebase.auth().currentUser;
+        user.delete().then(() => {
+          window.location.href = "/";
+          alert("Account Deleted!");
         }).catch((error) => { });
       }).catch((error) => {
         alert("Incorrect Password!");
       });
-    } else {
-      alert("Passwords must match!");
-    }
   }
 
   componentDidMount = () => {
@@ -111,7 +149,7 @@ class UserProfile extends Component {
               <Col lg={3}>
               </Col>
               <Col lg={3}>
-                <Button variant="primary" onClick={this.handleShowProfile}>
+                <Button variant="primary" onClick={this.handleShowPassword}>
                     Edit Profile
                 </Button>
               </Col>
@@ -251,17 +289,22 @@ class UserProfile extends Component {
                   </Row>
                   <Row className="formPadding">
                     <Col>
-                      <Form.Control id="currentPassword" type="password" placeholder="Enter Current Password" />
+                      <Form.Control id="newPasswordOne" type="password" placeholder="Enter New Password" />
+                    </Col>
+                  </Row>
+                  <Row className="formPaddingOne">
+                    <Col>
+                      <Form.Control id="newPasswordTwo" type="password" placeholder="Re-Enter New Password" />
                     </Col>
                   </Row>
                   <Row className="formPadding">
                     <Col>
-                      <Form.Control id="newPasswordOne" type="password" placeholder="Enter Password" />
+                      <Form.Label>Change Email</Form.Label>
                     </Col>
                   </Row>
                   <Row className="formPadding">
                     <Col>
-                      <Form.Control id="newPasswordTwo" type="password" placeholder="Enter Password" />
+                      <Form.Control id="newEmail" type="email" placeholder="Enter New Email" />
                     </Col>
                   </Row>
                 </Form.Group>
@@ -269,6 +312,9 @@ class UserProfile extends Component {
             </Container>
             </Modal.Body>
             <Modal.Footer>
+            <Button variant="danger" onClick={this.showDeleteUserModal}>
+              Delete Account
+            </Button>
               <Button variant="secondary" onClick={this.handleClose}>
                 Close
               </Button>
@@ -277,6 +323,42 @@ class UserProfile extends Component {
               </Button>
             </Modal.Footer>
           </Modal>
+
+          <Modal show={this.state.showDeleteUser} onHide={this.handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Delete Account</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <p> Note: This action cannot be undone. All fitness data will be lost.</p>
+              <Form.Control id="currentPasswordDeleteAccount" type="password" placeholder="Enter Current Password" />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="primary" onClick={this.handleClose}>
+                Nevermind
+              </Button>
+              <Button variant="danger" onClick={this.deleteAccount}>
+                Delete Account
+              </Button>
+            </Modal.Footer>
+          </Modal>
+
+          <Modal show={this.state.showPassword} onHide={this.handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Edit Profile</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Form.Control id="currentPassword" type="password" placeholder="Enter Current Password" />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={this.handleClose}>
+                Cancel
+              </Button>
+              <Button variant="primary" onClick={this.authenticatePassword}>
+                Submit
+              </Button>
+            </Modal.Footer>
+          </Modal>
+
       </Container>
     )
   }
