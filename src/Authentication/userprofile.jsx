@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import "./userprofile.css"
 import firebase from "firebase"
-// import FileUploader from "react-firebase-file-uploader";
+import FileUploader from "react-firebase-file-uploader";
 import { Button, Form, Container, Row, Col, Modal } from 'react-bootstrap'
 
 
@@ -17,12 +17,19 @@ class UserProfile extends Component {
     this.showDeleteUserModal = this.showDeleteUserModal.bind(this);
     this.authenticatePassword = this.authenticatePassword.bind(this);
 
+    this.submitHealth = this.submitHealth.bind(this);
+
     this.state = {
       isSignedIn: false,
       showHealth: false,
       showProfile: false,
       showDeleteUser: false,
       showPassword: false,
+      avatar: "",
+      avatarURL: "",
+      height: "",
+      weight: "",
+      gender: "",
     };
   }
 
@@ -58,6 +65,13 @@ class UserProfile extends Component {
 
   handleShowPassword() {
     this.setState({ showPassword: true });
+  }
+
+  submitHealth() {
+    this.setState({ height: document.getElementById("editHeight").value });
+    this.setState({ weight: document.getElementById("editWeight").value });
+    this.setState({ gender: document.getElementById("editGender").value });
+    this.handleClose();
   }
 
   reauthenticate = (currentPassword) => {
@@ -107,17 +121,37 @@ class UserProfile extends Component {
       });
   }
 
+  handleUploadSuccess = filename => {
+    var user = firebase.auth().currentUser;
+    this.setState({ avatar: filename });
+    firebase.storage().ref("images").child(filename).getDownloadURL().then(url => user.updateProfile({
+      photoURL: url
+    }).then(function() {
+      // Update successful.
+    }).catch(function(error) {
+      // An error happened.
+    }));
+  }
+
   componentDidMount = () => {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ isSignedIn: !!user })
     })
   }
+
+
   render() {
     return (
       <Container className="mainDisplay">
         <Row>
           <Col lg={5} className="profPic">
-            <img className="shadow-lg" src="http://i.pravatar.cc/300" alt="User Avatar"/>
+            {
+              firebase.auth().currentUser.photoURL ?
+                <img height="300px" src={firebase.auth().currentUser.photoURL }/>
+              :
+                <img className="shadow-lg" src="http://i.pravatar.cc/300" alt="User Avatar"/>
+            }
+
           </Col>
 
           <Col className="shadow-lg p-3 mb-5 bg-white contentDiv" lg={6}>
@@ -171,19 +205,19 @@ class UserProfile extends Component {
               <Col>
                 <h6>Height</h6>
                 <Col>
-                  <h4>5' 10"</h4>
+                  <h4>{this.state.height}</h4>
                 </Col>
               </Col>
               <Col>
                 <h6>Weight</h6>
                 <Col>
-                  <h4>150 lbs</h4>
+                  <h4>{this.state.weight + " lbs"}</h4>
                 </Col>
               </Col>
               <Col>
                 <h6>Gender</h6>
                 <Col>
-                  <h4>Male</h4>
+                  <h4>{this.state.gender}</h4>
                 </Col>
               </Col>
             </Row>
@@ -201,9 +235,16 @@ class UserProfile extends Component {
             </Modal.Header>
             <Modal.Body>
               <Form>
-                <Form.Group controlId="formBasicEmail">
+                <Form.Group>
                   <Form.Label>Height</Form.Label>
-                  <Form.Control as="select" multiple>
+                  <Form.Control id="editHeight" as="select" defaultValue={this.state.height}>
+                    <option>4'0"</option>
+                    <option>4'1"</option>
+                    <option>4'2"</option>
+                    <option>4'3"</option>
+                    <option>4'4"</option>
+                    <option>4'5"</option>
+                    <option>4'6"</option>
                     <option>4'7"</option>
                     <option>4'8"</option>
                     <option>4'9"</option>
@@ -211,63 +252,50 @@ class UserProfile extends Component {
                     <option>4'11"</option>
                     <option>5'0"</option>
                     <option>5'1"</option>
-                    <option>5'2'</option>
-                    <option>5'3'</option>
-                    <option>5'4'</option>
-                    <option>5'5'</option>
-                    <option>5'6'</option>
-                    <option>5'7'</option>
-                    <option>5'8'</option>
-                    <option>5'9'</option>
-                    <option>5'10'</option>
-                    <option>5'11'</option>
-                    <option>6'0'</option>
-                    <option>6'1'</option>
-                    <option>6'2'</option>
-                    <option>6'3'</option>
-                    <option>6'4'</option>
-                    <option>6'5'</option>
-                    <option>6'6'</option>
-                    <option>6'7'</option>
-                    <option>6'8'</option>
-                    <option>6'9'</option>
-                    <option>6'10'</option>
-                    <option>6'11'</option>
+                    <option>5'2"</option>
+                    <option>5'3"</option>
+                    <option>5'4"</option>
+                    <option>5'5"</option>
+                    <option>5'6"</option>
+                    <option>5'7"</option>
+                    <option>5'8"</option>
+                    <option>5'9"</option>
+                    <option>5'10"</option>
+                    <option>5'11"</option>
+                    <option>6'0"</option>
+                    <option>6'1"</option>
+                    <option>6'2"</option>
+                    <option>6'3"</option>
+                    <option>6'4"</option>
+                    <option>6'5"</option>
+                    <option>6'6"</option>
+                    <option>6'7"</option>
+                    <option>6'8"</option>
+                    <option>6'9"</option>
+                    <option>6'10"</option>
+                    <option>6'11"</option>
                   </Form.Control>
                 </Form.Group>
 
-                <Form.Group controlId="formWeight">
+                <Form.Group>
                   <Form.Label>Weight</Form.Label>
-                  <Form.Control type="weight" placeholder="Weight (in lbs)" />
+                  <Form.Control id="editWeight" type="" placeholder="Weight (in lbs)" defaultValue={this.state.weight} />
                 </Form.Group>
-                <p> Select Gender </p>
-                <Col sm={10} className="Gender">
-                        <Form.Check
-                          type="radio"
-                          label="Male"
-                          name="formHorizontalRadios"
-                          id=""
-                        />
-                        <Form.Check
-                          type="radio"
-                          label="Female"
-                          name="formHorizontalRadios"
-                          id=""
-                        />
-                        <Form.Check
-                          type="radio"
-                          label="Other"
-                          name="formHorizontalRadios"
-                          id=""
-                        />
-                </Col>
+                <Form.Group>
+                  <Form.Label>Gender</Form.Label>
+                  <Form.Control id="editGender" as="select" defaultValue={this.state.gender} >
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                  </Form.Control>
+                </Form.Group>
               </Form>
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={this.handleClose}>
                 Close
               </Button>
-              <Button variant="primary" onClick={this.handleClose}>
+              <Button variant="primary" onClick={this.submitHealth}>
                 Save Changes
               </Button>
             </Modal.Footer>
@@ -302,9 +330,23 @@ class UserProfile extends Component {
                       <Form.Label>Change Email</Form.Label>
                     </Col>
                   </Row>
-                  <Row className="formPadding">
+                  <Row className="formPaddingTwo">
                     <Col>
                       <Form.Control id="newEmail" type="email" placeholder="Enter New Email" />
+                    </Col>
+                  </Row>
+                  <Row className="formPadding text-center">
+                    <Col>
+                      <label style={{backgroundColor: 'steelblue', color: 'white', padding: 10, borderRadius: 4, pointer: 'cursor'}}>
+                        Upload Avatar
+                        <FileUploader
+                          hidden
+                          accept="image/*"
+                          filename={file => firebase.auth().currentUser.uid + file.name.split('.')[1]}
+                          storageRef={firebase.storage().ref('images')}
+                          onUploadSuccess={this.handleUploadSuccess}
+                        />
+                      </label>
                     </Col>
                   </Row>
                 </Form.Group>
