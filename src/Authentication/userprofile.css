@@ -8,10 +8,16 @@
 
 .contentDiv {
   min-height: 300px;
+  min-width: 600px;
+  transform: translateX(-30px);
+}
+
+.healthInfo {
+  padding-top: 30px;
 }
 
 .profPic {
-  transform: translateX(30px);
+  transform: translateX(7px);
 }
 
 .name {

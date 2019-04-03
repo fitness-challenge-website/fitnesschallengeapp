@@ -45,22 +45,24 @@ class Login extends Component {
                 <Container className="rounded">
                   <Row>
                     <Col>
-                    <h1>Welcome to the Fitness Challenge WebApp!</h1>
-                    <h2>You must be signed in to use this website</h2>
-                    <h2> Please Sign in Below </h2>
                     </Col>
                   </Row>
 
-                  <Row>
-                    <Col sm={4}>
+                  <Row className="contentDiv">
+                    <Col lg={2}>
                     </Col>
-                    <Col sm={4} className="shadow-lg p-3 mb-5 bg-white">
+                    <Col lg={4} className="shadow-lg p-3 mb-5 bg-white">
                       <StyledFirebaseAuth
                         uiConfig={this.uiConfig}
                         firebaseAuth={firebase.auth()}
                       />
                     </Col>
-                    <Col sm={4}>
+                    <Col lg={4} className="shadow-lg p-3 mb-5 bg-white learnMore">
+                      <h4>Welcome to the Fitness Challenge Web App!</h4>
+                      <p>You must sign in to use this website</p>
+                      <Button variant="primary" href="/learnmore">
+                          Learn More
+                      </Button>
                     </Col>
                   </Row>
 
