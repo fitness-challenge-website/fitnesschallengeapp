@@ -28,3 +28,8 @@
 .formPadding {
   padding-top: 5px;
 }
+
+.formPaddingOne {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
