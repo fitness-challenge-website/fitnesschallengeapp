@@ -34,20 +34,11 @@ class NavBar extends Component {
               <Nav className="mr-auto">
                 <NavDropdown title={firebase.auth().currentUser.displayName} id="basic-nav-dropdown">
                  <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-                 <NavDropdown.Item href="">Add Friends</NavDropdown.Item>
+                 <NavDropdown.Item href="/add">Add Friends</NavDropdown.Item>
                  <NavDropdown.Divider />
                  <NavDropdown.Item onClick={() => firebase.auth().signOut()}>Sign Out</NavDropdown.Item>
                </NavDropdown>
               </Nav>
-             {/*
-              <Form inline>
-                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                <Button variant="outline-success">Search</Button>
-              </Form>
-                <Navbar.Text>
-                    Signed in as: <a href="/profile">{firebase.auth().currentUser.displayName}</a>
-                </Navbar.Text>
-                */}
               </span>
             ) : (
               <div>

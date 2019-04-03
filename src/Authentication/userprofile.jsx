@@ -166,7 +166,7 @@ class UserProfile extends Component {
         <Row>
           <Col>
           </Col>
-          <Col className="shadow-lg p-3 mb-5 bg-white" lg={10}>
+          <Col className="shadow-lg p-3 mb-5 bg-white healthInfo" lg={10}>
             <Row>
               <Col>
                 <h6>Height</h6>

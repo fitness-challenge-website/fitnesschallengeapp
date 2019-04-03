@@ -6,8 +6,9 @@ import Login from './Authentication/login'
 import UserDash from './components/UserDash'
 import NavBar from './PageContent/navbar'
 import UserProfile from './Authentication/userprofile'
-import ActivityCard from './components/ActivityCard'
 import AddActivity from './components/AddActivity'
+import LearnMore from './Authentication/learnmore'
+import AddFriends from './components/addfriends'
 
 firebase.initializeApp({
   apiKey: "AIzaSyAYdZGv2f-0gvWOyQ8zkk8HjbsJqmcKwOM",
@@ -39,8 +40,8 @@ class App extends Component {
                   <Route path='/login' component={Login} />
                   <Route path='/userdash' component={UserDash} />
                   <Route path='/profile' component={UserProfile} />
-                  <Route path='/ActivityCard' component={ActivityCard} />
                   <Route path='/AddActivity' component={AddActivity} />
+                  <Route path='/add' component={AddFriends} />
                 </Switch>
           </BrowserRouter>
         </div>
@@ -50,6 +51,7 @@ class App extends Component {
           <BrowserRouter>
                 <Switch>
                   <Route exact path='/' component={Login} />
+                  <Route path='/learnmore' component={LearnMore} />
                 </Switch>
           </BrowserRouter>
         </div>

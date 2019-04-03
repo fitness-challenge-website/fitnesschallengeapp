@@ -13,3 +13,12 @@
   opacity: .95;
 
 }
+
+.learnMore {
+  min-height: 300px;
+  transform: translateX(10px);
+}
+
+.contentDiv {
+  padding-top: 20%;
+}
