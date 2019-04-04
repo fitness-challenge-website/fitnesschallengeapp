@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     height: DataTypes.FLOAT
   }, {
     freezeTableName: true,
-    tableName: "User",
+    tableName: "a_user",
     updatedAt: false
   });
 
