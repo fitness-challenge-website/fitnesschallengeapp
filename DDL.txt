@@ -37,8 +37,8 @@ create table a_Badges(
 
 create table a_Friends(
 	fid serial primary key,
-	req_uid integer references "User"(UID),
-	res_uid integer references "User"(UID),
+	req_uid integer references "a_User"(UID),
+	res_uid integer references "a_User"(UID),
 	status varchar(1) not null,
 	"createdAt" Date
 );
