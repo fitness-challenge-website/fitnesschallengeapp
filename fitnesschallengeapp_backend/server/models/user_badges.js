@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     uid: DataTypes.INTEGER,
     bid: DataTypes.INTEGER
   }, {
-    tableName: 'user_badges',
+    tableName: 'a_user_badges',
     freezeTableName: true,
     createdAt: false
   });
