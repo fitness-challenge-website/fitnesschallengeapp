@@ -4,36 +4,62 @@ import "../index.css"
 import { Button, Form, Container, Row, Col, Modal } from 'react-bootstrap'
 import firebase from "firebase"
 
+// TO GET USER ID firebase.auth().currentUser.uid
+
 class AddActivity extends Component {
 
   constructor(props, context) {
     super(props, context);
 
+    this.saveActivity = this.saveActivity.bind(this);
+    this.calculatePoints = this.calculatePoints.bind(this);
     this.submitActivity = this.submitActivity.bind(this);
-    // TO GET USER ID firebase.auth().currentUser.uid
 
     this.state = {
       a_name: '',
       a_description: '',
       a_type: '',
       a_duration: '',
-      a_distance: ''
+      a_distance: '',
+      a_points: '',
+      uid: ''
     };
   }
 
   submitActivity() {
+    console.log(this.state);
+    axios.post('http://localhost:3210/api/addActivity', this.state)
+      .then(res => console.log(res.data));
+
+    this.props.history.push('/');
+  }
+
+  calculatePoints() {
+    let points = 0;
+
+    if(this.state.a_type === 'Bike' && this.state.a_duration > 0) {
+      points = this.state.a_duration * 1.25;
+      alert('Points Earned Biking: ' + points)
+    }
+
+    this.setState({
+      a_points: points
+    }, function() {
+      this.submitActivity();
+    });
+  }
+
+  saveActivity() {
+    //calculatePoints();
     this.setState({
       a_name: document.getElementById("a_name").value,
       a_description: document.getElementById("a_description").value,
       a_type: document.getElementById("a_type").value,
       a_duration: document.getElementById("a_duration").value,
       a_distance: document.getElementById("a_distance").value,
+      uid: firebase.auth().currentUser.uid
     }, function() {
-      console.log(this.state);
-      axios.post('http://localhost:3210/api/addActivity', this.state)
-        .then(res => console.log(res.data));
-
-      this.props.history.push('/');
+      this.calculatePoints();
     });
   }
 
@@ -72,7 +98,7 @@ class AddActivity extends Component {
             <Form.Control id="a_distance" type="" placeholder="3" defaultValue={this.state.a_distance} />
           </Form.Group>
 
-          <Button variant="primary" onClick={this.submitActivity}>
+          <Button variant="primary" onClick={this.saveActivity}>
             Save Activity
           </Button>
 
