@@ -15,7 +15,6 @@ class Leaderboard extends Component {
   constructor(props, context) {
     super(props, context);
 
-    //this.submitActivity = this.submitActivity.bind(this);
     // TO GET USER ID firebase.auth().currentUser.uid
 
     this.state = {activities: []};
