@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     b_name: DataTypes.STRING,
     level: DataTypes.STRING
   }, {
-    tableName: "badges",
+    tableName: "a_badges",
     freezeTableName: true,
     createdAt: false,
     updatedAt: false

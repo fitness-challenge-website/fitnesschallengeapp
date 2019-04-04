@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
           autoIncrement: true},
     g_name: DataTypes.STRING
   }, {
-    tableName: 'activity',
+    tableName: 'a_group',
     freezeTableName: true,
     updatedAt: false
   });

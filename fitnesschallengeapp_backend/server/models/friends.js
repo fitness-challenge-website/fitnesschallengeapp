@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     res_uid:DataTypes.INTEGER,
     status: DataTypes.STRING
   }, {
-    tableName: 'friends',
+    tableName: 'a_friends',
     freezeTableName: true,
     updatedAt: false
   });
