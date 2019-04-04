@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import "../index.css"
 import { Button, Form, Container, Row, Col, Modal } from 'react-bootstrap'
 import firebase from "firebase"
 
@@ -38,8 +39,8 @@ class AddActivity extends Component {
 
   render() {
 		return (
-      <Container className="mainDisplay">
-        <h3>Add New Activity</h3>
+      <Container className="addActivityDisplay">
+        <h1>Add New Activity</h1>
         <Form>
           <Form.Group>
             <Form.Label>Activity Name</Form.Label>
