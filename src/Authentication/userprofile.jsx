@@ -3,6 +3,7 @@ import "./userprofile.css"
 import firebase from "firebase"
 import FileUploader from "react-firebase-file-uploader";
 import { Button, Form, Container, Row, Col, Modal } from 'react-bootstrap'
+import axios from 'axios'
 
 
 class UserProfile extends Component {
@@ -30,6 +31,11 @@ class UserProfile extends Component {
       height: "",
       weight: "",
       gender: "",
+      username: "",
+      email: "",
+      f_name: "",
+      l_name: "",
+      age: "",
     };
   }
 
@@ -68,10 +74,28 @@ class UserProfile extends Component {
   }
 
   submitHealth() {
-    this.setState({ height: document.getElementById("editHeight").value });
-    this.setState({ weight: document.getElementById("editWeight").value });
-    this.setState({ gender: document.getElementById("editGender").value });
+    axios.post('http://localhost:3210/api/editProfile', {
+      uid: 2,
+      f_name: this.state.f_name,
+      l_name: this.state.l_name,
+      weight: document.getElementById("editWeight").value,
+      height: document.getElementById("editHeight").value,
+      age: document.getElementById("editAge").value,
+    })
+    .then(res => {
+      let data = res.data;
+      window.location.reload();
+    }).catch(err => {
+      alert("Check If you have a data in the user table.");
+      console.log(err);
+    });
+
+
+    // this.setState({ height: document.getElementById("editHeight").value });
+    // this.setState({ weight: document.getElementById("editWeight").value });
+    // this.setState({ gender: document.getElementById("editGender").value });
     this.handleClose();
+    // window.location.reload();
   }
 
   reauthenticate = (currentPassword) => {
@@ -136,7 +160,26 @@ class UserProfile extends Component {
   componentDidMount = () => {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ isSignedIn: !!user })
-    })
+    });
+
+    axios.post('http://localhost:3210/api/getUserData', {uid: 2})
+		.then(res => {
+			let data = res.data;
+      this.setState({
+				username: data.username,
+				email: data.email,
+				f_name: data.f_name,
+				l_name: data.l_name,
+				height: data.height,
+				weight: data.weight,
+				age: data.age
+			});
+    }).catch(err => {
+			alert("Check If you have a data in the user table.");
+			console.log(err);
+		});
+
+
   }
 
 
@@ -220,6 +263,12 @@ class UserProfile extends Component {
                   <h4>{this.state.gender}</h4>
                 </Col>
               </Col>
+              <Col>
+                <h6>Age</h6>
+                <Col>
+                  <h4>{this.state.age}</h4>
+                </Col>
+              </Col>
             </Row>
           </Col>
 
@@ -280,6 +329,10 @@ class UserProfile extends Component {
                 <Form.Group>
                   <Form.Label>Weight</Form.Label>
                   <Form.Control id="editWeight" type="" placeholder="Weight (in lbs)" defaultValue={this.state.weight} />
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Age</Form.Label>
+                  <Form.Control id="editAge" type="" placeholder="Enter Age" defaultValue={this.state.age} />
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>Gender</Form.Label>
