@@ -26,6 +26,7 @@ class NavBar extends Component {
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/userdash">User Dashboard</Nav.Link>
                 <Nav.Link href="/AddActivity">Add Activity</Nav.Link>
+                <Nav.Link href="/Leaderboard">Leaderboard</Nav.Link>
               </Nav>
             </Navbar.Collapse>
             <Navbar.Collapse className="justify-content-end">
