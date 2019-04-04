@@ -44,14 +44,14 @@ create table a_Friends(
 );
 
 create table a_User_Badges(
-	uid integer references "User"(UID),
-	bid integer references Badges(BID),
+	uid integer references "a_User"(UID),
+	bid integer references a_Badges(BID),
 	"updatedAt" Date
 );
 
 create table a_User_Activity(
-	uid integer references "User"(UID),
-	aid integer references activity(AID),
+	uid integer references "a_User"(UID),
+	aid integer references a_Activity(AID),
 	duration integer,
 	weight integer,
 	rep integer,
@@ -61,9 +61,9 @@ create table a_User_Activity(
 
 create table a_User_Group(
 	ugid serial primary key,
-	req_uid integer references "User"(UID),
-	res_uid integer references "User"(UID),
-	gid integer references "Group"(GID),
+	req_uid integer references "a_User"(UID),
+	res_uid integer references "a_User"(UID),
+	gid integer references "a_Group"(GID),
 	status varchar(1),
 	"joinAt" Date
 );
