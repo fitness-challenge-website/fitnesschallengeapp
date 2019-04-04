@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     speed:DataTypes.FLOAT,
     point:DataTypes.INTEGER
   }, {
-    tableName: 'user_activity',
+    tableName: 'a_user_activity',
     freezeTableName: true,
     updatedAt: false,
     createdAt: false
