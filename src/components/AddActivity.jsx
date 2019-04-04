@@ -37,9 +37,25 @@ class AddActivity extends Component {
   calculatePoints() {
     let points = 0;
 
-    if(this.state.a_type === 'Bike' && this.state.a_duration > 0) {
-      points = this.state.a_duration * 1.25;
+    if(this.state.a_type === 'Run' && this.state.a_duration > 0) {
+      points = this.state.a_duration * 1;
+      alert('Points Earned Running: ' + points)
+    }
+    else if(this.state.a_type === 'Bike' && this.state.a_duration > 0) {
+      points = this.state.a_duration * 0.5;
       alert('Points Earned Biking: ' + points)
+    }
+    else if(this.state.a_type === 'Swim' && this.state.a_duration > 0) {
+      points = this.state.a_duration * 4;
+      alert('Points Earned Swimming: ' + points)
+    }
+    else if(this.state.a_type === 'Lift' && this.state.a_duration > 0) {
+      points = this.state.a_duration * 1;
+      alert('Points Earned Lifting: ' + points)
+    }
+    else {
+      alert('No activity entered!')
+      return
     }
 
     this.setState({
