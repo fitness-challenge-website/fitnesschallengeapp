@@ -3,8 +3,8 @@
     "username": "postgres",
     "password": "password",
     "database": "fitness",
-    "host": "127.0.0.1",
-    "port": 5432,
+    "host": "proxy18.rt3.io",
+    "port": 35573,
     "dialect": "postgres"
   },
   "test": {
