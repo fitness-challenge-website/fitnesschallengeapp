@@ -35,4 +35,10 @@ Development is done in individual branches. When you are ready to add a feature,
 Branches will be made for each iteration to be turned in.
 
 ## Testing
-Manual testing of user stories will take place upon completion of the story. Automated testing will take place once the manual testing is complete. 
+Manual testing of user stories will take place upon completion of the story. Automated testing will take place once the manual testing is complete. Test cases have been set up to ensure proper rendering of all pages without errors. Additional test cases will be added when developer imports or creates new pages on the website.
+### Instructions for Running Tests
+To Run Test Cases:
+- `$npm run test`
+
+Code Coverage Can be Ran by:
+- `$npm run test:coverage`
