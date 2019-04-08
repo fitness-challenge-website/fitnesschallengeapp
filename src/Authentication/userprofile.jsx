@@ -26,8 +26,10 @@ class UserProfile extends Component {
       showProfile: false,
       showDeleteUser: false,
       showPassword: false,
+      photoURL: "",
       avatar: "",
       avatarURL: "",
+      displayName: "",
       height: "",
       weight: "",
       gender: "",
@@ -160,6 +162,8 @@ class UserProfile extends Component {
   componentDidMount = () => {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ isSignedIn: !!user })
+      this.setState({ photoURL: firebase.auth().currentUser.photoURL })
+      this.setState({ displayName: firebase.auth().currentUser.displayName })
     });
 
     axios.post('http://localhost:3210/api/getUserData', {uid: 2})
@@ -189,7 +193,7 @@ class UserProfile extends Component {
         <Row>
           <Col lg={5} className="profPic">
             {
-              firebase.auth().currentUser.photoURL ?
+              this.photoURL ?
                 <img height="300px" src={firebase.auth().currentUser.photoURL }/>
               :
                 <img className="shadow-lg" src="http://i.pravatar.cc/300" alt="User Avatar"/>
@@ -198,8 +202,8 @@ class UserProfile extends Component {
           </Col>
 
           <Col className="shadow-lg p-3 mb-5 bg-white contentDiv" lg={6}>
-            <h3 class="name"> {firebase.auth().currentUser.displayName} </h3>
-            <h6 class="email"> {firebase.auth().currentUser.email} </h6>
+            <h3 class="name"> { this.displayName ? this.displayName : null} </h3>
+            <h6 class="email"> {this.email ? this.email : null} </h6>
 
             <Row className="displayInfo">
               <Col>
