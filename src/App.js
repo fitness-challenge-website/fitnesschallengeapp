@@ -14,6 +14,7 @@ import Challenges from './components/challenges'
 import WeeklyChallenge from './components/challengesFolder/weekly'
 import MonthlyChallenge from './components/challengesFolder/monthly'
 import YearlyChallenge from './components/challengesFolder/yearly'
+import MainDashBoard from './PageContent/MainDashBoard'
 
 
 firebase.initializeApp({
@@ -41,7 +42,7 @@ class App extends Component {
           <NavBar />
           <BrowserRouter>
                 <Switch>
-                  <Route exact path='/' component={UserDash} />
+                  <Route exact path='/' component={MainDashBoard} />
                   <Route path='/login' component={Login} />
                   <Route path='/userdash' component={UserDash} />
                   <Route path='/profile' component={UserProfile} />
