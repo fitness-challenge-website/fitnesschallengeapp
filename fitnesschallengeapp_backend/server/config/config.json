@@ -1,11 +1,12 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "password",
-    "database": "fitness",
-    "host": "proxy18.rt3.io",
-    "port": 35573,
-    "dialect": "postgres"
+    "username": "buopyddedeqbjn",
+    "password": "4e793f81fe1245c64fca4643dd04ceba12435a4c1dffc45e142169fc34a9c339",
+    "database": "dbetnbntappes8",
+    "host": "ec2-54-225-129-101.compute-1.amazonaws.com",
+    "port": 5432,
+    "dialect": "postgres",
+    "ssl": "true"
   },
   "test": {
     "username": "postgres",

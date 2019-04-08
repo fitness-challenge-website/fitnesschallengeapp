@@ -82,6 +82,8 @@ class AddActivity extends Component {
   render() {
 		return (
       <Container className="addActivityDisplay">
+      <Row className="shadow-lg p-3 mb-5 bg-white contentDiv">
+      <Col>
         <h1>Add New Activity</h1>
         <Form>
           <Form.Group>
@@ -119,6 +121,8 @@ class AddActivity extends Component {
           </Button>
 
         </Form>
+        </Col>
+        </Row>
       </Container>
 		);
 	}
