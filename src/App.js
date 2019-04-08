@@ -10,6 +10,7 @@ import AddActivity from './components/AddActivity'
 import Leaderboard from './components/Leaderboard'
 import LearnMore from './Authentication/learnmore'
 import AddFriends from './components/addfriends'
+import Challenges from './components/challenges'
 
 firebase.initializeApp({
   apiKey: "AIzaSyAYdZGv2f-0gvWOyQ8zkk8HjbsJqmcKwOM",
@@ -42,6 +43,7 @@ class App extends Component {
                   <Route path='/profile' component={UserProfile} />
                   <Route path='/AddActivity' component={AddActivity} />
                   <Route path='/Leaderboard' component={Leaderboard} />
+                  <Route path='/challenges' component={Challenges} />
                   <Route path='/add' component={AddFriends} />
                 </Switch>
           </BrowserRouter>
