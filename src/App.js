@@ -11,6 +11,10 @@ import Leaderboard from './components/Leaderboard'
 import LearnMore from './Authentication/learnmore'
 import AddFriends from './components/addfriends'
 import Challenges from './components/challenges'
+import WeeklyChallenge from './components/challengesFolder/weekly'
+import MonthlyChallenge from './components/challengesFolder/monthly'
+import YearlyChallenge from './components/challengesFolder/yearly'
+
 
 firebase.initializeApp({
   apiKey: "AIzaSyAYdZGv2f-0gvWOyQ8zkk8HjbsJqmcKwOM",
@@ -44,6 +48,9 @@ class App extends Component {
                   <Route path='/AddActivity' component={AddActivity} />
                   <Route path='/Leaderboard' component={Leaderboard} />
                   <Route path='/challenges' component={Challenges} />
+                  <Route path='/weeklychallenge' component={WeeklyChallenge} />
+                  <Route path='/monthlychallenge' component={MonthlyChallenge} />
+                  <Route path='yearlychallenge' component={YearlyChallenge} />
                   <Route path='/add' component={AddFriends} />
                 </Switch>
           </BrowserRouter>
