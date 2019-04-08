@@ -95,7 +95,7 @@ it('YearlyChallenge renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-it('MainDashBoard renders without crashing', () => {
+it.skip('MainDashBoard renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(<MainDashBoard />, div);
   ReactDOM.unmountComponentAtNode(div);
