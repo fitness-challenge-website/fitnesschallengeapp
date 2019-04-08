@@ -17,31 +17,74 @@ class Challenges extends Component {
               <Col>
                 <h6>Weekly Challenge</h6>
                 <img height="100px" src={require("../Images/1.png")} />
+                <Row>
+                  <Col>
+                    <li>Complete 5 Workouts</li>
+                    <li>Place top 25% of leaderboard</li>
+                  </Col>
+                </Row>
                 <Row className="imagePadding">
                   <Col>
-                    <Button variant="primary">Join</Button>
+                    <Button variant="primary" href="/weeklychallenge">View</Button>
                   </Col>
                 </Row>
               </Col>
               <Col>
                 <h6>Monthly Challenge</h6>
                 <img height="100px" src={require("../Images/2.png")} />
+                <Row>
+                  <Col>
+                    <li>Complete 25 Workouts</li>
+                    <li>Place top 10% of leaderboard</li>
+                  </Col>
+                </Row>
                 <Row className="imagePadding">
                   <Col>
-                    <Button variant="primary">Join</Button>
+                    <Button variant="primary" href="/monthlychallenge">View</Button>
                   </Col>
                 </Row>
               </Col>
               <Col>
                 <h6>Yearly Challenge</h6>
                 <img height="100px" src={require("../Images/3.png")} />
+                <Row>
+                  <Col>
+                    <li>Complete 325 Workouts</li>
+                    <li>Place top 5% of leaderboard</li>
+                  </Col>
+                </Row>
                 <Row className="imagePadding">
                   <Col>
-                    <Button variant="primary">Join</Button>
+                    <Button variant="primary" href="/yearlychallenge">View</Button>
                   </Col>
                 </Row>
               </Col>
             </Row>
+
+            <Row className="challengeListTwo">
+              <Col>
+              </Col>
+
+              <Col>
+                <h6>Heart Month</h6>
+                <img height="100px" src={require("../Images/4.png")} />
+                <Row>
+                  <Col>
+                    <li>Complete 5 runs this week</li>
+                  </Col>
+                </Row>
+                <Row className="imagePadding">
+                  <Col>
+                    <Button variant="primary">View</Button>
+                  </Col>
+                </Row>
+              </Col>
+
+              <Col>
+              </Col>
+            </Row>
+
+
           </Col>
         </Row>
       </Container>

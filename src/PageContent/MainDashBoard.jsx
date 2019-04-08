@@ -1,43 +1,73 @@
 import React, { Component } from "react"
-import "../App.css"
+import "./MainDashBoard.css"
 import firebase from "firebase"
-import { Button } from 'react-bootstrap'
+import { Button, Container, Row, Col } from 'react-bootstrap'
+import { Progress } from 'reactstrap';
+
 
 
 class MainDashBoard extends Component {
-  state = { isSignedIn: false }
-
-  componentDidMount = () => {
-    firebase.auth().onAuthStateChanged(user => {
-      this.setState({ isSignedIn: !!user })
-      console.log("user", user)
-    })
-  }
-
   render() {
     return (
 
-      <div className="App">
-      {this.state.isSignedIn ? (
-        <span>
-          <img src={require('../Images/dumbell.png')} width="30%" height="30%" alt="dumbell clip art"/>
-          <h1> Welcome to the Fitness Challenge App</h1>
-          <h3> This is the temporary main page dashboard </h3>
-          <h4> You are logged in as: {firebase.auth().currentUser.displayName} </h4>
-          <Button variant="primary" href="/profile">View Profile</Button>
-          <Button variant="secondary" onClick={() => firebase.auth().signOut()}>Sign out!</Button>
-        </span>
-      ) : (
-        <div>
-          <img src={require('../Images/dumbell.png')} width="30%" height="30%" alt="dumbell clip art"/>
-          <h1> Welcome to the Fitness Challenge App</h1>
-          <h3> This is the temporary main page dashboard </h3>
-        </div>
-      )}
+      <Container className="contentDiv">
+        <Row>
+          <Col className="shadow-lg p-3 mb-5 bg-white" lg={8}>
+          </Col>
+
+          <Col className="shadow-lg p-3 mb-5 bg-white leftBar" lg={4}>
+            <h4>Your Progress</h4>
+            <Row className="barSpacing">
+              <Col>
+                <h6>Weekly Challenge Progress</h6>
+                <Progress value={80} />
+              </Col>
+            </Row>
+
+            <Row className="barSpacing">
+              <Col>
+                <h6>Monthly Challenge Progress</h6>
+                <Progress value={40} />
+              </Col>
+            </Row>
+
+            <Row className="barSpacing">
+              <Col>
+                <h6>Yearly Challenge Progress</h6>
+                <Progress value={20} />
+              </Col>
+            </Row>
+
+            <h4 className="barSpacing">Your Badges</h4>
+            <Row>
+              <Col>
+                <img height="50px" src={require('../Images/badges/001-badge.png')} />
+              </Col>
+              <Col>
+                <img height="50px" src={require('../Images/badges/002-trophy.png')} />
+              </Col>
+              <Col>
+                <img height="50px" src={require('../Images/badges/003-silver-medal.png')} />
+              </Col>
+            </Row>
+            <Row className="barSpacing">
+              <Col>
+                <img height="50px" src={require('../Images/badges/004-first.png')} />
+              </Col>
+              <Col>
+                <img height="50px" src={require('../Images/badges/005-present.png')} />
+              </Col>
+              <Col>
+                <img height="50px" src={require('../Images/badges/006-money.png')} />
+              </Col>
+            </Row>
+
+          </Col>
+        </Row>
+
+      </Container>
 
 
-
-      </div>
 
     )
   }

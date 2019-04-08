@@ -1,0 +1,11 @@
+.leftBar {
+  transform: translateX(30px);
+}
+
+.contentDiv {
+  padding-top: 100px;
+}
+
+.barSpacing {
+  padding-top: 10px;
+}
