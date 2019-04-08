@@ -13,6 +13,7 @@ class MainDashBoard extends Component {
       <Container className="contentDiv">
         <Row>
           <Col className="shadow-lg p-3 mb-5 bg-white" lg={8}>
+            <h4>Welcome, {firebase.auth().currentUser.displayName}</h4>
           </Col>
 
           <Col className="shadow-lg p-3 mb-5 bg-white leftBar" lg={4}>
@@ -38,7 +39,7 @@ class MainDashBoard extends Component {
               </Col>
             </Row>
 
-            <h4 className="barSpacing">Your Badges</h4>
+            <h4 className="barSpacingTwo">Your Badges</h4>
             <Row>
               <Col>
                 <img height="50px" src={require('../Images/badges/001-badge.png')} />

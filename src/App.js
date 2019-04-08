@@ -15,6 +15,7 @@ import WeeklyChallenge from './components/challengesFolder/weekly'
 import MonthlyChallenge from './components/challengesFolder/monthly'
 import YearlyChallenge from './components/challengesFolder/yearly'
 import MainDashBoard from './PageContent/MainDashBoard'
+import NewUser from './Authentication/newuser'
 
 
 firebase.initializeApp({
@@ -63,6 +64,7 @@ class App extends Component {
                   <Route path='/monthlychallenge' component={MonthlyChallenge} />
                   <Route path='yearlychallenge' component={YearlyChallenge} />
                   <Route path='/add' component={AddFriends} />
+                  <Route path='/newuser' component={NewUser} />
                 </Switch>
           </BrowserRouter>
         </div>
