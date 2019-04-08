@@ -58,7 +58,7 @@ class Login extends Component {
                     </Col>
                     <Col lg={4} className="shadow-lg p-3 mb-5 bg-white learnMore">
                       <h4>Welcome to the Fitness Challenge Web App!</h4>
-                      <p>You must sign in to use this website</p>
+                      <p>Please sign in or sign up to use this website</p>
                       <Button variant="primary" href="/learnmore">
                           Learn More
                       </Button>

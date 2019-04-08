@@ -22,10 +22,10 @@ class NavBar extends Component {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/userdash">User Dashboard</Nav.Link>
-                <Nav.Link href="/AddActivity">Add Activity</Nav.Link>
+                <Nav.Link href="/userdash">Dashboard</Nav.Link>
                 <Nav.Link href="/Leaderboard">Leaderboard</Nav.Link>
+                <Nav.Link href="/challenges">Challenges</Nav.Link>
+                <Nav.Link href="/AddActivity">Add Activity</Nav.Link>
               </Nav>
             </Navbar.Collapse>
             <Navbar.Collapse className="justify-content-end">
