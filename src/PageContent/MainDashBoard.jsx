@@ -7,13 +7,34 @@ import { Progress } from 'reactstrap';
 
 
 class MainDashBoard extends Component {
+
+  constructor(props, context) {
+      super(props, context);
+      this.state = {
+        isSignedIn: false,
+        userDisplayName: "",
+      }
+
+
+  }
+
+  componentDidMount = () => {
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ isSignedIn: !!user })
+      this.setState({userDisplayName: firebase.auth().currentUser.displayName})
+
+    })
+  }
+
   render() {
     return (
 
       <Container className="contentDiv">
         <Row>
           <Col className="shadow-lg p-3 mb-5 bg-white" lg={8}>
-            <h4>Welcome, {firebase.auth().currentUser.displayName}</h4>
+            <h4>Welcome,
+            {this.userDisplayName ? this.userDisplayName : null }
+            </h4>
           </Col>
 
           <Col className="shadow-lg p-3 mb-5 bg-white leftBar" lg={4}>
