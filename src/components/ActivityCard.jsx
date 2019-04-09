@@ -2,26 +2,35 @@ import React, { Component } from 'react';
 class ActivityCard extends Component {
 	state = {
 		name: '',
-		parameters: [],
+		duration: '',
+		weight: '',
+		rep: '',
+		distance: '',
+		speed: '',
 	};
 	render() {
+		const props = this.props;
 		return (
 			<div className='container row'>
 				<div className='ActivityName'>
-					<p>{this.props.activityName}</p>
+					<p>{props.activityName}</p>
 				</div>
 				<div className='ActivityParams'>
-					{this.props.parameters.map(param => {
-						return (
-							<span
-								className='m-2'
-								id={param.parameterName}
-								key={param.parameterName}
-							>
-								{param.value}
-							</span>
-						);
-					})}
+					{props.duration ? (
+						<div className='col'>Duration: {props.duration}</div>
+					) : null}
+					{props.duration ? (
+						<div className='col'>Weight: {props.weight}</div>
+					) : null}
+					{props.duration ? (
+						<div className='col'>Reps: {props.rep}</div>
+					) : null}
+					{props.duration ? (
+						<div className='col'>Distance: {props.distance}</div>
+					) : null}
+					{props.duration ? (
+						<div className='col'>Speed: {props.speed}</div>
+					) : null}
 				</div>
 			</div>
 		);
