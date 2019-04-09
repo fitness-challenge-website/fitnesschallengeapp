@@ -1,0 +1,69 @@
+create database fitness;
+\c fitness;
+
+create table a_User(
+	uid serial primary key,
+	username varchar(100) not null,
+	Password varchar(255) not null,
+	f_name varchar(100) not null,
+	l_name varchar(100) not null,
+	email varchar(255),
+	age integer,
+	weight float,
+	height float,
+	"createdAt" Date
+);
+
+create table a_Activity(
+	aid serial primary key,
+	a_name varchar(255) not null,
+	a_description varchar(255) not null,
+	a_type varchar(255) not null,
+	a_duration integer,
+	a_distance integer
+);
+
+create table a_Group(
+	gid serial primary key,
+	g_name varchar(255) not null,
+	"createdAt" Date
+);
+
+create table a_Badges(
+	bid serial primary key,
+	b_name varchar(355),
+	"level" integer
+);
+
+create table a_Friends(
+	fid serial primary key,
+	req_uid integer references a_User(UID),
+	res_uid integer references a_User(UID),
+	status varchar(1) not null,
+	"createdAt" Date
+);
+
+create table a_User_Badges(
+	uid integer references a_User(UID),
+	bid integer references a_Badges(BID),
+	"updatedAt" Date
+);
+
+create table a_User_Activity(
+	uid integer references a_User(UID),
+	aid integer references a_Activity(AID),
+	duration integer,
+	weight integer,
+	rep integer,
+	distance integer,
+	speed float
+);
+
+create table a_User_Group(
+	ugid serial primary key,
+	req_uid integer references a_User(UID),
+	res_uid integer references a_User(UID),
+	gid integer references a_Group(GID),
+	status varchar(1),
+	"joinAt" Date
+);

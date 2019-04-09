@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     a_duration: DataTypes.INTEGER,
     a_distance: DataTypes.INTEGER
   }, {
-    tableName: 'activity',
+    tableName: 'a_activity',
     freezeTableName: true,
     createdAt: false,
     updatedAt: false

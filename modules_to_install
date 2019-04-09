@@ -9,3 +9,4 @@ sudo npm install chart.js
 sudo npm install react-chartjs-2
 sudo npm install react-router-dom
 sudo npm install react-firebase-file-uploader
+sudo npm install axios

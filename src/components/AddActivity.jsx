@@ -1,142 +1,129 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import axios from 'axios'
+import "../index.css"
+import { Button, Form, Container, Row, Col, Modal } from 'react-bootstrap'
+import firebase from "firebase"
+
+// TO GET USER ID firebase.auth().currentUser.uid
 
 class AddActivity extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
-    this.onChangeName = this.onChangeName.bind(this);
-    this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.onChangeType = this.onChangeType.bind(this);
-    this.onChangeDuration = this.onChangeDuration.bind(this);
-    this.onChangeDistance = this.onChangeDistance.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this.saveActivity = this.saveActivity.bind(this);
+    this.calculatePoints = this.calculatePoints.bind(this);
+    this.submitActivity = this.submitActivity.bind(this);
 
     this.state = {
       a_name: '',
       a_description: '',
       a_type: '',
       a_duration: '',
-      a_distance: ''
-    }
-  }
-
-  onChangeName(e) {
-    this.setState({
-      a_name: e.target.value
-    });
-  }
-
-  onChangeDescription(e) {
-    this.setState({
-      a_description: e.target.value
-    });
-  }
-
-  onChangeType(e) {
-    this.setState({
-      a_type: e.target.value
-    });
-  }
-
-  onChangeDuration(e) {
-    this.setState({
-      a_duration: e.target.value
-    });
-  }
-
-  onChangeDistance(e) {
-    this.setState({
-      a_distance: e.target.value
-    });
-  }
-
-  onSubmit(e) {
-    e.preventDefault();
-
-    const newActivity = {
-      a_name: this.state.a_name,
-      a_description: this.state.a_description,
-      a_type: this.state.a_type,
-      a_duration: this.state.a_duration,
-      a_distance: this.state.a_distance,
+      a_distance: '',
+      a_points: '',
+      uid: ''
     };
+  }
 
-//    axios.post('http://localhost:4000/courses/add', newCourse)
-//      .then(res => console.log(res.data));
-
-    this.setState({
-      a_name: '',
-      a_description: '',
-      a_type: '',
-      a_duration: '',
-      a_distance: ''
-    })
+  submitActivity() {
+    console.log(this.state);
+    axios.post('http://localhost:3210/api/addActivity', this.state)
+      .then(res => console.log(res.data));
 
     this.props.history.push('/');
   }
 
+  calculatePoints() {
+    let points = 0;
+
+    if(this.state.a_type === 'Run' && this.state.a_duration > 0) {
+      points = this.state.a_duration * 1;
+      alert('Points Earned Running: ' + points)
+    }
+    else if(this.state.a_type === 'Bike' && this.state.a_duration > 0) {
+      points = this.state.a_duration * 0.5;
+      alert('Points Earned Biking: ' + points)
+    }
+    else if(this.state.a_type === 'Swim' && this.state.a_duration > 0) {
+      points = this.state.a_duration * 4;
+      alert('Points Earned Swimming: ' + points)
+    }
+    else if(this.state.a_type === 'Lift' && this.state.a_duration > 0) {
+      points = this.state.a_duration * 1;
+      alert('Points Earned Lifting: ' + points)
+    }
+    else {
+      alert('No activity entered!')
+      return
+    }
+
+    this.setState({
+      a_points: points
+    }, function() {
+      this.submitActivity();
+    });
+  }
+
+  saveActivity() {
+    //calculatePoints();
+    this.setState({
+      a_name: document.getElementById("a_name").value,
+      a_description: document.getElementById("a_description").value,
+      a_type: document.getElementById("a_type").value,
+      a_duration: document.getElementById("a_duration").value,
+      a_distance: document.getElementById("a_distance").value,
+      uid: firebase.auth().currentUser.uid
+    }, function() {
+      this.calculatePoints();
+    });
+  }
+
   render() {
 		return (
-      <div>
-        <h3>Add New Activity</h3>
-        <form onSubmit={this.onSubmit}>
+      <Container className="addActivityDisplay">
+      <Row className="shadow-lg p-3 mb-5 bg-white contentDiv">
+      <Col>
+        <h1>Add New Activity</h1>
+        <Form>
+          <Form.Group>
+            <Form.Label>Activity Name</Form.Label>
+            <Form.Control id="a_name" type="" placeholder="ex.   Morning Run" defaultValue={this.state.a_name} />
+          </Form.Group>
 
-          <div>
-            <label>Activity Name</label>
-            <input  type="text"
-              value={this.state.a_name}
-              onChange={this.onChangeName}
-            />
-          </div>
+          <Form.Group>
+            <Form.Label>Activity Description</Form.Label>
+            <Form.Control id="a_description" type="" placeholder="ex.   Easy jog with Jesse" defaultValue={this.state.a_description} />
+          </Form.Group>
 
-          <div>
-            <label>Activity Description</label>
-            <textarea
-              type="text"
-              rows="5"
-              value={this.state.a_description}
-              onChange={this.onChangeDescription}
-            ></textarea>
-          </div>
+          <Form.Group>
+            <Form.Label>Activity Type</Form.Label>
+            <Form.Control id="a_type" as="select" defaultValue={this.state.a_type} >
+            <option>Run</option>
+            <option>Bike</option>
+            <option>Swim</option>
+            <option>Lift</option>
+            </Form.Control>
+          </Form.Group>
 
-          <div>
-            <label>Activity Type</label>
-            <br/>
-            <label>
-              <select value={this.state.a_type} onChange={this.onChangeType}>
-                <option value="run">Run</option>
-                <option value="bike">Bike</option>
-                <option value="swim">Swim</option>
-                <option value="lift">Lift</option>
-              </select>
-            </label>
-          </div>
+          <Form.Group>
+            <Form.Label>Activity Duration (mins)</Form.Label>
+            <Form.Control id="a_duration" type="" placeholder="25" defaultValue={this.state.a_duration} />
+          </Form.Group>
 
-          <div>
-            <label>Activity Duration</label>
-            <input
-              type="text"
-              value={this.state.a_duration}
-              onChange={this.onChangeDuration}
-            />
-          </div>
+          <Form.Group>
+            <Form.Label>Activity Distance (miles)</Form.Label>
+            <Form.Control id="a_distance" type="" placeholder="3" defaultValue={this.state.a_distance} />
+          </Form.Group>
 
-          <div>
-            <label>Activity Distance</label>
-            <input
-              type="text"
-              value={this.state.a_distance}
-              onChange={this.onChangeDistance}
-            />
-          </div>
+          <Button variant="primary" onClick={this.saveActivity}>
+            Save Activity
+          </Button>
 
-          <div>
-            <input type="submit" value="Add Activity"/>
-          </div>
-
-        </form>
-      </div>
+        </Form>
+        </Col>
+        </Row>
+      </Container>
 		);
 	}
 }
