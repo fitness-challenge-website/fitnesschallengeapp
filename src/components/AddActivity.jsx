@@ -1,129 +1,202 @@
-import React, { Component } from 'react'
-import axios from 'axios'
-import "../index.css"
-import { Button, Form, Container, Row, Col, Modal } from 'react-bootstrap'
-import firebase from "firebase"
-
-// TO GET USER ID firebase.auth().currentUser.uid
+import React, { Component } from 'react';
+import axios from 'axios';
+import '../index.css';
+import { Button, Form, Container, Row, Col } from 'react-bootstrap';
+import firebase from 'firebase';
 
 class AddActivity extends Component {
+	constructor(props, context) {
+		super(props, context);
 
-  constructor(props, context) {
-    super(props, context);
+		this.state = {
+			name: '',
+			description: '',
+			type: 'Run',
+			duration: '',
+			weight: '',
+			rep: '',
+			distance: '',
+			speed: '',
+			point: '',
+			uid: firebase.auth().currentUser.uid,
+		};
+	}
 
-    this.saveActivity = this.saveActivity.bind(this);
-    this.calculatePoints = this.calculatePoints.bind(this);
-    this.submitActivity = this.submitActivity.bind(this);
+	submitActivity = () => {
+		console.log(this.state);
+		axios
+			.post('http://localhost:3210/api/addStat', this.state)
+			.then(res => console.log(res.data));
 
-    this.state = {
-      a_name: '',
-      a_description: '',
-      a_type: '',
-      a_duration: '',
-      a_distance: '',
-      a_points: '',
-      uid: ''
-    };
-  }
+		this.props.history.push('/');
+	};
 
-  submitActivity() {
-    console.log(this.state);
-    axios.post('http://localhost:3210/api/addActivity', this.state)
-      .then(res => console.log(res.data));
+	calculatePoints = () => {
+		let points = 0;
 
-    this.props.history.push('/');
-  }
+		if (this.state.type === 'Run' && this.state.duration > 0) {
+			points = this.state.duration * 1;
+			alert('Points Earned Running: ' + points);
+		} else if (this.state.type === 'Bike' && this.state.duration > 0) {
+			points = this.state.duration * 0.5;
+			alert('Points Earned Biking: ' + points);
+		} else if (this.state.type === 'Swim' && this.state.duration > 0) {
+			points = this.state.duration * 4;
+			alert('Points Earned Swimming: ' + points);
+		} else if (this.state.type === 'Lift' && this.state.duration > 0) {
+			points = this.state.duration * 1;
+			alert('Points Earned Lifting: ' + points);
+		} else {
+			alert('No activity entered!');
+			return;
+		}
 
-  calculatePoints() {
-    let points = 0;
+		return points;
+	};
 
-    if(this.state.a_type === 'Run' && this.state.a_duration > 0) {
-      points = this.state.a_duration * 1;
-      alert('Points Earned Running: ' + points)
-    }
-    else if(this.state.a_type === 'Bike' && this.state.a_duration > 0) {
-      points = this.state.a_duration * 0.5;
-      alert('Points Earned Biking: ' + points)
-    }
-    else if(this.state.a_type === 'Swim' && this.state.a_duration > 0) {
-      points = this.state.a_duration * 4;
-      alert('Points Earned Swimming: ' + points)
-    }
-    else if(this.state.a_type === 'Lift' && this.state.a_duration > 0) {
-      points = this.state.a_duration * 1;
-      alert('Points Earned Lifting: ' + points)
-    }
-    else {
-      alert('No activity entered!')
-      return
-    }
+	handleClick = e => {
+		this.setState(
+			{
+				[e.target.id]: e.target.value,
+			},
+			() => console.log(this.state),
+		);
+	};
 
-    this.setState({
-      a_points: points
-    }, function() {
-      this.submitActivity();
-    });
-  }
+	handleSubmit = e => {
+		e.preventDefault();
+		this.setState({ point: this.calculatePoints() }, () =>
+			this.submitActivity(),
+		);
+	};
 
-  saveActivity() {
-    //calculatePoints();
-    this.setState({
-      a_name: document.getElementById("a_name").value,
-      a_description: document.getElementById("a_description").value,
-      a_type: document.getElementById("a_type").value,
-      a_duration: document.getElementById("a_duration").value,
-      a_distance: document.getElementById("a_distance").value,
-      uid: firebase.auth().currentUser.uid
-    }, function() {
-      this.calculatePoints();
-    });
-  }
+	render() {
+		const type = this.state.type;
+		const showDuration = ['Run', 'Bike', 'Swim', 'Exercise'].includes(type);
+		const showWeight = ['Lift'].includes(type);
+		const showRep = ['Lift', 'Exercise'].includes(type);
+		const showDistance = ['Run', 'Bike', 'Swim'].includes(type);
+		const showSpeed = ['Run', 'Bike', 'Swim'].includes(type);
 
-  render() {
 		return (
-      <Container className="addActivityDisplay">
-      <Row className="shadow-lg p-3 mb-5 bg-white contentDiv">
-      <Col>
-        <h1>Add New Activity</h1>
-        <Form>
-          <Form.Group>
-            <Form.Label>Activity Name</Form.Label>
-            <Form.Control id="a_name" type="" placeholder="ex.   Morning Run" defaultValue={this.state.a_name} />
-          </Form.Group>
+			<Container className='addActivityDisplay'>
+				<Row className='shadow-lg p-3 mb-5 bg-white contentDiv'>
+					<Col>
+						<h1>Add New Activity</h1>
+						<Form>
+							<Form.Group>
+								<Form.Label>Activity Name</Form.Label>
+								<Form.Control
+									id='name'
+									type=''
+									placeholder='ex.   Morning Run'
+									defaultValue={this.state.name}
+									onClick={this.handleClick}
+								/>
+							</Form.Group>
 
-          <Form.Group>
-            <Form.Label>Activity Description</Form.Label>
-            <Form.Control id="a_description" type="" placeholder="ex.   Easy jog with Jesse" defaultValue={this.state.a_description} />
-          </Form.Group>
+							<Form.Group>
+								<Form.Label>Activity Description</Form.Label>
+								<Form.Control
+									id='description'
+									type=''
+									placeholder='ex.   Easy jog with Jesse'
+									defaultValue={this.state.description}
+									onClick={this.handleClick}
+								/>
+							</Form.Group>
 
-          <Form.Group>
-            <Form.Label>Activity Type</Form.Label>
-            <Form.Control id="a_type" as="select" defaultValue={this.state.a_type} >
-            <option>Run</option>
-            <option>Bike</option>
-            <option>Swim</option>
-            <option>Lift</option>
-            </Form.Control>
-          </Form.Group>
+							<Form.Group>
+								<Form.Label>Activity Type</Form.Label>
+								<Form.Control
+									id='type'
+									as='select'
+									defaultValue={this.state.type}
+									onClick={this.handleClick}
+								>
+									<option>Run</option>
+									<option>Bike</option>
+									<option>Swim</option>
+									<option>Lift</option>
+									<option>Exercise</option>
+								</Form.Control>
+							</Form.Group>
 
-          <Form.Group>
-            <Form.Label>Activity Duration (mins)</Form.Label>
-            <Form.Control id="a_duration" type="" placeholder="25" defaultValue={this.state.a_duration} />
-          </Form.Group>
+							{showDuration ? (
+								<Form.Group>
+									<Form.Label>
+										Activity Duration (mins)
+									</Form.Label>
+									<Form.Control
+										id='duration'
+										placeholder='25'
+										onClick={this.handleClick}
+									/>
+								</Form.Group>
+							) : null}
 
-          <Form.Group>
-            <Form.Label>Activity Distance (miles)</Form.Label>
-            <Form.Control id="a_distance" type="" placeholder="3" defaultValue={this.state.a_distance} />
-          </Form.Group>
+							{showWeight ? (
+								<Form.Group>
+									<Form.Label>
+										Activity Weight (lbs)
+									</Form.Label>
+									<Form.Control
+										id='weight'
+										placeholder='25'
+										onClick={this.handleClick}
+									/>
+								</Form.Group>
+							) : null}
 
-          <Button variant="primary" onClick={this.saveActivity}>
-            Save Activity
-          </Button>
+							{showRep ? (
+								<Form.Group>
+									<Form.Label>
+										Activity Reps (count)
+									</Form.Label>
+									<Form.Control
+										id='duration'
+										placeholder='25'
+										onClick={this.handleClick}
+									/>
+								</Form.Group>
+							) : null}
 
-        </Form>
-        </Col>
-        </Row>
-      </Container>
+							{showDistance ? (
+								<Form.Group>
+									<Form.Label>
+										Activity Distance (miles)
+									</Form.Label>
+									<Form.Control
+										id='distance'
+										placeholder='3'
+										onClick={this.handleClick}
+									/>
+								</Form.Group>
+							) : null}
+
+							{showSpeed ? (
+								<Form.Group>
+									<Form.Label>
+										Activity Speed (mph)
+									</Form.Label>
+									<Form.Control
+										id='speed'
+										placeholder='10'
+										onClick={this.handleClick}
+									/>
+								</Form.Group>
+							) : null}
+
+							<Button
+								variant='primary'
+								onClick={this.saveActivity}
+							>
+								Save Activity
+							</Button>
+						</Form>
+					</Col>
+				</Row>
+			</Container>
 		);
 	}
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ActivityCard from './ActivityCard';
+import { Container } from 'react-bootstrap';
 class UserFeed extends Component {
 	state = {};
 
@@ -9,31 +10,26 @@ class UserFeed extends Component {
 			{
 				name: 'Running',
 				duration: '30min',
-				weight: '',
-				rep: '',
 				distance: '1mi',
-				speed: '',
 			},
 			{
 				name: 'Swimming',
 				duration: '30min',
-				weight: '',
-				rep: '',
 				distance: '500m',
-				speed: '',
 			},
 		];
 	};
 
 	render() {
 		return (
-			<div className='container'>
+			<Container>
 				<h5>Activity Feed</h5>
 				{/* Get recent activities from database and display cards of each of them */}
 				{this.fetchRecentActivities().map(activity => {
+					console.log(activity);
 					return (
 						<ActivityCard
-							key={activity.activityName}
+							key={activity.name}
 							name={activity.name}
 							duration={activity.duration}
 							weight={activity.weight}
@@ -43,7 +39,7 @@ class UserFeed extends Component {
 						/>
 					);
 				})}
-			</div>
+			</Container>
 		);
 	}
 }

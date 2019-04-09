@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
+import { Container, Row, Col, Dropdown } from 'react-bootstrap';
 
 class Charts extends Component {
 	constructor(props) {
@@ -144,52 +145,30 @@ class Charts extends Component {
 
 	render() {
 		return (
-			<div className='container'>
+			<Container>
 				<div className='TimeScaleSelect'>
-					<div className='dropdown'>
-						<button
-							className='btn btn-secondary dropdown-toggle m-2'
-							type='button'
-							id='dropdownMenu2'
-							data-toggle='dropdown'
-							aria-haspopup='true'
-							aria-expanded='false'
-						>
+					<Dropdown>
+						<Dropdown.Toggle variant='info' id='dropdown-basic'>
 							{this.state.timescale}
-						</button>
-						<div
-							className='dropdown-menu'
-							aria-labelledby='dropdownMenu2'
-						>
-							<button
-								className='dropdown-item'
-								type='button'
-								onClick={this.handleClick}
-								id='Week'
-							>
+						</Dropdown.Toggle>
+						<Dropdown.Menu>
+							<Dropdown.Item onClick={this.handleClick} id='Week'>
 								Week
-							</button>
-							<button
-								className='dropdown-item'
-								type='button'
+							</Dropdown.Item>
+							<Dropdown.Item
 								onClick={this.handleClick}
 								id='Month'
 							>
 								Month
-							</button>
-							<button
-								className='dropdown-item'
-								type='button'
-								onClick={this.handleClick}
-								id='Year'
-							>
+							</Dropdown.Item>
+							<Dropdown.Item onClick={this.handleClick} id='Year'>
 								Year
-							</button>
-						</div>
-					</div>
+							</Dropdown.Item>
+						</Dropdown.Menu>
+					</Dropdown>
 				</div>
-				<div className='row'>
-					<div className='col'>
+				<Row>
+					<Col>
 						<Line
 							className='ActivitiesPerTimeChart'
 							data={this.state.chartData}
@@ -205,8 +184,8 @@ class Charts extends Component {
 								},
 							}}
 						/>
-					</div>
-					<div className='col'>
+					</Col>
+					<Col>
 						<Line
 							className='ActivitiesOverTimeChart'
 							data={this.state.cumulativeData}
@@ -222,9 +201,9 @@ class Charts extends Component {
 								},
 							}}
 						/>
-					</div>
-				</div>
-			</div>
+					</Col>
+				</Row>
+			</Container>
 		);
 	}
 }
