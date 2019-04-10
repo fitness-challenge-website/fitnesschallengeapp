@@ -9,16 +9,15 @@ class AddActivity extends Component {
 		super(props, context);
 
 		this.state = {
-			name: '',
-			description: '',
 			type: 'Run',
+			uid: firebase.auth().currentUser.uid,
+			name: '',
 			duration: '',
 			weight: '',
 			rep: '',
 			distance: '',
 			speed: '',
 			point: '',
-			uid: firebase.auth().currentUser.uid,
 		};
 	}
 
@@ -26,7 +25,8 @@ class AddActivity extends Component {
 		console.log(this.state);
 		axios
 			.post('http://localhost:3210/api/addStat', this.state)
-			.then(res => console.log(res.data));
+			.then(res => console.log(res.data))
+			.catch(err => console.log(err));
 
 		this.props.history.push('/');
 	};
@@ -46,6 +46,12 @@ class AddActivity extends Component {
 		} else if (this.state.type === 'Lift' && this.state.duration > 0) {
 			points = this.state.duration * 1;
 			alert('Points Earned Lifting: ' + points);
+		} else if (this.state.type === 'Exercise' && this.state.duration > 0) {
+			points = this.state.duration * 1;
+			alert('Points Earned Exercising: ' + points);
+		} else if (this.state.type === 'Athletics' && this.state.duration > 0) {
+			points = this.state.duration * 1;
+			alert('Points Earned Doing Athletics: ' + points);
 		} else {
 			alert('No activity entered!');
 			return;
@@ -54,7 +60,7 @@ class AddActivity extends Component {
 		return points;
 	};
 
-	handleClick = e => {
+	handleChange = e => {
 		this.setState(
 			{
 				[e.target.id]: e.target.value,
@@ -72,18 +78,20 @@ class AddActivity extends Component {
 
 	render() {
 		const type = this.state.type;
-		const showDuration = ['Run', 'Bike', 'Swim', 'Exercise'].includes(type);
+		const showDuration = ['Run', 'Bike', 'Exercise', 'Athletics'].includes(
+			type,
+		);
 		const showWeight = ['Lift'].includes(type);
-		const showRep = ['Lift', 'Exercise'].includes(type);
+		const showRep = ['Swim', 'Lift', 'Exercise'].includes(type);
 		const showDistance = ['Run', 'Bike', 'Swim'].includes(type);
-		const showSpeed = ['Run', 'Bike', 'Swim'].includes(type);
+		const showSpeed = ['Run', 'Bike'].includes(type);
 
 		return (
 			<Container className='addActivityDisplay'>
 				<Row className='shadow-lg p-3 mb-5 bg-white contentDiv'>
 					<Col>
 						<h1>Add New Activity</h1>
-						<Form>
+						<Form onSubmit={this.handleSubmit}>
 							<Form.Group>
 								<Form.Label>Activity Name</Form.Label>
 								<Form.Control
@@ -91,18 +99,7 @@ class AddActivity extends Component {
 									type=''
 									placeholder='ex.   Morning Run'
 									defaultValue={this.state.name}
-									onClick={this.handleClick}
-								/>
-							</Form.Group>
-
-							<Form.Group>
-								<Form.Label>Activity Description</Form.Label>
-								<Form.Control
-									id='description'
-									type=''
-									placeholder='ex.   Easy jog with Jesse'
-									defaultValue={this.state.description}
-									onClick={this.handleClick}
+									onChange={this.handleChange}
 								/>
 							</Form.Group>
 
@@ -112,13 +109,14 @@ class AddActivity extends Component {
 									id='type'
 									as='select'
 									defaultValue={this.state.type}
-									onClick={this.handleClick}
+									onClick={this.handleChange}
 								>
 									<option>Run</option>
 									<option>Bike</option>
 									<option>Swim</option>
 									<option>Lift</option>
 									<option>Exercise</option>
+									<option>Athletics</option>
 								</Form.Control>
 							</Form.Group>
 
@@ -129,8 +127,8 @@ class AddActivity extends Component {
 									</Form.Label>
 									<Form.Control
 										id='duration'
-										placeholder='25'
-										onClick={this.handleClick}
+										placeholder='Duration'
+										onChange={this.handleChange}
 									/>
 								</Form.Group>
 							) : null}
@@ -142,8 +140,8 @@ class AddActivity extends Component {
 									</Form.Label>
 									<Form.Control
 										id='weight'
-										placeholder='25'
-										onClick={this.handleClick}
+										placeholder='Weight'
+										onChange={this.handleChange}
 									/>
 								</Form.Group>
 							) : null}
@@ -155,8 +153,8 @@ class AddActivity extends Component {
 									</Form.Label>
 									<Form.Control
 										id='duration'
-										placeholder='25'
-										onClick={this.handleClick}
+										placeholder='Reps/Laps'
+										onChange={this.handleChange}
 									/>
 								</Form.Group>
 							) : null}
@@ -168,8 +166,8 @@ class AddActivity extends Component {
 									</Form.Label>
 									<Form.Control
 										id='distance'
-										placeholder='3'
-										onClick={this.handleClick}
+										placeholder='Distance'
+										onChange={this.handleChange}
 									/>
 								</Form.Group>
 							) : null}
@@ -181,16 +179,13 @@ class AddActivity extends Component {
 									</Form.Label>
 									<Form.Control
 										id='speed'
-										placeholder='10'
-										onClick={this.handleClick}
+										placeholder='Speed'
+										onChange={this.handleChange}
 									/>
 								</Form.Group>
 							) : null}
 
-							<Button
-								variant='primary'
-								onClick={this.saveActivity}
-							>
+							<Button variant='primary' type='submit'>
 								Save Activity
 							</Button>
 						</Form>
