@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     ubid: {type:DataTypes.INTEGER,
           primaryKey: true,
           autoIncrement: true},
-    uid: DataTypes.INTEGER,
+    uid: DataTypes.STRING,
     bid: DataTypes.INTEGER
   }, {
     tableName: 'user_badges',

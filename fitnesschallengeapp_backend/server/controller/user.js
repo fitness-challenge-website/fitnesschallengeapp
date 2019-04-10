@@ -7,11 +7,9 @@ module.exports = {
       username: req.body.username,
       f_name: req.body.f_name,
       l_name: req.body.l_name,
-      email: req.body.email,
       weight: req.body.weight,
       height: req.body.height,
-      age: req.body.age,
-      password: req.body.password
+      age: req.body.age
     }
 
     return User.create(data).then(uid =>{

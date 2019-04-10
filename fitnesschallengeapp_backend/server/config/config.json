@@ -1,17 +1,17 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "YOUR PASSWORD",
+    "username": "fitness",
+    "password": "fitnesschallenge",
     "database": "fitness",
-    "host": "127.0.0.1",
+    "host": "ec2-18-219-86-139.us-east-2.compute.amazonaws.com",
     "port": 5432,
     "dialect": "postgres"
   },
   "test": {
-    "username": "postgres",
-    "password": "YOUR PASSWORD",
+    "username": "fitness",
+    "password": "fitnesschallenge",
     "database": "fitness",
-    "host": "127.0.0.1",
+    "host": "ec2-18-219-86-139.us-east-2.compute.amazonaws.com",
     "port": 5432,
     "dialect": "postgres"
   }

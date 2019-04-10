@@ -3,8 +3,8 @@ module.exports = (sequelize, DataTypes) => {
     fid: {type:DataTypes.INTEGER,
           primaryKey: true,
           autoIncrement: true},
-    req_uid:DataTypes.INTEGER,
-    res_uid:DataTypes.INTEGER,
+    req_uid:DataTypes.STRING,
+    res_uid:DataTypes.STRING,
     status: DataTypes.STRING
   }, {
     tableName: 'friends',
