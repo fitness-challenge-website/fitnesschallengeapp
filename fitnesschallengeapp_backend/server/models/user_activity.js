@@ -1,10 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   const User_Activity = sequelize.define('User_Activity', {
-    uaid: {type:DataTypes.INTEGER,
+    aid: {type:DataTypes.INTEGER,
           primaryKey: true,
           autoIncrement: true},
-    uid:DataTypes.INTEGER,
-    aid:DataTypes.INTEGER,
+    uid:DataTypes.STRING,
     duration:DataTypes.INTEGER,
     weight:DataTypes.INTEGER,
     rep:DataTypes.INTEGER,
