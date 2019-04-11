@@ -42,6 +42,7 @@ create table a_user_badges(
 create table a_user_activity(
 	aid serial primary key,
 	uid varchar(255) references a_user(UID),
+	type varchar(255),
 	duration integer,
 	weight integer,
 	rep integer,
