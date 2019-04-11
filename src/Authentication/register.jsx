@@ -5,23 +5,26 @@ import firebase from "firebase"
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 import { Button, Container, Row, Col, Form } from 'react-bootstrap'
 
-class Login extends Component {
+class Register extends Component {
   constructor(props, context) {
     super(props, context);
 
     this.state = {
       isSignedIn: false,
+      username: "",
+      password: ""
     };
   }
 
-  doSignInWithEmailAndPassword = (email, password) => {
+  doCreateUserWithEmailAndPassword = (email, password) => {
     var email = document.getElementById("enterEmail").value;
     var password = document.getElementById("enterPass").value;
-    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
         console.log(error);
         alert("Invalid Email or Password");
+        window.location.href = "/register";
     });
-    this.props.history.push('/');
+    this.props.history.push('/newuser');
 }
 
   uiConfig = {
@@ -56,38 +59,26 @@ class Login extends Component {
               </span>
             ) : (
                 <Container className="rounded">
-                  <Row>
-                    <Col>
-                    </Col>
-                  </Row>
-
                   <Row className="contentDiv">
-
-                    <Col lg={2}>
-                    </Col>
-                    <Col lg={4} className="shadow-lg p-3 mb-5 bg-white">
-                      <h4>Login</h4>
+                  <Col>
+                  </Col>
+                    <Col className="shadow-lg p-3 mb-5 bg-white">
+                      <h4>Register</h4>
                       <StyledFirebaseAuth
                         uiConfig={this.uiConfig}
                         firebaseAuth={firebase.auth()}
                       />
                       <Form>
                         <Form.Group>
-                          <Form.Control id="enterEmail" type="username" placeholder="Enter Email"/>
+                          <Form.Control id="enterEmail" type="username" placeholder="Enter a Valid Email"/>
                         </Form.Group>
                         <Form.Group>
-                          <Form.Control id="enterPass" type="password" placeholder="Enter Password"/>
+                          <Form.Control id="enterPass" type="password" placeholder="Enter a Password"/>
                         </Form.Group>
                       </Form>
-                      <Button variant="primary" onClick={this.doSignInWithEmailAndPassword}>Login</Button>
+                      <Button variant="primary" onClick={this.doCreateUserWithEmailAndPassword}>Register</Button>
                     </Col>
-                    <Col lg={4} className="shadow-lg p-3 mb-5 bg-white learnMore">
-                      <h4>Welcome to the Fitness Challenge Web App!</h4>
-                      <p>Please sign in or sign up to use this website</p>
-                      <Button variant="primary" href="/register">
-                          Register
-                      </Button>
-
+                    <Col>
                     </Col>
                   </Row>
 
@@ -98,4 +89,4 @@ class Login extends Component {
   }
 }
 
-export default Login
+export default Register

@@ -23,6 +23,10 @@ class NewUser extends Component {
   }
 
   submitProfile() {
+    var user = firebase.auth().currentUser;
+    user.updateProfile({
+      displayName: document.getElementById("editName").value
+    });
     console.log(this.state);
     axios.post('http://localhost:3210/api/createAccount', {
       uid: firebase.auth().currentUser.uid,
@@ -66,6 +70,10 @@ class NewUser extends Component {
               </Col>
               <Col lg={6}>
                 <Form>
+                <Form.Group>
+                  <Form.Label>First and Last Name</Form.Label>
+                  <Form.Control id="editName" type="username" placeholder="Enter First and Last Name"/>
+                </Form.Group>
                 <Form.Group>
                   <Form.Label>Username</Form.Label>
                   <Form.Control id="editUsername" type="username" placeholder="Enter a Username"/>

@@ -17,6 +17,7 @@ import YearlyChallenge from './components/challengesFolder/yearly'
 import MainDashBoard from './PageContent/MainDashBoard'
 import NewUser from './Authentication/newuser'
 import Test from './Authentication/test'
+import Register from './Authentication/register'
 
 
 firebase.initializeApp({
@@ -62,7 +63,7 @@ class App extends Component {
           <BrowserRouter>
                 <Switch>
                   <Route exact path='/' component={Login} />
-                  <Route path='/test' component={Test} />
+                  <Route path='/register' component={Register} />
                   <Route path='/learnmore' component={LearnMore} />
                 </Switch>
           </BrowserRouter>
