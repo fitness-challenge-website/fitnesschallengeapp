@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     b_name: DataTypes.STRING,
     level: DataTypes.STRING
   }, {
-    tableName: "badges",
+    tableName: "a_badges",
     freezeTableName: true,
     createdAt: false,
     updatedAt: false
@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   Badges.associate = function(models) {
     // associations can be defined here
 
-    Badages.hasMany(models.User_Badges, {
+    Badges.hasMany(models.User_Badges, {
       foreignKey: 'bid',
       as: "User_Badges"
     })

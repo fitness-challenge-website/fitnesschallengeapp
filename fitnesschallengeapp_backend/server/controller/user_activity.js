@@ -1,5 +1,4 @@
 const User_Activity = require("../models").User_Activity;
-const Activity = require("../models").Activity;
 const User = require("../models").User;
 
 module.exports = {
@@ -40,14 +39,7 @@ module.exports = {
     return User_Activity.findAll({
       where: {
         uid: req.body.uid
-      },
-      include:[
-        {
-          model: Activity,
-          attributes:['a_name'],
-          as: 'Activity'
-        }
-      ]
+      }
     }).then(stats => {
       res.send(stats);
     }).catch(err =>{

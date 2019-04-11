@@ -26,7 +26,6 @@ module.exports = {
       weight: req.body.weight,
       height: req.body.height,
       age: req.body.age,
-      password: req.body.password
     }
     return User.update(data, {
       where: {

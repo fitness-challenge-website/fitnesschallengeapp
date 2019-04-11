@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import "../App.css"
-import { Navbar, Nav, Button } from 'react-bootstrap'
+import { Navbar, Nav, Button, NavDropdown } from 'react-bootstrap'
 import firebase from "firebase"
 
 
@@ -11,7 +11,6 @@ class NavBar extends Component {
   componentDidMount = () => {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ isSignedIn: !!user })
-      console.log("user", user)
     })
   }
 
@@ -23,17 +22,23 @@ class NavBar extends Component {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/userdash">User Dashboard</Nav.Link>
+                <Nav.Link href="/userdash">Dashboard</Nav.Link>
+                <Nav.Link href="/Leaderboard">Leaderboard</Nav.Link>
+                <Nav.Link href="/challenges">Challenges</Nav.Link>
                 <Nav.Link href="/AddActivity">Add Activity</Nav.Link>
               </Nav>
             </Navbar.Collapse>
             <Navbar.Collapse className="justify-content-end">
             {this.state.isSignedIn ? (
               <span>
-                <Navbar.Text>
-                    Signed in as: <a href="/profile">{firebase.auth().currentUser.displayName}</a>
-                </Navbar.Text>
+              <Nav className="mr-auto">
+                <NavDropdown title={firebase.auth().currentUser.displayName} id="basic-nav-dropdown">
+                 <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+                 <NavDropdown.Item href="/add">Add Friends</NavDropdown.Item>
+                 <NavDropdown.Divider />
+                 <NavDropdown.Item onClick={() => firebase.auth().signOut()}>Sign Out</NavDropdown.Item>
+               </NavDropdown>
+              </Nav>
               </span>
             ) : (
               <div>
@@ -42,8 +47,6 @@ class NavBar extends Component {
                 </Navbar.Text>
               </div>
             )}
-
-              { /* <Nav.Link href="/login">Login</Nav.Link> */ }
             </Navbar.Collapse>
           </Navbar>
 

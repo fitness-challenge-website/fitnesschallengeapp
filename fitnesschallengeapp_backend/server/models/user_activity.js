@@ -10,16 +10,12 @@ module.exports = (sequelize, DataTypes) => {
     speed:DataTypes.FLOAT,
     point:DataTypes.INTEGER
   }, {
-    tableName: 'user_activity',
+    tableName: 'a_user_activity',
     freezeTableName: true,
     updatedAt: false
   });
   User_Activity.associate = function(models) {
     // associations can be defined here
-    User_Activity.belongsTo(models.Activity, {
-      as: 'Activity',
-      foreignKey: 'aid'
-    });
 
     User_Activity.belongsTo(models.User, {
       as: 'User',

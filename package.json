@@ -3,15 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "chart.js": "^2.8.0",
-    "moment": "^2.24.0",
+    "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
-    "firebase": "^5.9.1",
+    "chart.js": "^2.8.0",
+    "firebase": "^5.9.2",
     "firebaseui": "^3.5.2",
+    "jest-junit": "^6.3.0",
     "jquery": "^3.3.1",
+    "moment": "^2.24.0",
+    "rc-progress": "^2.3.0",
     "react": "^16.8.4",
     "react-bootstrap": "^1.0.0-beta.6",
-    "react-chartjs-2": "^2.7.5",
+    "react-chartjs-2": "^2.7.6",
     "react-dom": "^16.8.4",
     "react-firebase": "^2.2.8",
     "react-firebase-file-uploader": "^2.4.2",
@@ -25,7 +28,20 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage --colors",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/polyfill": "^7.0.0-beta.51",
+    "@babel/preset-env": "^7.0.0-beta.51",
+    "@babel/preset-react": "^7.0.0-beta.51",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.4.2",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest": "^23.6.0"
   },
   "eslintConfig": {
     "extends": "react-app"

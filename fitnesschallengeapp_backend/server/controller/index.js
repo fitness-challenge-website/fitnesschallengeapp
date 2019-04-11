@@ -1,5 +1,4 @@
 const user = require('./user');
-const activity = require('./activity');
 const badges = require('./badges');
 const friends = require('./friends');
 const group = require('./group');
@@ -9,7 +8,6 @@ const user_badges = require('./user_badges');
 
 module.exports = {
   user,
-  activity,
   badges,
   friends,
   group,
