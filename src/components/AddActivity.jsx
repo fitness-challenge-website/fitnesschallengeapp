@@ -15,20 +15,25 @@ class AddActivity extends Component {
     this.calculatePoints = this.calculatePoints.bind(this);
     this.submitActivity = this.submitActivity.bind(this);
 
+    // this.state = {
+    //   a_name: '',
+    //   a_description: '',
+    //   a_type: '',
+    //   duration: '',
+    //   a_distance: '',
+    //   a_points: '',
+    //   uid: ''
+    // };
+
     this.state = {
-      a_name: '',
-      a_description: '',
-      a_type: '',
-      a_duration: '',
-      a_distance: '',
-      a_points: '',
-      uid: ''
+      uid: '',
+      duration: ''
     };
   }
 
   submitActivity() {
     console.log(this.state);
-    axios.post('http://localhost:3210/api/addActivity', this.state)
+    axios.post('http://localhost:3210/api/addStat', this.state)
       .then(res => console.log(res.data));
 
     this.props.history.push('/');
@@ -68,14 +73,16 @@ class AddActivity extends Component {
   saveActivity() {
     //calculatePoints();
     this.setState({
-      a_name: document.getElementById("a_name").value,
-      a_description: document.getElementById("a_description").value,
-      a_type: document.getElementById("a_type").value,
-      a_duration: document.getElementById("a_duration").value,
-      a_distance: document.getElementById("a_distance").value,
-      uid: firebase.auth().currentUser.uid
+      // a_name: document.getElementById("a_name").value,
+      // a_description: document.getElementById("a_description").value,
+      // a_type: document.getElementById("a_type").value,
+      uid: firebase.auth().currentUser.uid,
+      duration: document.getElementById("a_duration").value
+      // a_distance: document.getElementById("a_distance").value,
+      // uid: firebase.auth().currentUser.uid
     }, function() {
-      this.calculatePoints();
+      // this.calculatePoints();
+      this.submitActivity();
     });
   }
 
