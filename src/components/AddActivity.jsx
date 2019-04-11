@@ -5,87 +5,85 @@ import { Button, Form, Container, Row, Col } from 'react-bootstrap';
 import firebase from 'firebase';
 
 class AddActivity extends Component {
-	constructor(props, context) {
-		super(props, context);
+  constructor(props, context) {
+    super(props, context);
 
-		this.state = {
-			type: 'Run',
-			uid: firebase.auth().currentUser.uid,
-			name: '',
-			duration: '',
-			weight: '',
-			rep: '',
-			distance: '',
-			speed: '',
-			point: '',
-		};
-	}
+    this.saveActivity = this.saveActivity.bind(this);
+    this.calculatePoints = this.calculatePoints.bind(this);
+    this.submitActivity = this.submitActivity.bind(this);
 
-	submitActivity = () => {
-		console.log(this.state);
-		axios
-			.post('http://localhost:3210/api/addStat', this.state)
-			.then(res => console.log(res.data))
-			.catch(err => console.log(err));
+    // this.state = {
+    //   a_name: '',
+    //   a_description: '',
+    //   a_type: '',
+    //   duration: '',
+    //   a_distance: '',
+    //   a_points: '',
+    //   uid: ''
+    // };
 
-		this.props.history.push('/');
-	};
+    this.state = {
+      uid: '',
+      duration: ''
+    };
+  }
 
-	calculatePoints = () => {
-		let points = 0;
+  submitActivity() {
+    console.log(this.state);
+    axios.post('http://localhost:3210/api/addStat', this.state)
+      .then(res => console.log(res.data));
 
-		if (this.state.type === 'Run' && this.state.duration > 0) {
-			points = this.state.duration * 1;
-			alert('Points Earned Running: ' + points);
-		} else if (this.state.type === 'Bike' && this.state.duration > 0) {
-			points = this.state.duration * 0.5;
-			alert('Points Earned Biking: ' + points);
-		} else if (this.state.type === 'Swim' && this.state.duration > 0) {
-			points = this.state.duration * 4;
-			alert('Points Earned Swimming: ' + points);
-		} else if (this.state.type === 'Lift' && this.state.duration > 0) {
-			points = this.state.duration * 1;
-			alert('Points Earned Lifting: ' + points);
-		} else if (this.state.type === 'Exercise' && this.state.duration > 0) {
-			points = this.state.duration * 1;
-			alert('Points Earned Exercising: ' + points);
-		} else if (this.state.type === 'Athletics' && this.state.duration > 0) {
-			points = this.state.duration * 1;
-			alert('Points Earned Doing Athletics: ' + points);
-		} else {
-			alert('No activity entered!');
-			return;
-		}
+    this.props.history.push('/');
+  }
 
-		return points;
-	};
+  calculatePoints() {
+    let points = 0;
 
-	handleChange = e => {
-		this.setState(
-			{
-				[e.target.id]: e.target.value,
-			},
-			() => console.log(this.state),
-		);
-	};
+    if(this.state.a_type === 'Run' && this.state.a_duration > 0) {
+      points = this.state.a_duration * 1;
+      alert('Points Earned Running: ' + points)
+    }
+    else if(this.state.a_type === 'Bike' && this.state.a_duration > 0) {
+      points = this.state.a_duration * 0.5;
+      alert('Points Earned Biking: ' + points)
+    }
+    else if(this.state.a_type === 'Swim' && this.state.a_duration > 0) {
+      points = this.state.a_duration * 4;
+      alert('Points Earned Swimming: ' + points)
+    }
+    else if(this.state.a_type === 'Lift' && this.state.a_duration > 0) {
+      points = this.state.a_duration * 1;
+      alert('Points Earned Lifting: ' + points)
+    }
+    else {
+      alert('No activity entered!')
+      return
+    }
 
-	handleSubmit = e => {
-		e.preventDefault();
-		this.setState({ point: this.calculatePoints() }, () =>
-			this.submitActivity(),
-		);
-	};
+    this.setState({
+      a_points: points
+    }, function() {
+      this.submitActivity();
+    });
+  }
 
-	render() {
-		const type = this.state.type;
-		const showDuration = ['Run', 'Bike', 'Exercise', 'Athletics'].includes(
-			type,
-		);
-		const showWeight = ['Lift'].includes(type);
-		const showRep = ['Swim', 'Lift', 'Exercise'].includes(type);
-		const showDistance = ['Run', 'Bike', 'Swim'].includes(type);
-		const showSpeed = ['Run', 'Bike'].includes(type);
+  saveActivity() {
+    //calculatePoints();
+    this.setState({
+      // a_name: document.getElementById("a_name").value,
+      // a_description: document.getElementById("a_description").value,
+      // a_type: document.getElementById("a_type").value,
+      uid: firebase.auth().currentUser.uid,
+      duration: document.getElementById("a_duration").value
+      // a_distance: document.getElementById("a_distance").value,
+      // uid: firebase.auth().currentUser.uid
+    }, function() {
+      // this.calculatePoints();
+      this.submitActivity();
+    });
+  }
 
+  render() {
 		return (
 			<Container className='addActivityDisplay'>
 				<Row className='shadow-lg p-3 mb-5 bg-white contentDiv'>
