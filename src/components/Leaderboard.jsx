@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import "../index.css"
-import { Button, Form, Container, Row, Col, Modal } from 'react-bootstrap'
-import firebase from "firebase"
+// import { Button, Form, Container, Row, Col, Modal } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
+// import firebase from "firebase"
 
 const Activity = props => (
     <tr>

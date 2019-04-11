@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import "./MainDashBoard.css"
 import firebase from "firebase"
-import { Button, Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import { Progress } from 'reactstrap';
 
 
@@ -63,24 +63,24 @@ class MainDashBoard extends Component {
             <h4 className="barSpacingTwo">Your Badges</h4>
             <Row>
               <Col>
-                <img height="50px" src={require('../Images/badges/001-badge.png')} />
+                <img height="50px" src={require('../Images/badges/001-badge.png')} alt=""/>
               </Col>
               <Col>
-                <img height="50px" src={require('../Images/badges/002-trophy.png')} />
+                <img height="50px" src={require('../Images/badges/002-trophy.png')} alt=""/>
               </Col>
               <Col>
-                <img height="50px" src={require('../Images/badges/003-silver-medal.png')} />
+                <img height="50px" src={require('../Images/badges/003-silver-medal.png')} alt=""/>
               </Col>
             </Row>
             <Row className="barSpacing">
               <Col>
-                <img height="50px" src={require('../Images/badges/004-first.png')} />
+                <img height="50px" src={require('../Images/badges/004-first.png')} alt=""/>
               </Col>
               <Col>
-                <img height="50px" src={require('../Images/badges/005-present.png')} />
+                <img height="50px" src={require('../Images/badges/005-present.png')} alt=""/>
               </Col>
               <Col>
-                <img height="50px" src={require('../Images/badges/006-money.png')} />
+                <img height="50px" src={require('../Images/badges/006-money.png')} alt=""/>
               </Col>
             </Row>
 

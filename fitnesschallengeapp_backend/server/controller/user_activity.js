@@ -18,6 +18,7 @@ module.exports = {
       res.status(200).send("Success");
     }).catch(err =>{
       res.status(400).send(err);
+      console.log(err);
     });
   },
   delStat(req, res){
