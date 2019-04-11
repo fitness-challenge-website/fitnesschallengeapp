@@ -106,7 +106,7 @@ class AddActivity extends Component {
       description: document.getElementById("description").value,
       type: document.getElementById("type").value,
       duration: document.getElementById("duration").value,
-      distance: ( (this.state.distance === '') ? 0 : document.getElementById("distance").value),
+      distance: ( (document.getElementById("distance").value === '') ? 0 : document.getElementById("distance").value),
       createdAt: now
     }, function() {
       this.calculatePoints();
