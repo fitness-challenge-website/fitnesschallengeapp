@@ -1,5 +1,3 @@
-const Friends = require("../models").Friends;
-const User = require("../models").User;
 const Badge = require("../models").Badges;
 
 module.exports = {

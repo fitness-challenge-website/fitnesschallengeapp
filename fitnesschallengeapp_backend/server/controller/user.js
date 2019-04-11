@@ -4,6 +4,7 @@ const User_Badge = require("../models").User_Badge;
 module.exports = {
   createAccount(req, res){
     var data = {
+      uid: req.body.uid,
       username: req.body.username,
       f_name: req.body.f_name,
       l_name: req.body.l_name,

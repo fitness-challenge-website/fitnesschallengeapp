@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import '../index.css';
-import { Button, Form, Container, Row, Col } from 'react-bootstrap';
-import firebase from 'firebase';
+import React, { Component } from 'react'
+import axios from 'axios'
+import "../index.css"
+import { Button, Form, Container, Row, Col } from 'react-bootstrap'
+import firebase from "firebase"
+
+// TO GET USER ID firebase.auth().currentUser.uid
 
 class AddActivity extends Component {
+
   constructor(props, context) {
     super(props, context);
 

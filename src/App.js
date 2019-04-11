@@ -33,16 +33,6 @@ class App extends Component {
   }
   render() {
     return (
-      <BrowserRouter>
-        <div className="App">
-        <Link to='/login'>Login (WIP)</Link>
-        <Link to='/userdash'>User Dash (WIP)</Link>
-        <Link to='/addactivity'>Add Activity (WIP)</Link>
-          <Switch>
-            <Route path='/login' component={Login} />
-            <Route path='/userdash' component={UserDash} />
-            <Route path='/addactivity' component={AddActivity} />
-          </Switch>
 
 
 
