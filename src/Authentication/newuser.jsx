@@ -1,9 +1,59 @@
 import React, { Component } from "react"
 import firebase from "firebase"
+import axios from 'axios'
 import "./newuser.css"
 import { Container, Row, Col, Form, Button} from "react-bootstrap"
 
 class NewUser extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.submitProfile = this.submitProfile.bind(this);
+    this.saveProfile = this.saveProfile.bind(this);
+
+    this.state = {
+      uid: "",
+      username: "",
+      // f_name: "",
+      // l_name: "",
+      age: "",
+      weight: "",
+      height: ""
+      //gender: ""
+    };
+  }
+
+  submitProfile() {
+    console.log(this.state);
+    axios.post('http://localhost:3210/api/createAccount', {
+      uid: firebase.auth().currentUser.uid,
+      username: document.getElementById("editUsername").value,
+      age: document.getElementById("editAge").value,
+      weight: document.getElementById("editWeight").value,
+      // height: document.getElementById("editHeight").value,
+      height: 170,
+      f_name: "josh",
+      l_name: "kaplinsky"
+    })
+      .then(res => console.log(res.data));
+
+    // this.props.history.push('/');
+  }
+
+  saveProfile() {
+    //calculatePoints();
+    this.setState({
+        uid: firebase.auth().currentUser.uid,
+        username: document.getElementById("editUsername").value,
+        age: document.getElementById("editAge").value,
+        weight: document.getElementById("editWeight").value,
+        height: document.getElementById("editHeight").value,
+    }, function() {
+      // this.calculatePoints();
+      console.log(this.uid);
+      this.submitProfile();
+    });
+  }
+
 
   render() {
     return (
@@ -79,7 +129,7 @@ class NewUser extends Component {
                     </Form.Control>
                   </Form.Group>
                 </Form>
-                <Button type="primary">Submit</Button>
+                <Button type="primary" onClick={this.submitProfile}>Submit</Button>
             </Col>
 
             <Col>

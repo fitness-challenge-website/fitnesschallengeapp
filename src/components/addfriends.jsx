@@ -1,6 +1,6 @@
 import React, { Component } from "react"
-import firebase from "firebase"
-import { Button, Form, Container, Row, Col, Modal } from 'react-bootstrap'
+// import firebase from "firebase"
+import { Container, Row, Col} from 'react-bootstrap'
 
 
 class AddFriends extends Component {

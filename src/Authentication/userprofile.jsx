@@ -26,6 +26,7 @@ class UserProfile extends Component {
       showProfile: false,
       showDeleteUser: false,
       showPassword: false,
+      uid: "",
       photoURL: "",
       avatar: "",
       avatarURL: "",
@@ -77,7 +78,7 @@ class UserProfile extends Component {
 
   submitHealth() {
     axios.post('http://localhost:3210/api/editProfile', {
-      uid: 2,
+      uid: firebase.auth().currentUser.uid,
       f_name: this.state.f_name,
       l_name: this.state.l_name,
       weight: document.getElementById("editWeight").value,
@@ -166,7 +167,7 @@ class UserProfile extends Component {
       this.setState({ displayName: firebase.auth().currentUser.displayName })
     });
 
-    axios.post('http://localhost:3210/api/getUserData', {uid: 2})
+    axios.post('http://localhost:3210/api/getUserData', {uid: firebase.auth().currentUser.uid })
 		.then(res => {
 			let data = res.data;
       this.setState({
@@ -176,7 +177,8 @@ class UserProfile extends Component {
 				l_name: data.l_name,
 				height: data.height,
 				weight: data.weight,
-				age: data.age
+				age: data.age,
+        uid: firebase.auth().currentUser.uid
 			});
     }).catch(err => {
 			alert("Check If you have a data in the user table.");
