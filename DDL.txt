@@ -1,52 +1,42 @@
 create database fitness;
 \c fitness;
 
-create table a_User(
-	uid serial primary key,
+create table a_user(
+	uid varchar(255) primary key,
 	username varchar(100) not null,
-	Password varchar(255) not null,
 	f_name varchar(100) not null,
 	l_name varchar(100) not null,
-	email varchar(255),
 	age integer,
 	weight float,
 	height float,
-	"createdAt" Date
+	"createdAt" Timestamp
 );
 
-create table a_Activity(
-	aid serial primary key,
-	a_name varchar(255) not null,
-	a_description varchar(255) not null,
-	a_type varchar(255) not null,
-	a_duration integer,
-	a_distance integer
-);
-
-create table a_Group(
+create table a_group(
 	gid serial primary key,
 	g_name varchar(255) not null,
-	"createdAt" Date
+	"createdAt" Timestamp
 );
 
-create table a_Badges(
+create table a_badges(
 	bid serial primary key,
 	b_name varchar(355),
 	"level" integer
 );
 
-create table a_Friends(
+create table a_friends(
 	fid serial primary key,
-	req_uid integer references a_User(UID),
-	res_uid integer references a_User(UID),
+	req_uid varchar(255) references a_user(UID),
+	res_uid varchar(255) references a_user(UID),
 	status varchar(1) not null,
-	"createdAt" Date
+	"createdAt" Timestamp
 );
 
-create table a_User_Badges(
-	uid integer references a_User(UID),
-	bid integer references a_Badges(BID),
-	"updatedAt" Date
+create table a_user_badges(
+	ubid serial primary key,
+	uid varchar(255) references a_user(UID),
+	bid integer references a_badges(BID),
+	"updatedAt" Timestamp
 );
 
 create table a_user_activity(
@@ -61,11 +51,11 @@ create table a_user_activity(
 	"updatedAt" Timestamp
 );
 
-create table a_User_Group(
+create table a_user_group(
 	ugid serial primary key,
-	req_uid integer references a_User(UID),
-	res_uid integer references a_User(UID),
-	gid integer references a_Group(GID),
+	req_uid varchar(255) references a_user(UID),
+	res_uid varchar(255) references a_user(UID),
+	gid integer references a_group(GID),
 	status varchar(1),
-	"joinAt" Date
+	"joinAt" Timestamp
 );
