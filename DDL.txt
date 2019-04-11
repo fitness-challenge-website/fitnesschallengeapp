@@ -42,11 +42,9 @@ create table a_user_badges(
 create table a_user_activity(
 	aid serial primary key,
 	uid varchar(255) references a_user(UID),
-	duration integer,
-	weight integer,
-	rep integer,
-	distance integer,
-	speed float,
+	type varchar(255),
+	duration float,
+	distance float,
 	"updatedAt" Timestamp
 );
 
