@@ -4,11 +4,12 @@ module.exports = (sequelize, DataTypes) => {
           primaryKey: true,
           autoIncrement: true},
     uid:DataTypes.STRING,
-    duration:DataTypes.INTEGER,
-    weight:DataTypes.INTEGER,
-    rep:DataTypes.INTEGER,
-    speed:DataTypes.FLOAT,
-    point:DataTypes.INTEGER
+    name:DataTypes.STRING,
+    description:DataTypes.STRING,
+    type:DataTypes.STRING,
+    duration:DataTypes.FLOAT,
+    distance:DataTypes.FLOAT,
+    points:DataTypes.FLOAT
   }, {
     tableName: 'a_user_activity',
     freezeTableName: true,
