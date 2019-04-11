@@ -21,16 +21,16 @@ class AddActivity extends Component {
       duration: '',
       distance: '',
       points: '',
-      createdAt: ''
+      updatedAt: ''
     };
   }
 
   submitActivity() {
     console.log(this.state);
-    // axios.post('http://localhost:3210/api/addStat', this.state)
-    //   .then(res => console.log(res.data));
-    axios.post('http://localhost:3210/api/updatePoints', this.state)
+    axios.post('http://localhost:3210/api/addStat', this.state)
       .then(res => console.log(res.data));
+    // axios.post('http://localhost:3210/api/updatePoints', this.state)
+    //   .then(res => console.log(res.data));
 
     this.props.history.push('/');
   }
@@ -96,7 +96,7 @@ class AddActivity extends Component {
 
   saveActivity() {
     console.log(new Date().toLocaleString());
-    let now = new Date().toLocaleString();
+    var now = new Date().toLocaleString();
     if(this.state.distance === '') {
       this.setState({distance: 0})
     }
@@ -107,7 +107,7 @@ class AddActivity extends Component {
       type: document.getElementById("type").value,
       duration: document.getElementById("duration").value,
       distance: ( (document.getElementById("distance").value === '') ? 0 : document.getElementById("distance").value),
-      createdAt: now
+      updatedAt: new Date().toLocaleString()
     }, function() {
       this.calculatePoints();
     });
