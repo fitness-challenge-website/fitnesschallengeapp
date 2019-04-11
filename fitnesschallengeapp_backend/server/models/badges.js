@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
   });
   Badges.associate = function(models) {
     // associations can be defined here
+
+    Badages.hasMany(models.User_Badges, {
+      foreignKey: 'bid',
+      as: "User_Badges"
+    })
   };
   return Badges;
 };
