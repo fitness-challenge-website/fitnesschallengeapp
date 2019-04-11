@@ -10,8 +10,7 @@ module.exports = {
     return Group.create(data).then(gid =>{
       User_Group.create({
         gid: gid,
-        req_uid: req.body.uid,
-        res_uid: req.body.uid,
+        uid: req.body.uid,
         status: 'A'
       }).then(ugid => {
         res.status(200).send("Group id: " + gid + " User_Group id: " + ugid);

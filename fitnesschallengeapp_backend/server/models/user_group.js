@@ -3,10 +3,8 @@ module.exports = (sequelize, DataTypes) => {
     ugid: {type:DataTypes.INTEGER,
           primaryKey: true,
           autoIncrement: true},
-    req_uid:DataTypes.INTEGER,
-    res_uid:DataTypes.INTEGER,
+    uid:DataTypes.STRING,
     gid: DataTypes.INTEGER,
-    status: DataTypes.STRING,
     joinAt: DataTypes.DATE
   }, {
     tableName: 'a_user_group',
@@ -22,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     User_Group.belongsTo(models.User, {
-      foreignKey: 'res_uid',
+      foreignKey: 'uid',
       as: 'User'
     });
   };

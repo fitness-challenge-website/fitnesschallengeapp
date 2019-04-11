@@ -20,9 +20,6 @@ module.exports = (app) => {
   app.post("/api/editProfile", userCtrl.editProfile);
   app.post("/api/delUser", userCtrl.delUser);
 
-  //Activity
-  app.post("/api/addActivity", actCtrl.addActivity);
-
   //Group
   app.post("/api/createGroup", grpCtrl.createGroup);
   app.post("/api/delGroup", grpCtrl.delGroup);
