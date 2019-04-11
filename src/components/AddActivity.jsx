@@ -4,8 +4,6 @@ import "../index.css"
 import { Button, Form, Container, Row, Col } from 'react-bootstrap'
 import firebase from "firebase"
 
-// TO GET USER ID firebase.auth().currentUser.uid
-
 class AddActivity extends Component {
 
   constructor(props, context) {
