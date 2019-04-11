@@ -3,8 +3,8 @@ const User = require("../models").User;
 module.exports = {
   request(req, res){
     var data = {
-      req_uid: req.body.req_uid,
-      res_uid: req.body.res_uid,
+      follower_uid: req.body.follower_uid,
+      following_uid: req.body.following_uid,
       status: 'P'
     }
     return Friends.create(data).then(fid => {
@@ -22,8 +22,8 @@ module.exports = {
     var isFriend = false;
     Friends.findOne({
       where:{
-        req_uid: req.body.req_uid,
-        res_uid: req.body.res_uid
+        follower_uid: req.body.follower_uid,
+        following_uid: req.body.following_uid
       }
     }).then(data =>{
       return True;
@@ -34,8 +34,8 @@ module.exports = {
 
     Friends.findOne({
       where:{
-        req_uid: req.body.res_uid,
-        res_uid: req.body.req_uid
+        follower_uid: req.body.following_uid,
+        following_uid: req.body.follower_uid
       }
     }).then(data =>{
       return True;

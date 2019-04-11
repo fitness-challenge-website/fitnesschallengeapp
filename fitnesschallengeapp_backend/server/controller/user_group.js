@@ -5,10 +5,8 @@ const Group = require("../models").Group;
 module.exports = {
   request(req, res){
     var data = {
-      req_uid: req.body.req_uid,
-      res_uid: req.body.res_uid,
-      gid: req.body.gid,
-      status: 'P'
+      uid: req.body.uid,
+      gid: req.body.gid
     };
 
     return User_Group.create(data).then(ugid =>{
@@ -20,7 +18,7 @@ module.exports = {
   },
   response(req, res){
     return User_Group.update({
-      status: req.body.status
+
     }, {
       where: {
         ugid: req.body.ugid
@@ -36,7 +34,7 @@ module.exports = {
     return User_Group.destroy({
       where: {
         ugid: req.body.ugid,
-        res_uid: req.body.uid
+        uid: req.body.uid
       }
     }).then(() => {
       res.status(200).send("Success");
@@ -51,7 +49,7 @@ module.exports = {
     User_Group.findAll({
       where:{
         ugid: req.body.ugid,
-        res_uid: req.body.uid,
+        uid: req.body.uid,
         status: "A"
       }
     }).then(data => {
@@ -65,7 +63,7 @@ module.exports = {
   getMyGroups(req, res){
     return User_Group.findAll({
       where: {
-        res_uid: req.body.uid,
+        uid: req.body.uid,
         status: 'A'
       },
       include: [
