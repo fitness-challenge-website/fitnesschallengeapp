@@ -1,6 +1,5 @@
-const User_Activity = require('../models').User_Activity;
-const Activity = require('../models').Activity;
-const User = require('../models').User;
+const User_Activity = require("../models").User_Activity;
+const User = require("../models").User;
 
 module.exports = {
 	addStat(req, res) {
@@ -39,42 +38,34 @@ module.exports = {
 			});
 	},
 
-	updateStat(req, res) {},
-	getUserStats(req, res) {
-		return User_Activity.findAll({
-			where: {
-				uid: req.body.uid,
-			},
-			include: [
-				{
-					model: Activity,
-					attributes: ['a_name'],
-					as: 'Activity',
-				},
-			],
-		})
-			.then(stats => {
-				res.send(stats);
-			})
-			.catch(err => {
-				res.status(400).send(err);
-				console.log(err);
-			});
-	},
-	//TODO: order by count(uid) group by uid
-	getLeaders(req, res) {
-		return User_Activity.findAll({
-			group: ['User_Activity.uid', 'User.uid'],
-			attributes: ['uid'],
-			include: [
-				{
-					model: User,
-					as: 'User',
-					attributes: ['f_name', 'l_name'],
-				},
-			],
-		}).then(leaders => {
-			res.send(leaders);
-		});
-	},
-};
+  updateStat(req, res){
+  },
+  getUserStats(req, res){
+    return User_Activity.findAll({
+      where: {
+        uid: req.body.uid
+      }
+    }).then(stats => {
+      res.send(stats);
+    }).catch(err =>{
+      res.status(400).send(err);
+      console.log(err);
+    });
+  },
+  //TODO: order by count(uid) group by uid
+  getLeaders(req, res){
+    return User_Activity.findAll({
+      group:['User_Activity.uid', 'User.uid'],
+      attributes:['uid'],
+      include:[
+        {
+          model: User,
+          as:'User',
+          attributes:['f_name', 'l_name']
+        }
+      ]
+    }).then(leaders => {
+      res.send(leaders);
+    })
+  }
+}
