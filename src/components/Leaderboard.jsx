@@ -5,9 +5,12 @@ import "../index.css"
 import { Container } from 'react-bootstrap'
 // import firebase from "firebase"
 
-const Activity = props => (
+const User = props => (
     <tr>
-        <td>{props.activity.a_name}</td>
+        <td>{props.user.username}</td>
+        <td>{props.user.f_name}</td>
+        <td>{props.user.l_name}</td>
+        <td>{props.user.totalPoints}</td>
     </tr>
 )
 
@@ -15,25 +18,22 @@ class Leaderboard extends Component {
 
   constructor(props, context) {
     super(props, context);
-
-    // TO GET USER ID firebase.auth().currentUser.uid
-
-    this.state = {activities: []};
+    this.state = {users: []};
   }
 
   componentDidMount() {
-      axios.post('http://localhost:3210/api/listActivities')
+      axios.post('http://localhost:3210/api/listUsers')
           .then(response => {
-              this.setState({ activities: response.data });
+              this.setState({ users: response.data });
           })
           .catch(function (error){
               console.log(error);
           })
   }
 
-  activityList() {
-      return this.state.activities.map(function(currentActivity, i){
-          return <Activity activity={currentActivity} key={i} />;
+  userList() {
+      return this.state.users.map(function(currentUser, i){
+          return <User user={currentUser} key={i} />;
       })
   }
 
@@ -44,11 +44,14 @@ class Leaderboard extends Component {
         <table className="table table-striped" style={{ marginTop: 20 }} >
             <thead>
                 <tr>
-                    <th>Activity Name</th>
+                    <th>Username</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Total Points</th>
                 </tr>
             </thead>
             <tbody>
-                { this.activityList() }
+                { this.userList() }
             </tbody>
         </table>
       </Container>
