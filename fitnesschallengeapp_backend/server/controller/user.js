@@ -71,6 +71,29 @@ module.exports = {
       console.log(err);
     })
   },
+  updatePoints(req, res){
+    var curPoints = User.findOne({
+      where:{
+        uid: req.body.uid
+      },
+      attributes:['totalPoints']
+    })
+    console.log(curPoints);
+    var data = {
+      totalPoints: req.body.points + curPoints
+    }
+    console.log(data);
+    return User.update(data, {
+      where: {
+        uid: req.body.uid
+      }
+    }).then(() => {
+      res.status(200).send("Success");
+    }).catch(err => {
+      res.status(400).send(err);
+      console.log(err);
+    });
+  },
   getLeaders(req, res){
 
   }

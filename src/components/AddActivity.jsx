@@ -27,7 +27,9 @@ class AddActivity extends Component {
 
   submitActivity() {
     console.log(this.state);
-    axios.post('http://localhost:3210/api/addStat', this.state)
+    // axios.post('http://localhost:3210/api/addStat', this.state)
+    //   .then(res => console.log(res.data));
+    axios.post('http://localhost:3210/api/updatePoints', this.state)
       .then(res => console.log(res.data));
 
     this.props.history.push('/');
