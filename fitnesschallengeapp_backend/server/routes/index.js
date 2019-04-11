@@ -19,6 +19,7 @@ module.exports = (app) => {
   app.post("/api/createAccount", userCtrl.createAccount);
   app.post("/api/editProfile", userCtrl.editProfile);
   app.post("/api/delUser", userCtrl.delUser);
+  app.post("/api/listUsers", userCtrl.listUsers);
 
   //Group
   app.post("/api/createGroup", grpCtrl.createGroup);

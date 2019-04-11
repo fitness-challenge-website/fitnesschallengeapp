@@ -63,6 +63,14 @@ module.exports = {
       console.log(err);
     })
   },
+  listUsers(req, res){
+    return User.findAll().then(data => {
+      res.status(200).send(data);
+    }).catch(err => {
+      res.status(400).send(err);
+      console.log(err);
+    })
+  },
   getLeaders(req, res){
 
   }
