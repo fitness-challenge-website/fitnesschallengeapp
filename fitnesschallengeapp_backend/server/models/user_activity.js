@@ -12,8 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     tableName: 'user_activity',
     freezeTableName: true,
-    updatedAt: false,
-    createdAt: false
+    updatedAt: false
   });
   User_Activity.associate = function(models) {
     // associations can be defined here
