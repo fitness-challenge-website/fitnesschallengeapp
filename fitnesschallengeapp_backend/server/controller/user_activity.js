@@ -2,41 +2,37 @@ const User_Activity = require("../models").User_Activity;
 const User = require("../models").User;
 
 module.exports = {
-	addStat(req, res) {
-		var data = {
-			uid: req.body.uid,
-			type: req.body.type,
-			name: req.body.name,
-			duration: req.body.duration,
-			weight: req.body.weight,
-			rep: req.body.rep,
-			distance: req.body.distance,
-			speed: req.body.speed,
-			point: req.body.point,
-		};
+  addStat(req, res){
+    var data = {
+      aid: req.body.aid,
+      uid: req.body.uid,
+      name: req.body.name,
+      description: req.body.description,
+      type: req.body.type,
+      duration: req.body.duration,
+      distance: req.body.distance,
+      points: req.body.points
+    }
 
-		return User_Activity.create(data)
-			.then(id => {
-				res.status(200).send('Success');
-			})
-			.catch(err => {
-				res.status(400).send(err);
-			});
-	},
-	delStat(req, res) {
-		var uaid = req.body.uaid;
-		return User_Activity.destroy({
-			where: {
-				uaid: uaid,
-			},
-		})
-			.then(() => {
-				res.status(200).send('Successfully deleted');
-			})
-			.catch(err => {
-				res.status(400).send(err);
-			});
-	},
+    return User_Activity.create(data).then(id => {
+      res.status(200).send("Success");
+    }).catch(err =>{
+      res.status(400).send(err);
+      console.log(err)
+    });
+  },
+  delStat(req, res){
+    var uaid = req.body.uaid;
+    return User_Activity.destroy({
+      where:{
+        uaid: uaid
+      }
+    }).then(() => {
+      res.status(200).send("Successfully deleted");
+    }).catch(err => {
+      res.status(400).send(err);
+    });
+  },
 
   updateStat(req, res){
   },
