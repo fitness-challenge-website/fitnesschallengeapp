@@ -49,14 +49,16 @@ create table a_User_Badges(
 	"updatedAt" Date
 );
 
-create table a_User_Activity(
-	uid integer references a_User(UID),
-	aid integer references a_Activity(AID),
-	duration integer,
-	weight integer,
-	rep integer,
-	distance integer,
-	speed float
+create table a_user_activity(
+	aid serial primary key,
+	uid varchar(255) references a_user(UID),
+	name varchar(255),
+	description varchar(255),
+	type varchar(255),
+	duration float,
+	distance float,
+	points float,
+	"updatedAt" Timestamp
 );
 
 create table a_User_Group(
