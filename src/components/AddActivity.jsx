@@ -6,6 +6,7 @@ import firebase from "firebase"
 
 // TO GET USER ID firebase.auth().currentUser.uid
 
+
 class AddActivity extends Component {
 
   constructor(props, context) {
@@ -23,8 +24,20 @@ class AddActivity extends Component {
       duration: '',
       distance: '',
       points: '',
-      createdAt: ''
+      createdAt: '',
+      weight: '',
+      totalPoints: '0',
     };
+  }
+
+  componentDidMount() {
+      axios.get('http://localhost:3210/api/getUserData?uid=firebase.auth().currentUser.uid')
+          .then(response => {
+              this.setState({ weight: response.data.weight });
+          })
+          .catch(function (error){
+              console.log(error);
+          })
   }
 
   submitActivity() {
@@ -35,9 +48,12 @@ class AddActivity extends Component {
     this.props.history.push('/');
   }
 
+
+
   calculatePoints() {
     console.log(this.state);
     let points = 0;
+    let totalPoints = 0;
 
     if(this.state.name === '') {
       alert('No Activity Name entered!')
@@ -60,26 +76,107 @@ class AddActivity extends Component {
     }
     else if(this.state.type === 'Running') {
       points = this.state.duration * 1;
+      totalPoints = this.state.points + points;
       alert('Points Earned Running: ' + points)
     }
-    else if(this.state.type === 'Biking') {
+    else if(this.state.type === 'Biking' && this.state.weight >120 && this.state.weight<140) {
       points = this.state.duration * 0.5;
+      totalPoints = this.state.points + points;
       alert('Points Earned Biking: ' + points)
     }
-    else if(this.state.type === 'Swimming') {
+    else if(this.state.type === 'Biking' && this.state.weight >140 && this.state.weight<160) {
+      points = this.state.duration * 0.8;
+      totalPoints = this.state.points + points;
+      alert('Points Earned Biking: ' + points)
+    }
+    else if(this.state.type === 'Biking' && this.state.weight >160 && this.state.weight<180) {
+      points = this.state.duration * 1.1;
+      totalPoints = this.state.points + points;
+      alert('Points Earned Biking: ' + points)
+    }
+    else if(this.state.type === 'Biking' && this.state.weight >180 && this.state.weight<200) {
+      points = this.state.duration * 1.3;
+      totalPoints = this.state.points + points;
+      alert('Points Earned Biking: ' + points)
+    }
+    else if(this.state.type === 'Swimming'&& this.state.weight >120 && this.state.weight<140) {
       points = this.state.duration * 2.5;
+      totalPoints = this.state.points + points;
       alert('Points Earned Swimming: ' + points)
     }
-    else if(this.state.type === 'Weight Lifting') {
+    else if(this.state.type === 'Swimming'&& this.state.weight >140 && this.state.weight<160) {
+      points = this.state.duration * 2.8;
+      totalPoints = this.state.points + points;
+      alert('Points Earned Swimming: ' + points)
+    }
+    else if(this.state.type === 'Swimming'&& this.state.weight >160 && this.state.weight<180) {
+      points = this.state.duration * 3.1;
+      totalPoints = this.state.points + points;
+      alert('Points Earned Swimming: ' + points)
+    }
+    else if(this.state.type === 'Swimming'&& this.state.weight >180 && this.state.weight<200) {
+      points = this.state.duration * 3.4;
+      totalPoints = this.state.points + points;
+      alert('Points Earned Swimming: ' + points)
+    }
+    else if(this.state.type === 'Weight Lifting'&&this.state.weight >120 && this.state.weight<140) {
       points = this.state.duration * 1;
+      totalPoints = this.state.points + points;
       alert('Points Earned Weight Lifting: ' + points)
     }
-    else if(this.state.type === 'Team Sports') {
-      points = this.state.duration * 0.75;
+    else if(this.state.type === 'Weight Lifting'&&this.state.weight >140 && this.state.weight<160) {
+      points = this.state.duration * 1.3;
+      totalPoints = this.state.points + points;
+      alert('Points Earned Weight Lifting: ' + points)
+    }
+    else if(this.state.type === 'Weight Lifting'&&this.state.weight >160 && this.state.weight<180) {
+      points = this.state.duration * 1.6;
+      totalPoints = this.state.points + points;
+      alert('Points Earned Weight Lifting: ' + points)
+    }
+    else if(this.state.type === 'Weight Lifting'&&this.state.weight >180 && this.state.weight<200) {
+      points = this.state.duration * 1.9;
+      totalPoints = this.state.points + points;
+      alert('Points Earned Weight Lifting: ' + points)
+    }
+    else if(this.state.type === 'Team Sports'&&this.state.weight >120 && this.state.weight<140) {
+      points = this.state.duration * 0.7;
+      totalPoints = this.state.points + points;
       alert('Points Earned in Team Sports: ' + points)
     }
-    else if(this.state.type === 'Other Exercise') {
-      points = this.state.duration * 0.75;
+    else if(this.state.type === 'Team Sports'&&this.state.weight >140 && this.state.weight<160) {
+      points = this.state.duration * 1;
+      totalPoints = this.state.points + points;
+      alert('Points Earned in Team Sports: ' + points)
+    }
+    else if(this.state.type === 'Team Sports'&&this.state.weight >160 && this.state.weight<180) {
+      points = this.state.duration * 1.3;
+      totalPoints = this.state.points + points;
+      alert('Points Earned in Team Sports: ' + points)
+    }
+    else if(this.state.type === 'Team Sports'&&this.state.weight >180 && this.state.weight<200) {
+      points = this.state.duration * 1.6;
+      totalPoints = this.state.points + points;
+      alert('Points Earned in Team Sports: ' + points)
+    }
+    else if(this.state.type === 'Other Exercise'&&this.state.weight >120 && this.state.weight<140) {
+      points = this.state.duration * 0.8;
+      totalPoints = this.state.points + points;
+      alert('Points Earned in Other Exercise: ' + points)
+    }
+    else if(this.state.type === 'Other Exercise'&&this.state.weight >140 && this.state.weight<160) {
+      points = this.state.duration * 1.1;
+      totalPoints = this.state.points + points;
+      alert('Points Earned in Other Exercise: ' + points)
+    }
+    else if(this.state.type === 'Other Exercise'&&this.state.weight >160 && this.state.weight<180) {
+      points = this.state.duration * 1.4;
+      totalPoints = this.state.points + points;
+      alert('Points Earned in Other Exercise: ' + points)
+    }
+    else if(this.state.type === 'Other Exercise'&&this.state.weight >180 && this.state.weight<200) {
+      points = this.state.duration * 1.7;
+      totalPoints = this.state.points + points;
       alert('Points Earned in Other Exercise: ' + points)
     }
     else {
@@ -88,7 +185,8 @@ class AddActivity extends Component {
     }
 
     this.setState({
-      points: points
+      points: points,
+      totalPoints: totalPoints
     }, function() {
       this.submitActivity();
     });
@@ -99,6 +197,9 @@ class AddActivity extends Component {
     let now = new Date().toLocaleString();
     if(this.state.distance === '') {
       this.setState({distance: 0})
+    }
+    if(this.state.totalPoints === '') {
+      this.setState({totalPoints: 0})
     }
     this.setState({
       uid: firebase.auth().currentUser.uid,
@@ -151,7 +252,9 @@ class AddActivity extends Component {
             <Form.Label>Activity Distance (miles)</Form.Label>
             <Form.Control id="distance" type="" placeholder="3.15" defaultValue={this.state.distance} />
           </Form.Group>
-
+          <div>
+          <label>Points : {this.state.totalPoints}</label>
+          </div>
           <Button variant="primary" onClick={this.saveActivity}>
             Save Activity
           </Button>
