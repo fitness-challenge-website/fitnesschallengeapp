@@ -10,11 +10,11 @@ module.exports = (sequelize, DataTypes) => {
     duration:DataTypes.FLOAT,
     distance:DataTypes.FLOAT,
     points:DataTypes.FLOAT,
-    updatedAt:DataTypes.STRING
+    updatedAt:DataTypes.DATE
   }, {
     tableName: 'a_user_activity',
     freezeTableName: true,
-    updatedAt: false
+    createdAt: false
   });
   User_Activity.associate = function(models) {
     // associations can be defined here
