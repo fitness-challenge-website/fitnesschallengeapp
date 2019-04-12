@@ -89,7 +89,7 @@ class UserProfile extends Component {
       let data = res.data;
       window.location.reload();
     }).catch(err => {
-      alert("Check If you have a data in the user table.");
+      // alert("Check If you have a data in the user table.");
       console.log(err);
     });
 
@@ -167,7 +167,7 @@ class UserProfile extends Component {
       this.setState({ displayName: firebase.auth().currentUser.displayName })
     });
 
-    axios.post('http://localhost:3210/api/getUserData', {uid: firebase.auth().currentUser.uid })
+    axios.post('http://localhost:3210/api/getUserData', {uid: firebase.auth().currentUser.uid})
 		.then(res => {
 			let data = res.data;
       this.setState({
@@ -181,7 +181,7 @@ class UserProfile extends Component {
         uid: firebase.auth().currentUser.uid
 			});
     }).catch(err => {
-			alert("Check If you have a data in the user table.");
+			// alert("Check If you have a data in the user table.");
 			console.log(err);
 		});
 

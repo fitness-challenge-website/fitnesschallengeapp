@@ -17,6 +17,8 @@ import MainDashBoard from './PageContent/MainDashBoard'
 import NewUser from './Authentication/newuser'
 import Friends from './components/Friends'
 import Groups from './components/Groups'
+import Test from './Authentication/test'
+import Register from './Authentication/register'
 
 
 firebase.initializeApp({
@@ -54,6 +56,8 @@ class App extends Component {
                   <Route path='/weeklychallenge' component={WeeklyChallenge} />
                   <Route path='/monthlychallenge' component={MonthlyChallenge} />
                   <Route path='yearlychallenge' component={YearlyChallenge} />
+                  <Route path='/yearlychallenge' component={YearlyChallenge} />
+                  <Route path='/add' component={AddFriends} />
                   <Route path='/newuser' component={NewUser} />
 				  <Route path='/friends' component={Friends} />
 				  <Route path='/groups' component={Groups} />
@@ -66,6 +70,7 @@ class App extends Component {
           <BrowserRouter>
                 <Switch>
                   <Route exact path='/' component={Login} />
+                  <Route path='/register' component={Register} />
                   <Route path='/learnmore' component={LearnMore} />
                 </Switch>
           </BrowserRouter>
