@@ -5,11 +5,10 @@ module.exports = (sequelize, DataTypes) => {
           autoIncrement: true},
     uid:DataTypes.STRING,
     gid: DataTypes.INTEGER,
-    joinAt: DataTypes.DATE
+    createdAt: DataTypes.DATE
   }, {
     tableName: 'a_user_group',
     freezeTableName: true,
-    createdAt: false,
     updatedAt: false
   });
   User_Group.associate = function(models) {

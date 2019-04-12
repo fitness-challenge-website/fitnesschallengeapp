@@ -11,7 +11,10 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt: false
   });
   Friends.associate = function(models) {
-    // associations can be defined here
+    Friends.belongsTo(models.User, {
+      foreignKey: "following_uid",
+      as:'User'
+    });
   };
   return Friends;
 };

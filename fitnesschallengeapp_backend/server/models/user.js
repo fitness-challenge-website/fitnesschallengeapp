@@ -29,19 +29,20 @@ module.exports = (sequelize, DataTypes) => {
       as: 'User_Group'
     });
 
-    /*
     User.hasMany(models.User_Badges, {
-
+      foreignKey:'uid',
+      as:'User_Badges'
     });
 
     User.hasMany(models.User_Activity, {
-
+      foreignKey:'uid',
+      as:'User_Activity'
     });
 
     User.hasMany(models.Friends, {
-
+      foreignKey: 'follower_uid',
+      as: 'Friends'
     });
-    */
   };
 
   return User;
