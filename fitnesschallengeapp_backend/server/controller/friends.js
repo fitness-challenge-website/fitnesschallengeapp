@@ -1,11 +1,10 @@
 const Friends = require("../models").Friends;
 const User = require("../models").User;
 module.exports = {
-  request(req, res){
+  follow(req, res){
     var data = {
-      req_uid: req.body.req_uid,
-      res_uid: req.body.res_uid,
-      status: 'P'
+      follower_uid: req.body.follower_uid,
+      following_uid: req.body.following_uid
     }
     return Friends.create(data).then(fid => {
       res.status(200).send(fid);
@@ -14,36 +13,53 @@ module.exports = {
       console.log(err);
     });
   },
-  response(req, res){
-
+  unfollow(req, res){
+    return Friends.destroy({
+      where:{
+        fid: req.body.fid
+      }
+    }).then(() => {
+      res.status(200).send("Success");
+      return;
+    }).catch(err =>{
+      res.status(400).send(err);
+      console.log(err);
+    })
   },
-  //TODO: need to check the status (P: Pending, R: Rejected, A: Accepted)
   isFriend(req, res){
     var isFriend = false;
     Friends.findOne({
       where:{
-        req_uid: req.body.req_uid,
-        res_uid: req.body.res_uid
+        follower_uid: req.body.follower_uid,
+        following_uid: req.body.following_uid
       }
     }).then(data =>{
-      return True;
+      res.status(200).send(data);
+      return true;
     }).catch(err =>{
       res.status(400).send(err);
       console.log(err);
     });
 
-    Friends.findOne({
+    return false;
+  },
+  listFriends(req, res){
+    return Friends.findAll({
       where:{
-        req_uid: req.body.res_uid,
-        res_uid: req.body.req_uid
-      }
+        follower_uid: req.body.uid
+      },
+      include: [
+        {
+          model: User,
+          attributes: ['uid', 'f_name', 'l_name', 'totalpoints'],
+          as: "User"
+        }
+      ]
     }).then(data =>{
-      return True;
+      res.status(200).send(data);
     }).catch(err =>{
       res.status(400).send(err);
       console.log(err);
-    });
-
-    return False;
+    })
   }
 }

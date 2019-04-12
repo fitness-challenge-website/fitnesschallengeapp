@@ -19,9 +19,9 @@ module.exports = (app) => {
   app.post("/api/createAccount", userCtrl.createAccount);
   app.post("/api/editProfile", userCtrl.editProfile);
   app.post("/api/delUser", userCtrl.delUser);
-
-  //Activity
-  app.post("/api/addActivity", actCtrl.addActivity);
+  app.post("/api/listUsers", userCtrl.listUsers);
+  app.post("/api/updatePoints", userCtrl.updatePoints);
+  app.post("/api/getPoints", userCtrl.getPoints);
 
   //Group
   app.post("/api/createGroup", grpCtrl.createGroup);
@@ -29,9 +29,10 @@ module.exports = (app) => {
   app.post("/api/getGroupData", grpCtrl.getGroupData);
 
   //Friend
-  app.post("/api/reqFriend", frCtrl.request);
-  app.post("/api/resFriend", frCtrl.response);
+  app.post("/api/follow", frCtrl.follow);
+  app.post("/api/unfollow", frCtrl.unfollow);
   app.post("/api/isFriend", frCtrl.isFriend);
+  app.post("/api/listFriends", frCtrl.listFriends);
 
   //Badge
   app.post("/api/addBadge", bgCtrl.addBadge);
@@ -49,8 +50,7 @@ module.exports = (app) => {
   app.post("/api/earnBadge", userbgCtrl.earnBadge);
 
   //User_Group
-  app.post("/api/reqGroup", usergrpCtrl.request);
-  app.post("/api/resGroup", usergrpCtrl.response);
+  app.post("/api/joinGroup", usergrpCtrl.joinGroup);
   app.post("/api/leaveGroup", usergrpCtrl.leaveGroup);
   app.post("/api/isBelongTo", usergrpCtrl.isBelongTo);
   app.post("/api/getMyGroups", usergrpCtrl.getMyGroups);

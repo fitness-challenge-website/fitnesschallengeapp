@@ -26,8 +26,11 @@ class UserProfile extends Component {
       showProfile: false,
       showDeleteUser: false,
       showPassword: false,
+      uid: "",
+      photoURL: "",
       avatar: "",
       avatarURL: "",
+      displayName: "",
       height: "",
       weight: "",
       gender: "",
@@ -75,18 +78,19 @@ class UserProfile extends Component {
 
   submitHealth() {
     axios.post('http://localhost:3210/api/editProfile', {
-      uid: 2,
+      uid: firebase.auth().currentUser.uid,
       f_name: this.state.f_name,
       l_name: this.state.l_name,
       weight: document.getElementById("editWeight").value,
       height: document.getElementById("editHeight").value,
       age: document.getElementById("editAge").value,
+      gender: document.getElementById("editGender").value
     })
     .then(res => {
       let data = res.data;
       window.location.reload();
     }).catch(err => {
-      alert("Check If you have a data in the user table.");
+      // alert("Check If you have a data in the user table.");
       console.log(err);
     });
 
@@ -160,9 +164,11 @@ class UserProfile extends Component {
   componentDidMount = () => {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ isSignedIn: !!user })
+      this.setState({ photoURL: firebase.auth().currentUser.photoURL })
+      this.setState({ displayName: firebase.auth().currentUser.displayName })
     });
 
-    axios.post('http://localhost:3210/api/getUserData', {uid: 2})
+    axios.post('http://localhost:3210/api/getUserData', {uid: firebase.auth().currentUser.uid})
 		.then(res => {
 			let data = res.data;
       this.setState({
@@ -172,10 +178,12 @@ class UserProfile extends Component {
 				l_name: data.l_name,
 				height: data.height,
 				weight: data.weight,
-				age: data.age
+				age: data.age,
+        gender: data.gender,
+        uid: firebase.auth().currentUser.uid
 			});
     }).catch(err => {
-			alert("Check If you have a data in the user table.");
+			// alert("Check If you have a data in the user table.");
 			console.log(err);
 		});
 
@@ -189,7 +197,7 @@ class UserProfile extends Component {
         <Row>
           <Col lg={5} className="profPic">
             {
-              firebase.auth().currentUser.photoURL ?
+              this.photoURL ?
                 <img height="300px" src={firebase.auth().currentUser.photoURL }/>
               :
                 <img className="shadow-lg" src="http://i.pravatar.cc/300" alt="User Avatar"/>

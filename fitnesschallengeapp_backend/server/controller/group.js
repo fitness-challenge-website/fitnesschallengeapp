@@ -7,14 +7,12 @@ module.exports = {
       g_name: req.body.g_name
     };
 
-    return Group.create(data).then(gid =>{
+    return Group.create(data).then(group =>{
       User_Group.create({
-        gid: gid,
-        req_uid: req.body.uid,
-        res_uid: req.body.uid,
-        status: 'A'
+        gid: group.dataValues.gid,
+        uid: req.body.uid
       }).then(ugid => {
-        res.status(200).send("Group id: " + gid + " User_Group id: " + ugid);
+        res.status(200).send("Group id: " + group.dataValues.gid + " User_Group id: " + ugid.dataValues.ugid);
       }).catch(err => {
         res.status(400).send(err);
         console.log(err);

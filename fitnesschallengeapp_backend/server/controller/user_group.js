@@ -3,12 +3,10 @@ const User = require("../models").User;
 const Group = require("../models").Group;
 
 module.exports = {
-  request(req, res){
+  joinGroup(req, res){
     var data = {
-      req_uid: req.body.req_uid,
-      res_uid: req.body.res_uid,
-      gid: req.body.gid,
-      status: 'P'
+      uid: req.body.uid,
+      gid: req.body.gid
     };
 
     return User_Group.create(data).then(ugid =>{
@@ -18,25 +16,10 @@ module.exports = {
       console.log(err);
     })
   },
-  response(req, res){
-    return User_Group.update({
-      status: req.body.status
-    }, {
-      where: {
-        ugid: req.body.ugid
-      }
-    }).then(() => {
-      res.status(200).send("Success");
-    }).catch(err => {
-      res.status(400).send(err);
-      console.log(err);
-    });
-  },
   leaveGroup(req, res){
     return User_Group.destroy({
       where: {
-        ugid: req.body.ugid,
-        res_uid: req.body.uid
+        ugid: req.body.ugid
       }
     }).then(() => {
       res.status(200).send("Success");
@@ -48,30 +31,28 @@ module.exports = {
   isBelongTo(req, res){
     var belongs = false;
 
-    User_Group.findAll({
+    User_Group.findOne({
       where:{
-        ugid: req.body.ugid,
-        res_uid: req.body.uid,
-        status: "A"
+        ugid: req.body.ugid
       }
     }).then(data => {
-      if(data){
-        return true;
-      }
-    });
+      res.status(200).send(data);
+    }).catch(err =>{
+      res.status(400).send(err);
+      console.log(err);
+    })
 
     return false;
   },
   getMyGroups(req, res){
     return User_Group.findAll({
       where: {
-        res_uid: req.body.uid,
-        status: 'A'
+        uid: req.body.uid
       },
       include: [
         {
           model: Group,
-          attributes: ['b_name'],
+          attributes: ['g_name'],
           as: "Group"
         }
       ]
