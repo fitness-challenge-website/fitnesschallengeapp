@@ -84,6 +84,7 @@ class UserProfile extends Component {
       weight: document.getElementById("editWeight").value,
       height: document.getElementById("editHeight").value,
       age: document.getElementById("editAge").value,
+      gender: document.getElementById("editGender").value
     })
     .then(res => {
       let data = res.data;
@@ -178,6 +179,7 @@ class UserProfile extends Component {
 				height: data.height,
 				weight: data.weight,
 				age: data.age,
+        gender: data.gender,
         uid: firebase.auth().currentUser.uid
 			});
     }).catch(err => {
@@ -204,8 +206,8 @@ class UserProfile extends Component {
           </Col>
 
           <Col className="shadow-lg p-3 mb-5 bg-white contentDiv" lg={6}>
-            <h3 class="name"> { this.displayName ? this.displayName : null} </h3>
-            <h6 class="email"> {this.email ? this.email : null} </h6>
+            <h3 class="name"> {firebase.auth().currentUser.displayName} </h3>
+            <h6 class="email"> {firebase.auth().currentUser.email} </h6>
 
             <Row className="displayInfo">
               <Col>

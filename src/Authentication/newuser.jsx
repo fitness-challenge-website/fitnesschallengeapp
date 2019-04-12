@@ -18,7 +18,7 @@ class NewUser extends Component {
       age: "",
       weight: "",
       height: "",
-      //gender: ""
+      gender: "",
       totalpoints: 0
     };
   }
@@ -26,9 +26,8 @@ class NewUser extends Component {
   submitProfile() {
     var user = firebase.auth().currentUser;
     user.updateProfile({
-      displayName: document.getElementById("editName").value
+      displayName: document.getElementById("editFirstName").value + " " + document.getElementById("editLastName").value
     });
-    //console.log(this.state);
     axios.post('http://localhost:3210/api/createAccount', this.state)
       .then(res => console.log(res.data));
 
@@ -36,18 +35,15 @@ class NewUser extends Component {
   }
 
   saveProfile() {
-    //calculatePoints();
     this.setState({
         uid: firebase.auth().currentUser.uid,
         username: document.getElementById("editUsername").value,
-        f_name: "TEST",
-        l_name: "TEST",
+        f_name: document.getElementById("editFirstName").value,
+        l_name: document.getElementById("editLastName").value,
         age: document.getElementById("editAge").value,
         weight: document.getElementById("editWeight").value,
-        height: 170
+        height: document.getElementById("editHeight").value
     }, function() {
-      // this.calculatePoints();
-      //console.log(this.uid);
       this.submitProfile();
     });
   }
@@ -64,8 +60,12 @@ class NewUser extends Component {
               <Col lg={6}>
                 <Form>
                 <Form.Group>
-                  <Form.Label>First and Last Name</Form.Label>
-                  <Form.Control id="editName" type="username" placeholder="Enter First and Last Name"/>
+                  <Form.Label>First Name</Form.Label>
+                  <Form.Control id="editFirstName" type="username" placeholder="Enter First Name"/>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Last Name</Form.Label>
+                  <Form.Control id="editLastName" type="username" placeholder="Enter Last Name"/>
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>Username</Form.Label>

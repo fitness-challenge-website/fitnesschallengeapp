@@ -6,7 +6,21 @@ import firebase from "firebase"
 
 
 class NavBar extends Component {
-  state = { isSignedIn: false }
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.signOut = this.signOut.bind(this);
+
+    this.state = { isSignedIn: false }
+
+}
+
+  signOut() {
+    this.setState({isSignedIn: false});
+    firebase.auth().signOut();
+    window.location.href = "/";
+  }
 
   componentDidMount = () => {
     firebase.auth().onAuthStateChanged(user => {
@@ -36,7 +50,7 @@ class NavBar extends Component {
                  <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                  <NavDropdown.Item href="/add">Add Friends</NavDropdown.Item>
                  <NavDropdown.Divider />
-                 <NavDropdown.Item onClick={() => firebase.auth().signOut()}>Sign Out</NavDropdown.Item>
+                 <NavDropdown.Item onClick={this.signOut}>Sign Out</NavDropdown.Item>
                </NavDropdown>
               </Nav>
               </span>
