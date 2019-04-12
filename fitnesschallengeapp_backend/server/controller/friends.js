@@ -16,8 +16,7 @@ module.exports = {
   unfollow(req, res){
     return Friends.destroy({
       where:{
-        follower_uid: req.body.follower_uid,
-        following_uid:req.body.following_uid
+        fid: req.body.fid
       }
     }).then(() => {
       res.status(200).send("Success");
