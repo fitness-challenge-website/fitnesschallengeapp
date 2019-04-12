@@ -10,7 +10,7 @@ const User = props => (
         <td>{props.user.username}</td>
         <td>{props.user.f_name}</td>
         <td>{props.user.l_name}</td>
-        <td>{props.user.totalPoints}</td>
+        <td>{props.user.totalpoints}</td>
     </tr>
 )
 
