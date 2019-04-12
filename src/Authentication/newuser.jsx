@@ -13,51 +13,40 @@ class NewUser extends Component {
     this.state = {
       uid: "",
       username: "",
-      // f_name: "",
-      // l_name: "",
+      f_name: "",
+      l_name: "",
       age: "",
       weight: "",
-      height: ""
-      //gender: ""
+      height: "",
+      gender: "",
+      totalpoints: 0
     };
   }
 
   submitProfile() {
     var user = firebase.auth().currentUser;
     user.updateProfile({
-      displayName: document.getElementById("editName").value
+      displayName: document.getElementById("editFirstName").value + " " + document.getElementById("editLastName").value
     });
-    console.log(this.state);
-    axios.post('http://localhost:3210/api/createAccount', {
-      uid: firebase.auth().currentUser.uid,
-      username: document.getElementById("editUsername").value,
-      age: document.getElementById("editAge").value,
-      weight: document.getElementById("editWeight").value,
-      // height: document.getElementById("editHeight").value,
-      height: 170,
-      f_name: "josh",
-      l_name: "kaplinsky"
-    })
+    axios.post('http://localhost:3210/api/createAccount', this.state)
       .then(res => console.log(res.data));
 
     this.props.history.push('/');
   }
 
   saveProfile() {
-    //calculatePoints();
     this.setState({
         uid: firebase.auth().currentUser.uid,
         username: document.getElementById("editUsername").value,
+        f_name: document.getElementById("editFirstName").value,
+        l_name: document.getElementById("editLastName").value,
         age: document.getElementById("editAge").value,
         weight: document.getElementById("editWeight").value,
-        height: document.getElementById("editHeight").value,
+        height: document.getElementById("editHeight").value
     }, function() {
-      // this.calculatePoints();
-      console.log(this.uid);
       this.submitProfile();
     });
   }
-
 
   render() {
     return (
@@ -71,8 +60,12 @@ class NewUser extends Component {
               <Col lg={6}>
                 <Form>
                 <Form.Group>
-                  <Form.Label>First and Last Name</Form.Label>
-                  <Form.Control id="editName" type="username" placeholder="Enter First and Last Name"/>
+                  <Form.Label>First Name</Form.Label>
+                  <Form.Control id="editFirstName" type="username" placeholder="Enter First Name"/>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Last Name</Form.Label>
+                  <Form.Control id="editLastName" type="username" placeholder="Enter Last Name"/>
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>Username</Form.Label>
@@ -137,7 +130,7 @@ class NewUser extends Component {
                     </Form.Control>
                   </Form.Group>
                 </Form>
-                <Button type="primary" onClick={this.submitProfile}>Submit</Button>
+                <Button type="primary" onClick={this.saveProfile}>Submit</Button>
             </Col>
 
             <Col>

@@ -10,9 +10,9 @@ module.exports = {
       l_name: req.body.l_name,
       weight: req.body.weight,
       height: req.body.height,
-      age: req.body.age
+      age: req.body.age,
+      totalpoints: req.body.totalpoints
     }
-
     return User.create(data).then(uid =>{
       res.status(200).send(uid);
     }).catch(err => {
@@ -56,6 +56,42 @@ module.exports = {
       where:{
         uid: req.body.uid
       }
+    }).then(data => {
+      res.status(200).send(data);
+    }).catch(err => {
+      res.status(400).send(err);
+      console.log(err);
+    })
+  },
+  listUsers(req, res){
+    return User.findAll().then(data => {
+      res.status(200).send(data);
+    }).catch(err => {
+      res.status(400).send(err);
+      console.log(err);
+    })
+  },
+  updatePoints(req, res){
+    var data = {
+      totalpoints: req.body.totalpoints,
+    }
+    return User.update(data, {
+      where: {
+        uid: req.body.uid
+      }
+    }).then(() => {
+      res.status(200).send("Success");
+    }).catch(err => {
+      res.status(400).send(err);
+      console.log(err);
+    });
+  },
+  getPoints(req, res){
+    return User.findOne({
+      where:{
+        uid: req.body.uid
+      },
+        attributes:['totalpoints']
     }).then(data => {
       res.status(200).send(data);
     }).catch(err => {

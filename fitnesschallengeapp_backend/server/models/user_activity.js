@@ -9,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
     type:DataTypes.STRING,
     duration:DataTypes.FLOAT,
     distance:DataTypes.FLOAT,
-    points:DataTypes.FLOAT
+    points:DataTypes.FLOAT,
+    updatedAt:DataTypes.STRING
   }, {
     tableName: 'a_user_activity',
     freezeTableName: true,
