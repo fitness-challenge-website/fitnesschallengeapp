@@ -13,12 +13,13 @@ class NewUser extends Component {
     this.state = {
       uid: "",
       username: "",
-      // f_name: "",
-      // l_name: "",
+      f_name: "",
+      l_name: "",
       age: "",
       weight: "",
-      height: ""
+      height: "",
       //gender: ""
+      totalpoints: 0
     };
   }
 
@@ -27,17 +28,8 @@ class NewUser extends Component {
     user.updateProfile({
       displayName: document.getElementById("editName").value
     });
-    console.log(this.state);
-    axios.post('http://localhost:3210/api/createAccount', {
-      uid: firebase.auth().currentUser.uid,
-      username: document.getElementById("editUsername").value,
-      age: document.getElementById("editAge").value,
-      weight: document.getElementById("editWeight").value,
-      // height: document.getElementById("editHeight").value,
-      height: 170,
-      f_name: "josh",
-      l_name: "kaplinsky"
-    })
+    //console.log(this.state);
+    axios.post('http://localhost:3210/api/createAccount', this.state)
       .then(res => console.log(res.data));
 
     this.props.history.push('/');
@@ -48,16 +40,17 @@ class NewUser extends Component {
     this.setState({
         uid: firebase.auth().currentUser.uid,
         username: document.getElementById("editUsername").value,
+        f_name: "TEST",
+        l_name: "TEST",
         age: document.getElementById("editAge").value,
         weight: document.getElementById("editWeight").value,
-        height: document.getElementById("editHeight").value,
+        height: 170
     }, function() {
       // this.calculatePoints();
-      console.log(this.uid);
+      //console.log(this.uid);
       this.submitProfile();
     });
   }
-
 
   render() {
     return (
@@ -137,7 +130,7 @@ class NewUser extends Component {
                     </Form.Control>
                   </Form.Group>
                 </Form>
-                <Button type="primary" onClick={this.submitProfile}>Submit</Button>
+                <Button type="primary" onClick={this.saveProfile}>Submit</Button>
             </Col>
 
             <Col>

@@ -10,9 +10,9 @@ module.exports = {
       l_name: req.body.l_name,
       weight: req.body.weight,
       height: req.body.height,
-      age: req.body.age
+      age: req.body.age,
+      totalpoints: req.body.totalpoints
     }
-
     return User.create(data).then(uid =>{
       res.status(200).send(uid);
     }).catch(err => {
