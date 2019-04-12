@@ -33,7 +33,7 @@ class MainDashBoard extends Component {
         <Row>
           <Col className="shadow-lg p-3 mb-5 bg-white" lg={8}>
             <h4>Welcome,
-            {this.userDisplayName ? this.userDisplayName : null }
+              {" " + firebase.auth().currentUser.displayName}
             </h4>
           </Col>
 
