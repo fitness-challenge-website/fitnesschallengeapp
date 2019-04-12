@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     l_name: DataTypes.STRING,
     age: DataTypes.INTEGER,
     weight: DataTypes.FLOAT,
-    height: DataTypes.FLOAT,
+    height: DataTypes.STRING,
+    gender: DataTypes.STRING,
     totalpoints: DataTypes.FLOAT
     // totalPoints_run: DataTypes.FLOAT,
     // totalPoints_bike: DataTypes.FLOAT,
