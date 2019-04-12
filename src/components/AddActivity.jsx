@@ -24,9 +24,8 @@ class AddActivity extends Component {
       duration: '',
       distance: '',
       points: '',
-      createdAt: '',
-      weight: '',
-      totalPoints: '0',
+      updateAt: '',
+      weight: ''
     };
   }
 
@@ -39,9 +38,20 @@ class AddActivity extends Component {
               console.log(error);
           })
   }
-
   submitActivity() {
-    console.log(this.state);
+    let curPoints;
+    let newPoints = {
+      uid: '',
+      totalpoints: ''
+    };
+    axios.post('http://localhost:3210/api/getPoints', this.state)
+      .then(res => {
+        curPoints = res.data;
+        newPoints.uid = this.state.uid;
+        newPoints.totalpoints = curPoints.totalpoints + this.state.points;
+        axios.post('http://localhost:3210/api/updatePoints',newPoints)
+          .then(res => console.log(res.data));
+    });
     axios.post('http://localhost:3210/api/addStat', this.state)
       .then(res => console.log(res.data));
 
@@ -53,7 +63,6 @@ class AddActivity extends Component {
   calculatePoints() {
     console.log(this.state);
     let points = 0;
-    let totalPoints = 0;
 
     if(this.state.name === '') {
       alert('No Activity Name entered!')
@@ -185,30 +194,21 @@ class AddActivity extends Component {
     }
 
     this.setState({
-      points: points,
-      totalPoints: totalPoints
+      points: points
     }, function() {
       this.submitActivity();
     });
   }
 
   saveActivity() {
-    console.log(new Date().toLocaleString());
-    let now = new Date().toLocaleString();
-    if(this.state.distance === '') {
-      this.setState({distance: 0})
-    }
-    if(this.state.totalPoints === '') {
-      this.setState({totalPoints: 0})
-    }
     this.setState({
       uid: firebase.auth().currentUser.uid,
       name: document.getElementById("name").value,
       description: document.getElementById("description").value,
       type: document.getElementById("type").value,
       duration: document.getElementById("duration").value,
-      distance: ( (this.state.distance === '') ? 0 : document.getElementById("distance").value),
-      createdAt: now
+      distance: ( (document.getElementById("distance").value === '') ? 0 : document.getElementById("distance").value),
+      updatedAt: new Date().toLocaleString()
     }, function() {
       this.calculatePoints();
     });
