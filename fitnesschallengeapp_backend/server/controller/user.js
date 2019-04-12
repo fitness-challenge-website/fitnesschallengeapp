@@ -72,29 +72,19 @@ module.exports = {
     })
   },
   updatePoints(req, res){
-    // return User.findOne({
-    //   where:{
-    //     uid: req.body.uid
-    //   },
-    //   attributes:['totalpoints']
-    // }).then(data => {
-    //   res.status(200).send(data);
-    // })
-    // console.log(curPoints);
-    // var data = {
-    //   totalpoints: req.body.points + curPoints
-    // }
-    // console.log(data);
-    // return User.update(data, {
-    //   where: {
-    //     uid: req.body.uid
-    //   }
-    // }).then(() => {
-    //   res.status(200).send("Success");
-    // }).catch(err => {
-    //   res.status(400).send(err);
-    //   console.log(err);
-    // });
+    var data = {
+      totalpoints: req.body.totalpoints,
+    }
+    return User.update(data, {
+      where: {
+        uid: req.body.uid
+      }
+    }).then(() => {
+      res.status(200).send("Success");
+    }).catch(err => {
+      res.status(400).send(err);
+      console.log(err);
+    });
   },
   getPoints(req, res){
     return User.findOne({

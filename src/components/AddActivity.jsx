@@ -26,21 +26,27 @@ class AddActivity extends Component {
   }
 
   submitActivity() {
-    console.log(this.state);
+    let curPoints;
+    let newPoints = {
+      uid: '',
+      totalpoints: ''
+    };
     axios.post('http://localhost:3210/api/getPoints', this.state)
       .then(res => {
-        console.log(res.data)
+        curPoints = res.data;
+        newPoints.uid = this.state.uid;
+        newPoints.totalpoints = curPoints.totalpoints + this.state.points;
+        axios.post('http://localhost:3210/api/updatePoints',newPoints)
+          .then(res => console.log(res.data));
     });
     axios.post('http://localhost:3210/api/addStat', this.state)
       .then(res => console.log(res.data));
-    // axios.post('http://localhost:3210/api/updatePoints', this.state)
-    //   .then(res => console.log(res.data));
 
     this.props.history.push('/');
   }
 
   calculatePoints() {
-    console.log(this.state);
+    //console.log(this.state);
     let points = 0;
 
     if(this.state.name === '') {
@@ -99,11 +105,6 @@ class AddActivity extends Component {
   }
 
   saveActivity() {
-    console.log(new Date().toLocaleString());
-    var now = new Date().toLocaleString();
-    if(this.state.distance === '') {
-      this.setState({distance: 0})
-    }
     this.setState({
       uid: firebase.auth().currentUser.uid,
       name: document.getElementById("name").value,
