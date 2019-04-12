@@ -16,6 +16,8 @@ import MonthlyChallenge from './components/challengesFolder/monthly'
 import YearlyChallenge from './components/challengesFolder/yearly'
 import MainDashBoard from './PageContent/MainDashBoard'
 import NewUser from './Authentication/newuser'
+import Test from './Authentication/test'
+import Register from './Authentication/register'
 
 
 firebase.initializeApp({
@@ -34,9 +36,6 @@ class App extends Component {
   render() {
     return (
 
-
-
-
       <div className="App">
       {this.state.isSignedIn ? (
         <div>
@@ -47,12 +46,12 @@ class App extends Component {
                   <Route path='/login' component={Login} />
                   <Route path='/userdash' component={UserDash} />
                   <Route path='/profile' component={UserProfile} />
-                  <Route path='/AddActivity' component={AddActivity} />
-                  <Route path='/Leaderboard' component={Leaderboard} />
+                  <Route path='/addactivity' component={AddActivity} />
+                  <Route path='/leaderboard' component={Leaderboard} />
                   <Route path='/challenges' component={Challenges} />
                   <Route path='/weeklychallenge' component={WeeklyChallenge} />
                   <Route path='/monthlychallenge' component={MonthlyChallenge} />
-                  <Route path='yearlychallenge' component={YearlyChallenge} />
+                  <Route path='/yearlychallenge' component={YearlyChallenge} />
                   <Route path='/add' component={AddFriends} />
                   <Route path='/newuser' component={NewUser} />
                 </Switch>
@@ -64,6 +63,7 @@ class App extends Component {
           <BrowserRouter>
                 <Switch>
                   <Route exact path='/' component={Login} />
+                  <Route path='/register' component={Register} />
                   <Route path='/learnmore' component={LearnMore} />
                 </Switch>
           </BrowserRouter>

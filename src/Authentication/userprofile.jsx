@@ -26,6 +26,7 @@ class UserProfile extends Component {
       showProfile: false,
       showDeleteUser: false,
       showPassword: false,
+      uid: "",
       photoURL: "",
       avatar: "",
       avatarURL: "",
@@ -77,18 +78,19 @@ class UserProfile extends Component {
 
   submitHealth() {
     axios.post('http://localhost:3210/api/editProfile', {
-      uid: 2,
+      uid: firebase.auth().currentUser.uid,
       f_name: this.state.f_name,
       l_name: this.state.l_name,
       weight: document.getElementById("editWeight").value,
       height: document.getElementById("editHeight").value,
       age: document.getElementById("editAge").value,
+      gender: document.getElementById("editGender").value
     })
     .then(res => {
       let data = res.data;
       window.location.reload();
     }).catch(err => {
-      alert("Check If you have a data in the user table.");
+      // alert("Check If you have a data in the user table.");
       console.log(err);
     });
 
@@ -166,7 +168,7 @@ class UserProfile extends Component {
       this.setState({ displayName: firebase.auth().currentUser.displayName })
     });
 
-    axios.post('http://localhost:3210/api/getUserData', {uid: 2})
+    axios.post('http://localhost:3210/api/getUserData', {uid: firebase.auth().currentUser.uid})
 		.then(res => {
 			let data = res.data;
       this.setState({
@@ -176,10 +178,12 @@ class UserProfile extends Component {
 				l_name: data.l_name,
 				height: data.height,
 				weight: data.weight,
-				age: data.age
+				age: data.age,
+        gender: data.gender,
+        uid: firebase.auth().currentUser.uid
 			});
     }).catch(err => {
-			alert("Check If you have a data in the user table.");
+			// alert("Check If you have a data in the user table.");
 			console.log(err);
 		});
 
@@ -202,8 +206,8 @@ class UserProfile extends Component {
           </Col>
 
           <Col className="shadow-lg p-3 mb-5 bg-white contentDiv" lg={6}>
-            <h3 class="name"> { this.displayName ? this.displayName : null} </h3>
-            <h6 class="email"> {this.email ? this.email : null} </h6>
+            <h3 class="name"> {firebase.auth().currentUser.displayName} </h3>
+            <h6 class="email"> {firebase.auth().currentUser.email} </h6>
 
             <Row className="displayInfo">
               <Col>

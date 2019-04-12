@@ -4,20 +4,22 @@ const User = require("../models").User;
 module.exports = {
   addStat(req, res){
     var data = {
-      uid: req.body.uid,
       aid: req.body.aid,
+      uid: req.body.uid,
+      name: req.body.name,
+      description: req.body.description,
+      type: req.body.type,
       duration: req.body.duration,
-      weight: req.body.weight,
-      rep: req.body.rep,
       distance: req.body.distance,
-      speed: req.body.speed,
-      point: req.body.point
+      points: req.body.points,
+      updatedAt: req.body.updatedAt
     }
 
     return User_Activity.create(data).then(id => {
       res.status(200).send("Success");
     }).catch(err =>{
       res.status(400).send(err);
+      console.log(err)
     });
   },
   delStat(req, res){

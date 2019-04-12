@@ -1,9 +1,52 @@
 import React, { Component } from "react"
 import firebase from "firebase"
+import axios from 'axios'
 import "./newuser.css"
 import { Container, Row, Col, Form, Button} from "react-bootstrap"
 
 class NewUser extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.submitProfile = this.submitProfile.bind(this);
+    this.saveProfile = this.saveProfile.bind(this);
+
+    this.state = {
+      uid: "",
+      username: "",
+      f_name: "",
+      l_name: "",
+      age: "",
+      weight: "",
+      height: "",
+      gender: "",
+      totalpoints: 0
+    };
+  }
+
+  submitProfile() {
+    var user = firebase.auth().currentUser;
+    user.updateProfile({
+      displayName: document.getElementById("editFirstName").value + " " + document.getElementById("editLastName").value
+    });
+    axios.post('http://localhost:3210/api/createAccount', this.state)
+      .then(res => console.log(res.data));
+
+    this.props.history.push('/');
+  }
+
+  saveProfile() {
+    this.setState({
+        uid: firebase.auth().currentUser.uid,
+        username: document.getElementById("editUsername").value,
+        f_name: document.getElementById("editFirstName").value,
+        l_name: document.getElementById("editLastName").value,
+        age: document.getElementById("editAge").value,
+        weight: document.getElementById("editWeight").value,
+        height: document.getElementById("editHeight").value
+    }, function() {
+      this.submitProfile();
+    });
+  }
 
   render() {
     return (
@@ -16,6 +59,14 @@ class NewUser extends Component {
               </Col>
               <Col lg={6}>
                 <Form>
+                <Form.Group>
+                  <Form.Label>First Name</Form.Label>
+                  <Form.Control id="editFirstName" type="username" placeholder="Enter First Name"/>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Last Name</Form.Label>
+                  <Form.Control id="editLastName" type="username" placeholder="Enter Last Name"/>
+                </Form.Group>
                 <Form.Group>
                   <Form.Label>Username</Form.Label>
                   <Form.Control id="editUsername" type="username" placeholder="Enter a Username"/>
@@ -79,7 +130,7 @@ class NewUser extends Component {
                     </Form.Control>
                   </Form.Group>
                 </Form>
-                <Button type="primary">Submit</Button>
+                <Button type="primary" onClick={this.saveProfile}>Submit</Button>
             </Col>
 
             <Col>

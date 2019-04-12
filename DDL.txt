@@ -1,7 +1,7 @@
 create database fitness;
 \c fitness;
 
-create table a_user(
+create table a_user_new(
 	uid varchar(255) primary key,
 	username varchar(100) not null,
 	f_name varchar(100) not null,
@@ -9,6 +9,13 @@ create table a_user(
 	age integer,
 	weight float,
 	height float,
+	totalPoints float,
+	totalPoints_run float,
+	totalPoints_bike float,
+	totalPoints_swim float,
+	totalPoints_weightlift float,
+	totalPoints_teamsports float,
+	totalPoints_other float,
 	"createdAt" Timestamp
 );
 
@@ -42,11 +49,12 @@ create table a_user_badges(
 create table a_user_activity(
 	aid serial primary key,
 	uid varchar(255) references a_user(UID),
-	duration integer,
-	weight integer,
-	rep integer,
-	distance integer,
-	speed float,
+	name varchar(255),
+	description varchar(255),
+	type varchar(255),
+	duration float,
+	distance float,
+	points float,
 	"updatedAt" Timestamp
 );
 

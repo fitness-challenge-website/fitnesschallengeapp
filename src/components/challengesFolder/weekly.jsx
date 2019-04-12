@@ -1,7 +1,7 @@
 import React, { Component } from "react"
-import firebase from "firebase"
+// import firebase from "firebase"
 // import "./challenges.css";
-import { Button, Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import { Progress } from 'reactstrap';
 
 
