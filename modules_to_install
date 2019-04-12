@@ -13,3 +13,7 @@ sudo npm install react-firebase-file-uploader
 sudo npm install axios
 sudo npm install pg
 sudo npm install nodemon
+sudo npm install react-scripts
+
+cd fitnesschallengeapp_backend
+sudo install nodemon
