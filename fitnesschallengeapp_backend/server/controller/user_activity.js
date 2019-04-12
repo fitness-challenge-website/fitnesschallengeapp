@@ -11,7 +11,8 @@ module.exports = {
       type: req.body.type,
       duration: req.body.duration,
       distance: req.body.distance,
-      points: req.body.points
+      points: req.body.points,
+      updatedAt: req.body.updatedAt
     }
 
     return User_Activity.create(data).then(id => {
