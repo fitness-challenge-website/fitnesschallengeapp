@@ -77,20 +77,27 @@ class Friends extends Component {
     // Used by add follow form, updates state object with new follow username
     handleChange = e => {
         this.setState({
-            newfollow: [e.target.value],
+            newfollow: e.target.value,
         });
     };
 
     render() {
         return (
-            <Container>
+            <Container className='p-3'>
                 {/* Form for following new person */}
-                <Form id='newFollowForm' onSubmit={this.handleSubmit}>
-                    <Form.Row>
+                <Form
+                    id='newFollowForm'
+                    onSubmit={this.handleSubmit}
+                    className='shadow-lg p-3 mb-5 bg-white'
+                    lg={8}
+                >
+                    <Form.Row className='align-items-center'>
                         {/* Entry box */}
                         <Form.Group as={Col} controlId='newFollowName'>
+                            <Form.Label className='float-left'>
+                                New Follow
+                            </Form.Label>
                             <InputGroup>
-                                <Form.Label>New Follow</Form.Label>
                                 <InputGroup.Prepend>
                                     <InputGroup.Text>@</InputGroup.Text>
                                 </InputGroup.Prepend>
@@ -102,14 +109,18 @@ class Friends extends Component {
                                     required
                                 />
                             </InputGroup>
-                            <Form.Text>
+                            <Form.Text className='float-left'>
                                 Enter the username of the person you want to
                                 follow.
                             </Form.Text>
                         </Form.Group>
                         {/* Submission button */}
                         <Col>
-                            <Button variant='outline-primary' type='submit'>
+                            <Button
+                                variant='outline-primary'
+                                type='submit'
+                                className='float-left'
+                            >
                                 Follow
                             </Button>
                         </Col>
@@ -118,7 +129,7 @@ class Friends extends Component {
                 {/* Lists of people we follow and who follow us */}
                 <Row>
                     {/* People We are following */}
-                    <Col>
+                    <Col className='shadow-lg p-3 mb-5 bg-white'>
                         <h5>Following</h5>
                         {this.state.follows.map(follow => (
                             <Row>
@@ -139,7 +150,7 @@ class Friends extends Component {
                         ))}
                     </Col>
                     {/* People following us */}
-                    <Col>
+                    <Col className='shadow-lg p-3 mb-5 bg-white leftBar'>
                         <h5>Followers</h5>
                         {this.state.followers.map(follower => (
                             <Row>

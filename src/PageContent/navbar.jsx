@@ -35,6 +35,7 @@ class NavBar extends Component {
                 <NavDropdown title={firebase.auth().currentUser.displayName} id="basic-nav-dropdown">
                  <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                  <NavDropdown.Item href="/friends">Friends</NavDropdown.Item>
+                 <NavDropdown.Item href="/groups">Groups</NavDropdown.Item>
                  <NavDropdown.Divider />
                  <NavDropdown.Item onClick={() => firebase.auth().signOut()}>Sign Out</NavDropdown.Item>
                </NavDropdown>
