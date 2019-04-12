@@ -96,6 +96,19 @@ module.exports = {
     //   console.log(err);
     // });
   },
+  getPoints(req, res){
+    return User.findOne({
+      where:{
+        uid: req.body.uid
+      },
+        attributes:['totalpoints']
+    }).then(data => {
+      res.status(200).send(data);
+    }).catch(err => {
+      res.status(400).send(err);
+      console.log(err);
+    })
+  },
   getLeaders(req, res){
 
   }
