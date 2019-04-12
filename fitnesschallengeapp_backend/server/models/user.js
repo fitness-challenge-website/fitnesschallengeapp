@@ -7,7 +7,15 @@ module.exports = (sequelize, DataTypes) => {
     l_name: DataTypes.STRING,
     age: DataTypes.INTEGER,
     weight: DataTypes.FLOAT,
-    height: DataTypes.FLOAT
+    height: DataTypes.STRING,
+    gender: DataTypes.STRING,
+    totalpoints: DataTypes.FLOAT
+    // totalPoints_run: DataTypes.FLOAT,
+    // totalPoints_bike: DataTypes.FLOAT,
+    // totalPoints_swim: DataTypes.FLOAT,
+    // totalPoints_weightlift: DataTypes.FLOAT,
+    // totalPoints_teamsports: DataTypes.FLOAT,
+    // totalPoints__other: DataTypes.FLOAT
   }, {
     freezeTableName: true,
     tableName: "a_user",
@@ -23,15 +31,10 @@ module.exports = (sequelize, DataTypes) => {
 
     /*
     User.hasMany(models.User_Badges, {
-
     });
-
     User.hasMany(models.User_Activity, {
-
     });
-
     User.hasMany(models.Friends, {
-
     });
     */
   };
