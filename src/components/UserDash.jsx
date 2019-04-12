@@ -3,30 +3,21 @@ import UserFeed from './UserFeed';
 import Charts from './Charts';
 import { Container, Row } from 'react-bootstrap';
 import axios from 'axios';
+import firebase from 'firebase';
 
 class UserDash extends Component {
-	state = {};
+	state = { user_activities: [] };
 
 	componentDidMount = () => {
 		axios
 			.post('http://localhost:3210/api/getUserStats', {
-				uid: this.state.uid,
+				uid: firebase.auth().currentUser.uid,
 			})
 			.then(res => {
-				let data = res.data;
-				console.log(data);
-				// this.setState({
-				// 	username: data.username,
-				// 	email: data.email,
-				// 	f_name: data.f_name,
-				// 	l_name: data.l_name,
-				// 	height: data.height,
-				// 	weight: data.weight,
-				// 	age: data.age,
-				// });
+				this.setState({ user_activities: res.data });
+				console.log('Data:', res.data);
 			})
 			.catch(err => {
-				alert('Check If you have a data in the user table.');
 				console.log(err);
 			});
 	};
@@ -35,10 +26,10 @@ class UserDash extends Component {
 		return (
 			<Container>
 				<Row>
-					<Charts />
+					<Charts props={this.state.user_activities} />
 				</Row>
 				<Row>
-					<UserFeed />
+					<UserFeed props={this.state.user_activities} />
 				</Row>
 			</Container>
 		);

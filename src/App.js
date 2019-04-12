@@ -57,7 +57,6 @@ class App extends Component {
                   <Route path='/monthlychallenge' component={MonthlyChallenge} />
                   <Route path='yearlychallenge' component={YearlyChallenge} />
                   <Route path='/yearlychallenge' component={YearlyChallenge} />
-                  <Route path='/add' component={AddFriends} />
                   <Route path='/newuser' component={NewUser} />
 				  <Route path='/friends' component={Friends} />
 				  <Route path='/groups' component={Groups} />

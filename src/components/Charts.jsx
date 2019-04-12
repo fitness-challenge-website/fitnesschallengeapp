@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Container, Row, Col, Dropdown } from 'react-bootstrap';
+import axios from 'axios';
 
 class Charts extends Component {
 	constructor(props) {
@@ -50,6 +51,8 @@ class Charts extends Component {
 		for (let i = 0; i < 12; i++) {
 			monthlyLog[i] = Math.floor(Math.random() * 100);
 		}
+
+		console.log(this.props.user_activities);
 
 		//Update state with activity logs and update the chart
 		this.setState(
