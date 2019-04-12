@@ -32,6 +32,7 @@ class Leaderboard extends Component {
   }
 
   userList() {
+    this.state.users.sort((a, b) => b.totalpoints - a.totalpoints);
       return this.state.users.map(function(currentUser, i){
           return <User user={currentUser} key={i} />;
       })
