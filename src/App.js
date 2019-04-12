@@ -44,8 +44,8 @@ class App extends Component {
                   <Route path='/login' component={Login} />
                   <Route path='/userdash' component={UserDash} />
                   <Route path='/profile' component={UserProfile} />
-                  <Route path='/AddActivity' component={AddActivity} />
-                  <Route path='/Leaderboard' component={Leaderboard} />
+                  <Route path='/addactivity' component={AddActivity} />
+                  <Route path='/leaderboard' component={Leaderboard} />
                   <Route path='/challenges' component={Challenges} />
                   <Route path='/weeklychallenge' component={WeeklyChallenge} />
                   <Route path='/monthlychallenge' component={MonthlyChallenge} />
