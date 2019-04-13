@@ -1,16 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import firebase from "firebase";
+
 import NavBar from '../PageContent/navbar'
 import MainDashBoard from '../PageContent/MainDashBoard'
 
-it.skip('NavBar renders without crashing', () => {
+firebase.initializeApp({
+  apiKey: "AIzaSyAYdZGv2f-0gvWOyQ8zkk8HjbsJqmcKwOM",
+  authDomain: "fitness-challenge-app.firebaseapp.com",
+  storageBucket: "fitness-challenge-app.appspot.com"
+})
+
+/////////////////////////////////////////////////////////////////
+//    RENDER TESTS
+/////////////////////////////////////////////////////////////////
+it('NavBar renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(<NavBar />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
 
-it.skip('MainDashBoard renders without crashing', () => {
+it('MainDashBoard renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(<MainDashBoard />, div);
   ReactDOM.unmountComponentAtNode(div);

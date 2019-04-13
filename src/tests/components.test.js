@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import firebase from "firebase";
+
 import ActivityCard from '../components/ActivityCard'
 import AddActivity from '../components/AddActivity'
 import AddFriends from '../components/addfriends'
@@ -16,6 +18,15 @@ import Sample from '../components/Sample'
 import UserDash from '../components/UserDash'
 import UserFeed from '../components/UserFeed'
 
+firebase.initializeApp({
+  apiKey: "AIzaSyAYdZGv2f-0gvWOyQ8zkk8HjbsJqmcKwOM",
+  authDomain: "fitness-challenge-app.firebaseapp.com",
+  storageBucket: "fitness-challenge-app.appspot.com"
+})
+
+/////////////////////////////////////////////////////////////////
+//    RENDER TESTS
+/////////////////////////////////////////////////////////////////
 it('ActivityCard renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(<ActivityCard />, div);
@@ -99,3 +110,7 @@ it('UserFeed renders without crashing', () => {
   ReactDOM.render(<UserFeed />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
+
+/////////////////////////////////////////////////////////////////
+//    RENDER TESTS
+/////////////////////////////////////////////////////////////////

@@ -28,18 +28,17 @@ firebase.initializeApp({
 })
 
 class App extends Component {
+
   state = { isSignedIn: false }
+
   componentDidMount = () => {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ isSignedIn: !!user })
     })
   }
+
   render() {
     return (
-
-
-
-
       <div className="App">
       {this.state.isSignedIn ? (
         <div>
@@ -77,7 +76,6 @@ class App extends Component {
       )}
 
       </div>
-
     )
   }
 }
