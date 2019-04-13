@@ -28,6 +28,8 @@ module.exports = {
       height: req.body.height,
       age: req.body.age,
     }
+
+    console.log(data);
     return User.update(data, {
       where: {
         uid: req.body.uid
