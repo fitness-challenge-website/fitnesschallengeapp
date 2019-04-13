@@ -55,4 +55,5 @@ module.exports = (app) => {
   app.post("/api/leaveGroup", usergrpCtrl.leaveGroup);
   app.post("/api/isBelongTo", usergrpCtrl.isBelongTo);
   app.post("/api/getMyGroups", usergrpCtrl.getMyGroups);
+  app.post("/api/getMembers", usergrpCtrl.getMembers);
 }
