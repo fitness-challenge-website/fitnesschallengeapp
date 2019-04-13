@@ -80,12 +80,24 @@ it('Charts renders without crashing', () => {
 });
 
 it('Friends renders without crashing', () => {
+  firebase.auth = jest.fn().mockReturnValue({
+    currentUser: {
+      uid: 'TEST'
+    }
+  });
+
   const div = document.createElement('div');
   ReactDOM.render(<Friends />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
 
 it('Groups renders without crashing', () => {
+  firebase.auth = jest.fn().mockReturnValue({
+    currentUser: {
+      uid: 'TEST'
+    }
+  });
+
   const div = document.createElement('div');
   ReactDOM.render(<Groups />, div);
   ReactDOM.unmountComponentAtNode(div);
@@ -104,6 +116,12 @@ it('Sample renders without crashing', () => {
 });
 
 it('UserDash renders without crashing', () => {
+  firebase.auth = jest.fn().mockReturnValue({
+    currentUser: {
+      uid: 'TEST'
+    }
+  });
+
   const div = document.createElement('div');
   ReactDOM.render(<UserDash />, div);
   ReactDOM.unmountComponentAtNode(div);
@@ -118,27 +136,25 @@ it('UserFeed renders without crashing', () => {
 /////////////////////////////////////////////////////////////////
 //    AddActivity
 /////////////////////////////////////////////////////////////////
-describe('Add Activity saves activity', () => {
-  it('Running activity', () => {
-    firebase.auth = jest.fn().mockReturnValue({
-      currentUser: {
-        uid: 'TEST'
-      }
-    });
-    document.getElementById = jest.fn().mockReturnValue({
-      name: 'Test',
-      description: 'Test',
-      type: 'Test',
-      duration: 10,
-      distance: 10,
-      updatedAt: '2019-04-11 12:00:00'
-    });
-    window.alert = jest.fn();
-
-    const div = document.createElement('div');
-    const wrapper = shallow(<AddActivity />);
-    const saveActivityButton = wrapper.find('Button');
-
-    saveActivityButton.simulate('click');
+it('Running activity', () => {
+  firebase.auth = jest.fn().mockReturnValue({
+    currentUser: {
+      uid: 'TEST'
+    }
   });
+  document.getElementById = jest.fn().mockReturnValue({
+    name: 'Test',
+    description: 'Test',
+    type: 'Test',
+    duration: 10,
+    distance: 10,
+    updatedAt: '2019-04-11 12:00:00'
+  });
+  window.alert = jest.fn();
+
+  const div = document.createElement('div');
+  const wrapper = shallow(<AddActivity />);
+  const saveActivityButton = wrapper.find('Button');
+
+  saveActivityButton.simulate('click');
 });

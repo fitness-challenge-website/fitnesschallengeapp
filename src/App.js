@@ -17,7 +17,6 @@ import MainDashBoard from './PageContent/MainDashBoard'
 import NewUser from './Authentication/newuser'
 import Friends from './components/Friends'
 import Groups from './components/Groups'
-import Test from './Authentication/temp'
 import Register from './Authentication/register'
 
 

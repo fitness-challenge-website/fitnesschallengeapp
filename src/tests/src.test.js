@@ -7,12 +7,6 @@ import App from '../App';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-// beforeAll(function() {
-//   firebase.auth = jest.fn().mockReturnValue({
-//     onAuthStateChanged: function() { return true; }
-//   });
-// });
-
 /////////////////////////////////////////////////////////////////
 //    RENDER TESTS
 /////////////////////////////////////////////////////////////////
@@ -28,32 +22,11 @@ it('App renders without crashing', () => {
 // This doesn't work
 it('App renders when logged in, without crashing', () => {
   const div = document.createElement('div');
-  // const wrapper = shallow(<App />);
-
   const props = {
-
-      state: {
-        isSignedIn: true
-      }
-
+    state: {
+      isSignedIn: true
+    }
   }
   const wrapper = shallow(<App {...props}/>);
-  //
-  //div_App.simulate(true);
-  // // expect(secondButton.props().disabled).toEqual(true);
   ReactDOM.render(wrapper, div);
-  //ReactDOM.unmountComponentAtNode(div);
 });
-
-// it('App renders when logged in, without crashing2', () => {
-//   const div = document.createElement('div');
-//   const props = {
-//     state: {
-//       isSignedIn: true
-//     }
-//   }
-//
-//   const component = ReactDOM.render(<App {...props} />, div)
-//   ReactDOM.unmountComponentAtNode(div);
-//
-// });

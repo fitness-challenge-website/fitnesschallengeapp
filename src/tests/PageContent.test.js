@@ -12,24 +12,31 @@ firebase.initializeApp({
   storageBucket: "fitness-challenge-app.appspot.com"
 })
 
-beforeAll(function() {
-  firebase.auth = jest.fn().mockReturnValue({
-    currentUser: {
-      uid: 'TEST'
-    }
-  });
-});
-
 /////////////////////////////////////////////////////////////////
 //    RENDER TESTS
 /////////////////////////////////////////////////////////////////
+
 it('NavBar renders without crashing', () => {
+  firebase.auth = jest.fn().mockReturnValue({
+    currentUser: {
+      uid: 'TEST'
+    },
+    onAuthStateChanged: function() { return true; }
+  });
+
   const div = document.createElement('div');
   ReactDOM.render(<NavBar />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
 
 it('MainDashBoard renders without crashing', () => {
+  firebase.auth = jest.fn().mockReturnValue({
+    currentUser: {
+      displayName: 'TEST'
+    },
+    onAuthStateChanged: function() { return true; }
+  });
+
   const div = document.createElement('div');
   ReactDOM.render(<MainDashBoard />, div);
   ReactDOM.unmountComponentAtNode(div);
