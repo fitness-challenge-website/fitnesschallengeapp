@@ -46,56 +46,117 @@ class AddActivity extends Component {
   }
 
   calculatePoints() {
-    //console.log(this.state);
-    let points = 0;
-
-    if(this.state.name === '') {
-      alert('No Activity Name entered!')
-      return
-    }
-    else if(this.state.description === '') {
-      alert('No Activity Description entered!')
-      return
-    }
-    else if(this.state.duration <= 0) {
-      alert('No Activity Duration entered!')
-      return
-    }
-    else if( ( this.state.type === 'Running' ||
-                this.state.type === 'Biking' ||
-                this.state.type === 'Swimming' ) &&
-                this.state.distance <= 0) {
-      alert('No Activity Distance entered!')
-      return
-    }
-    else if(this.state.type === 'Running') {
-      points = this.state.duration * 1;
-      alert('Points Earned Running: ' + points)
-    }
-    else if(this.state.type === 'Biking') {
-      points = this.state.duration * 0.5;
-      alert('Points Earned Biking: ' + points)
-    }
-    else if(this.state.type === 'Swimming') {
-      points = this.state.duration * 2.5;
-      alert('Points Earned Swimming: ' + points)
-    }
-    else if(this.state.type === 'Weight Lifting') {
-      points = this.state.duration * 1;
-      alert('Points Earned Weight Lifting: ' + points)
-    }
-    else if(this.state.type === 'Team Sports') {
-      points = this.state.duration * 0.75;
-      alert('Points Earned in Team Sports: ' + points)
-    }
-    else if(this.state.type === 'Other Exercise') {
-      points = this.state.duration * 0.75;
-      alert('Points Earned in Other Exercise: ' + points)
-    }
-    else {
-      alert('Error!!')
-      return
-    }
+  //console.log(this.state);
+  let points = 0;
+  
+  if(this.state.name === '') {
+    alert('No Activity Name entered!')
+    return
+  }
+  else if(this.state.description === '') {
+    alert('No Activity Description entered!')
+    return
+  }
+  else if(this.state.duration <= 0) {
+    alert('No Activity Duration entered!')
+    return
+  }
+  else if( ( this.state.type === 'Running' ||
+              this.state.type === 'Biking' ||
+              this.state.type === 'Swimming' ) &&
+              this.state.distance <= 0) {
+    alert('No Activity Distance entered!')
+    return
+  }
+  else if(this.state.type === 'Running') {
+    points = this.state.duration * 1;
+    alert('Points Earned Running: ' + points)
+  }
+  else if(this.state.type === 'Biking' && this.state.weight >120 && this.state.weight<140) {
+    points = this.state.duration * 0.5;
+    alert('Points Earned Biking: ' + points)
+  }
+  else if(this.state.type === 'Biking' && this.state.weight >140 && this.state.weight<160) {
+    points = this.state.duration * 0.8;
+    alert('Points Earned Biking: ' + points)
+  }
+  else if(this.state.type === 'Biking' && this.state.weight >160 && this.state.weight<180) {
+    points = this.state.duration * 1.1;
+    alert('Points Earned Biking: ' + points)
+  }
+  else if(this.state.type === 'Biking' && this.state.weight >180 && this.state.weight<200) {
+    points = this.state.duration * 1.3;
+    alert('Points Earned Biking: ' + points)
+  }
+  else if(this.state.type === 'Swimming'&& this.state.weight >120 && this.state.weight<140) {
+    points = this.state.duration * 2.5;
+    alert('Points Earned Swimming: ' + points)
+  }
+  else if(this.state.type === 'Swimming'&& this.state.weight >140 && this.state.weight<160) {
+    points = this.state.duration * 2.8;
+    totalPoints = this.state.points + points;
+    alert('Points Earned Swimming: ' + points)
+  }
+  else if(this.state.type === 'Swimming'&& this.state.weight >160 && this.state.weight<180) {
+    points = this.state.duration * 3.1;
+    alert('Points Earned Swimming: ' + points)
+  }
+  else if(this.state.type === 'Swimming'&& this.state.weight >180 && this.state.weight<200) {
+    points = this.state.duration * 3.4;
+    alert('Points Earned Swimming: ' + points)
+  }
+  else if(this.state.type === 'Weight Lifting'&&this.state.weight >120 && this.state.weight<140) {
+    points = this.state.duration * 1;
+    alert('Points Earned Weight Lifting: ' + points)
+  }
+  else if(this.state.type === 'Weight Lifting'&&this.state.weight >140 && this.state.weight<160) {
+    points = this.state.duration * 1.3;
+    alert('Points Earned Weight Lifting: ' + points)
+  }
+  else if(this.state.type === 'Weight Lifting'&&this.state.weight >160 && this.state.weight<180) {
+    points = this.state.duration * 1.6;
+    alert('Points Earned Weight Lifting: ' + points)
+  }
+  else if(this.state.type === 'Weight Lifting'&&this.state.weight >180 && this.state.weight<200) {
+    points = this.state.duration * 1.9;
+    alert('Points Earned Weight Lifting: ' + points)
+  }
+  else if(this.state.type === 'Team Sports'&&this.state.weight >120 && this.state.weight<140) {
+    points = this.state.duration * 0.7;
+    alert('Points Earned in Team Sports: ' + points)
+  }
+  else if(this.state.type === 'Team Sports'&&this.state.weight >140 && this.state.weight<160) {
+    points = this.state.duration * 1;
+    alert('Points Earned in Team Sports: ' + points)
+  }
+  else if(this.state.type === 'Team Sports'&&this.state.weight >160 && this.state.weight<180) {
+    points = this.state.duration * 1.3;
+    alert('Points Earned in Team Sports: ' + points)
+  }
+  else if(this.state.type === 'Team Sports'&&this.state.weight >180 && this.state.weight<200) {
+    points = this.state.duration * 1.6;
+    alert('Points Earned in Team Sports: ' + points)
+  }
+  else if(this.state.type === 'Other Exercise'&&this.state.weight >120 && this.state.weight<140) {
+    points = this.state.duration * 0.8;
+    alert('Points Earned in Other Exercise: ' + points)
+  }
+  else if(this.state.type === 'Other Exercise'&&this.state.weight >140 && this.state.weight<160) {
+    points = this.state.duration * 1.1;
+    alert('Points Earned in Other Exercise: ' + points)
+  }
+  else if(this.state.type === 'Other Exercise'&&this.state.weight >160 && this.state.weight<180) {
+    points = this.state.duration * 1.4;
+    alert('Points Earned in Other Exercise: ' + points)
+  }
+  else if(this.state.type === 'Other Exercise'&&this.state.weight >180 && this.state.weight<200) {
+    points = this.state.duration * 1.7;
+    alert('Points Earned in Other Exercise: ' + points)
+  }
+  else {
+    alert('Error!!')
+    return
+  }
 
     this.setState({
       points: points
