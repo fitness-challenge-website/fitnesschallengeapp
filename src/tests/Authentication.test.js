@@ -126,6 +126,4 @@ it('User profile button Edit Health', () => {
   const editHealthButton = wrapper.find('Button').at(1);
 
   editHealthButton.simulate('click');
-  // ReactDOM.render(wrapper, div);
-  // ReactDOM.unmountComponentAtNode(div);
 });

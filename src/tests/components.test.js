@@ -145,7 +145,7 @@ it('Running activity', () => {
   document.getElementById = jest.fn().mockReturnValue({
     name: 'Test',
     description: 'Test',
-    type: 'Test',
+    type: 'Running',
     duration: 10,
     distance: 10,
     updatedAt: '2019-04-11 12:00:00'
@@ -157,4 +157,5 @@ it('Running activity', () => {
   const saveActivityButton = wrapper.find('Button');
 
   saveActivityButton.simulate('click');
+  expect(wrapper.state.points).toEqual(10);
 });
