@@ -8,17 +8,18 @@ class ActivityCard extends Component {
 			<Container>
 				<Row className='container'>
 					<Col className='ActivityName'>
-						<p>{props.name}</p>
+						<p>{props.name}:</p>
 					</Col>
+					{props.description ? <Col>{props.description}</Col> : null}
 					{props.duration ? (
 						<Col>Duration: {props.duration}</Col>
 					) : null}
-					{props.weight ? <Col>Weight: {props.weight}</Col> : null}
-					{props.rep ? <Col>Reps: {props.rep}</Col> : null}
 					{props.distance ? (
 						<Col>Distance: {props.distance}</Col>
 					) : null}
-					{props.speed ? <Col>Speed: {props.speed}</Col> : null}
+					{props.points ? (
+						<Col>Points Earned: {props.points}</Col>
+					) : null}
 				</Row>
 			</Container>
 		);
