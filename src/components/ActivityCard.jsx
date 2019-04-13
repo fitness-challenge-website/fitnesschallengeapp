@@ -4,7 +4,6 @@ import { Row, Container, Col } from 'react-bootstrap';
 class ActivityCard extends Component {
 	render() {
 		const props = this.props;
-		console.log(props);
 		return (
 			<Container>
 				<Row className='container'>

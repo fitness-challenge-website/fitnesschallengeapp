@@ -26,7 +26,6 @@ class UserFeed extends Component {
 				<h5>Activity Feed</h5>
 				{/* Get recent activities from database and display cards of each of them */}
 				{this.fetchRecentActivities().map(activity => {
-					console.log(activity);
 					return (
 						<ActivityCard
 							key={activity.name}
