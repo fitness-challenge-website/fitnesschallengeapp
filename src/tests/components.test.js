@@ -118,8 +118,8 @@ it('UserFeed renders without crashing', () => {
 /////////////////////////////////////////////////////////////////
 //    AddActivity
 /////////////////////////////////////////////////////////////////
-describe('Add Activity saves', () => {
-  beforeAll(function() {
+describe('Add Activity saves activity', () => {
+  it('Running activity', () => {
     firebase.auth = jest.fn().mockReturnValue({
       currentUser: {
         uid: 'TEST'
@@ -128,14 +128,13 @@ describe('Add Activity saves', () => {
     document.getElementById = jest.fn().mockReturnValue({
       name: 'Test',
       description: 'Test',
-      type: 'Running',
+      type: 'Test',
       duration: 10,
       distance: 10,
-      updatedAt: '2019-04-11 21:21:57'
+      updatedAt: '2019-04-11 12:00:00'
     });
-  });
+    window.alert = jest.fn();
 
-  it('AddActivity saves activity', () => {
     const div = document.createElement('div');
     const wrapper = shallow(<AddActivity />);
     const saveActivityButton = wrapper.find('Button');
