@@ -34,6 +34,7 @@ Development is done in individual branches. When you are ready to add a feature,
 
 Branches will be made for each iteration to be turned in.
 
+<<<<<<< HEAD
 ---
 
 ## React README Initialization
@@ -105,3 +106,13 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+=======
+## Testing
+Manual testing of user stories will take place upon completion of the story. Automated testing will take place once the manual testing is complete. Test cases have been set up to ensure proper rendering of all pages without errors. Additional test cases will be added when developer imports or creates new pages on the website.
+### Instructions for Running Tests
+To Run Test Cases:
+- `$npm run test`
+
+Code Coverage Can be Ran by:
+- `$npm run test:coverage`
+>>>>>>> 6f27e80ee3d631c21180b1fccdf1cc589f5d1897
