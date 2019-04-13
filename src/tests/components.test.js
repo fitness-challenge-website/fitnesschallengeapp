@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Enzyme, { shallow, mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
 import firebase from "firebase";
 
@@ -17,6 +19,8 @@ import Leaderboard from '../components/Leaderboard'
 import Sample from '../components/Sample'
 import UserDash from '../components/UserDash'
 import UserFeed from '../components/UserFeed'
+
+Enzyme.configure({ adapter: new Adapter() });
 
 firebase.initializeApp({
   apiKey: "AIzaSyAYdZGv2f-0gvWOyQ8zkk8HjbsJqmcKwOM",
@@ -112,5 +116,30 @@ it('UserFeed renders without crashing', () => {
 });
 
 /////////////////////////////////////////////////////////////////
-//    RENDER TESTS
+//    AddActivity
 /////////////////////////////////////////////////////////////////
+describe('Add Activity saves', () => {
+  beforeAll(function() {
+    firebase.auth = jest.fn().mockReturnValue({
+      currentUser: {
+        uid: 'TEST'
+      }
+    });
+    document.getElementById = jest.fn().mockReturnValue({
+      name: 'Test',
+      description: 'Test',
+      type: 'Running',
+      duration: 10,
+      distance: 10,
+      updatedAt: '2019-04-11 21:21:57'
+    });
+  });
+
+  it('AddActivity saves activity', () => {
+    const div = document.createElement('div');
+    const wrapper = shallow(<AddActivity />);
+    const saveActivityButton = wrapper.find('Button');
+
+    saveActivityButton.simulate('click');
+  });
+});

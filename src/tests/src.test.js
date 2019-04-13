@@ -7,6 +7,11 @@ import App from '../App';
 
 Enzyme.configure({ adapter: new Adapter() });
 
+// beforeAll(function() {
+//   firebase.auth = jest.fn().mockReturnValue({
+//     onAuthStateChanged: function() { return true; }
+//   });
+// });
 
 /////////////////////////////////////////////////////////////////
 //    RENDER TESTS

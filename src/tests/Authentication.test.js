@@ -15,6 +15,14 @@ firebase.initializeApp({
   storageBucket: "fitness-challenge-app.appspot.com"
 })
 
+// beforeAll(function() {
+//   firebase.auth = jest.fn().mockReturnValue({
+//     currentUser: {
+//       uid: 'TEST'
+//     }
+//   });
+// });
+
 /////////////////////////////////////////////////////////////////
 //    RENDER TESTS
 /////////////////////////////////////////////////////////////////
