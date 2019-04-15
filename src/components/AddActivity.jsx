@@ -105,7 +105,6 @@ class AddActivity extends Component {
   }
   else if(this.state.type === 'Swimming'&& this.state.weight >140 && this.state.weight<160) {
     points = this.state.duration * 2.8;
-    totalPoints = this.state.points + points;
     alert('Points Earned Swimming: ' + points)
   }
   else if(this.state.type === 'Swimming'&& this.state.weight >160 && this.state.weight<180) {
