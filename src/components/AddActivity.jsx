@@ -21,9 +21,20 @@ class AddActivity extends Component {
       duration: '',
       distance: '',
       points: '',
-      updatedAt: ''
+      updatedAt: '',
+      weight: ''
     };
   }
+
+  componentDidMount() {
+    axios.get('http://localhost:3210/api/getUserData?uid=firebase.auth().currentUser.uid')
+        .then(response => {
+            this.setState({ weight: response.data.weight });
+        })
+        .catch(function (error){
+            console.log(error);
+        })
+}
 
   submitActivity() {
     let curPoints;
@@ -48,7 +59,7 @@ class AddActivity extends Component {
   calculatePoints() {
   //console.log(this.state);
   let points = 0;
-  
+
   if(this.state.name === '') {
     alert('No Activity Name entered!')
     return
