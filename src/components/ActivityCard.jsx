@@ -1,29 +1,27 @@
 import React, { Component } from 'react';
+import { Row, Container, Col } from 'react-bootstrap';
+
 class ActivityCard extends Component {
-	state = {
-		name: '',
-		parameters: [],
-	};
 	render() {
+		const props = this.props;
 		return (
-			<div className='container row'>
-				<div className='ActivityName'>
-					<p>{this.props.activityName}</p>
-				</div>
-				<div className='ActivityParams'>
-					{this.props.parameters.map(param => {
-						return (
-							<span
-								className='m-2'
-								id={param.parameterName}
-								key={param.parameterName}
-							>
-								{param.value}
-							</span>
-						);
-					})}
-				</div>
-			</div>
+			<Container>
+				<Row className='container'>
+					<Col className='ActivityName'>
+						<p>{props.name}:</p>
+					</Col>
+					{props.description ? <Col>{props.description}</Col> : null}
+					{props.duration ? (
+						<Col>Duration: {props.duration}</Col>
+					) : null}
+					{props.distance ? (
+						<Col>Distance: {props.distance}</Col>
+					) : null}
+					{props.points ? (
+						<Col>Points Earned: {props.points}</Col>
+					) : null}
+				</Row>
+			</Container>
 		);
 	}
 }
