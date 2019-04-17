@@ -5,18 +5,18 @@ This repository is the home of the fitness challenge app code. The app is a webs
 Clone the repository to local machine and navigate to the directory in terminal.  
 Run the following commands:
 - `$npm install` (sudo may be necessary)
-- `$./modules_to_install` to install the needed dependencies via script
 - `$npm start` (to run the server)
 	- The server should start in terminal and automatically open the localhost page.
 	- If localhost does not automatically load, navigate to localhost:3000 in your browser
 
 ## Instructions for Running Backend:
+- The backend must also be ran to interact with the database.
 - Navigate to ./fitnesschallengeapp_backend folder first
 - Run `$npm run start:dev`
 
 ## Instructions for Database Setup:
 The database for our web application has been setup and hosted in an AWS EC2 instance.  
-This is up and running currently.  
+This is up and running currently. The following is for reference of configuration.
 
 The host address is: `ec2-18-219-86-139.us-east-2.compute.amazonaws.com`  
 Database: `fitness`  
