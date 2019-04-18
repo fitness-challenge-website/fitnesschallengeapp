@@ -17,7 +17,6 @@ import MainDashBoard from './PageContent/MainDashBoard'
 import NewUser from './Authentication/newuser'
 import Friends from './components/Friends'
 import Groups from './components/Groups'
-import Test from './Authentication/test'
 import Register from './Authentication/register'
 
 
@@ -28,18 +27,17 @@ firebase.initializeApp({
 })
 
 class App extends Component {
+
   state = { isSignedIn: false }
+
   componentDidMount = () => {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ isSignedIn: !!user })
     })
   }
+
   render() {
     return (
-
-
-
-
       <div className="App">
       {this.state.isSignedIn ? (
         <div>
@@ -77,7 +75,6 @@ class App extends Component {
       )}
 
       </div>
-
     )
   }
 }
