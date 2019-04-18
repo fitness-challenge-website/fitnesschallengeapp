@@ -34,7 +34,7 @@ class AddActivity extends Component {
         weight: data.weight
       });
     }).catch(err => {
-      // alert("Check If you have a data in the user table.");
+      
       console.log(err);
     });
 
