@@ -18,8 +18,9 @@ class Leaderboard extends Component {
 
   constructor(props, context) {
     super(props, context);
-    this.state = {users: []};
-  }
+    this.state = {users: []
+
+  }};
 
   componentDidMount() {
       axios.post('http://localhost:3210/api/listUsers')
@@ -37,6 +38,7 @@ class Leaderboard extends Component {
           return <User user={currentUser} key={i} />;
       })
   }
+
 
   render() {
 		return (

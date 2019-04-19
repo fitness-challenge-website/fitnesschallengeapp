@@ -85,15 +85,19 @@ class AddActivity extends Component {
       alert('No Activity Distance entered!')
       return
     }
-    else if(this.state.type === 'Running' && this.state.weight >120 && this.state.weight<140) {
+    else if(this.state.type === 'Running' && this.state.weight <=120) {
+      points = this.state.duration * 0.7;
+      alert('Points Earned Running: ' + points)
+    }
+    else if(this.state.type === 'Running' && this.state.weight >120 && this.state.weight<=140) {
       points = this.state.duration * 1;
       alert('Points Earned Running: ' + points)
     }
-    else if(this.state.type === 'Running' && this.state.weight >140 && this.state.weight<160) {
+    else if(this.state.type === 'Running' && this.state.weight >140 && this.state.weight<=160) {
       points = this.state.duration * 1.3;
       alert('Points Earned Running: ' + points)
     }
-    else if(this.state.type === 'Running' && this.state.weight >160 && this.state.weight<180) {
+    else if(this.state.type === 'Running' && this.state.weight >160 && this.state.weight<=180) {
       points = this.state.duration * 1.6;
       alert('Points Earned Running: ' + points)
     }
@@ -101,15 +105,23 @@ class AddActivity extends Component {
       points = this.state.duration * 1.9;
       alert('Points Earned Running: ' + points)
     }
-    else if(this.state.type === 'Biking' && this.state.weight >120 && this.state.weight<140) {
+    else if(this.state.type === 'Running' && this.state.weight >=200) {
+      points = this.state.duration * 2.2;
+      alert('Points Earned Running: ' + points)
+    }
+    else if(this.state.type === 'Biking' && this.state.weight <=120) {
+      points = this.state.duration * 0.2;
+      alert('Points Earned Biking: ' + points)
+    }
+    else if(this.state.type === 'Biking' && this.state.weight >120 && this.state.weight<=140) {
       points = this.state.duration * 0.5;
       alert('Points Earned Biking: ' + points)
     }
-    else if(this.state.type === 'Biking' && this.state.weight >140 && this.state.weight<160) {
+    else if(this.state.type === 'Biking' && this.state.weight >140 && this.state.weight<=160) {
       points = this.state.duration * 0.8;
       alert('Points Earned Biking: ' + points)
     }
-    else if(this.state.type === 'Biking' && this.state.weight >160 && this.state.weight<180) {
+    else if(this.state.type === 'Biking' && this.state.weight >160 && this.state.weight<=180) {
       points = this.state.duration * 1.1;
       alert('Points Earned Biking: ' + points)
     }
@@ -117,15 +129,23 @@ class AddActivity extends Component {
       points = this.state.duration * 1.3;
       alert('Points Earned Biking: ' + points)
     }
-    else if(this.state.type === 'Swimming'&& this.state.weight >120 && this.state.weight<140) {
+    else if(this.state.type === 'Biking' && this.state.weight >=200) {
+      points = this.state.duration * 1.6;
+      alert('Points Earned Biking: ' + points)
+    }
+    else if(this.state.type === 'Swimming'&& this.state.weight <=120 ) {
+      points = this.state.duration * 2.2;
+      alert('Points Earned Swimming: ' + points)
+    }
+    else if(this.state.type === 'Swimming'&& this.state.weight >120 && this.state.weight<=140) {
       points = this.state.duration * 2.5;
       alert('Points Earned Swimming: ' + points)
     }
-    else if(this.state.type === 'Swimming'&& this.state.weight >140 && this.state.weight<160) {
+    else if(this.state.type === 'Swimming'&& this.state.weight >140 && this.state.weight<=160) {
       points = this.state.duration * 2.8;
       alert('Points Earned Swimming: ' + points)
     }
-    else if(this.state.type === 'Swimming'&& this.state.weight >160 && this.state.weight<180) {
+    else if(this.state.type === 'Swimming'&& this.state.weight >160 && this.state.weight<=180) {
       points = this.state.duration * 3.1;
       alert('Points Earned Swimming: ' + points)
     }
@@ -133,15 +153,23 @@ class AddActivity extends Component {
       points = this.state.duration * 3.4;
       alert('Points Earned Swimming: ' + points)
     }
-    else if(this.state.type === 'Weight Lifting'&&this.state.weight >120 && this.state.weight<140) {
+    else if(this.state.type === 'Swimming'&& this.state.weight >=200 ) {
+      points = this.state.duration * 3.7;
+      alert('Points Earned Swimming: ' + points)
+    }
+    else if(this.state.type === 'Weight Lifting'&&this.state.weight <=120 ) {
+      points = this.state.duration * 0.7;
+      alert('Points Earned Weight Lifting: ' + points)
+    }
+    else if(this.state.type === 'Weight Lifting'&&this.state.weight >120 && this.state.weight<=140) {
       points = this.state.duration * 1;
       alert('Points Earned Weight Lifting: ' + points)
     }
-    else if(this.state.type === 'Weight Lifting'&&this.state.weight >140 && this.state.weight<160) {
+    else if(this.state.type === 'Weight Lifting'&&this.state.weight >140 && this.state.weight<=160) {
       points = this.state.duration * 1.3;
       alert('Points Earned Weight Lifting: ' + points)
     }
-    else if(this.state.type === 'Weight Lifting'&&this.state.weight >160 && this.state.weight<180) {
+    else if(this.state.type === 'Weight Lifting'&&this.state.weight >160 && this.state.weight<=180) {
       points = this.state.duration * 1.6;
       alert('Points Earned Weight Lifting: ' + points)
     }
@@ -149,15 +177,23 @@ class AddActivity extends Component {
       points = this.state.duration * 1.9;
       alert('Points Earned Weight Lifting: ' + points)
     }
-    else if(this.state.type === 'Team Sports'&&this.state.weight >120 && this.state.weight<140) {
+    else if(this.state.type === 'Weight Lifting'&&this.state.weight >=200 ) {
+      points = this.state.duration * 2.2;
+      alert('Points Earned Weight Lifting: ' + points)
+    }
+    else if(this.state.type === 'Team Sports'&&this.state.weight <=120 ) {
+      points = this.state.duration * 0.4;
+      alert('Points Earned in Team Sports: ' + points)
+    }
+    else if(this.state.type === 'Team Sports'&&this.state.weight >120 && this.state.weight<=140) {
       points = this.state.duration * 0.7;
       alert('Points Earned in Team Sports: ' + points)
     }
-    else if(this.state.type === 'Team Sports'&&this.state.weight >140 && this.state.weight<160) {
+    else if(this.state.type === 'Team Sports'&&this.state.weight >140 && this.state.weight<=160) {
       points = this.state.duration * 1;
       alert('Points Earned in Team Sports: ' + points)
     }
-    else if(this.state.type === 'Team Sports'&&this.state.weight >160 && this.state.weight<180) {
+    else if(this.state.type === 'Team Sports'&&this.state.weight >160 && this.state.weight<=180) {
       points = this.state.duration * 1.3;
       alert('Points Earned in Team Sports: ' + points)
     }
@@ -165,20 +201,32 @@ class AddActivity extends Component {
       points = this.state.duration * 1.6;
       alert('Points Earned in Team Sports: ' + points)
     }
-    else if(this.state.type === 'Other Exercise'&&this.state.weight >120 && this.state.weight<140) {
+    else if(this.state.type === 'Team Sports'&&this.state.weight >=200 ) {
+      points = this.state.duration * 1.9;
+      alert('Points Earned in Team Sports: ' + points)
+    }
+    else if(this.state.type === 'Other Exercise'&&this.state.weight <=120 ) {
+      points = this.state.duration * 0.5;
+      alert('Points Earned in Other Exercise: ' + points)
+    }
+    else if(this.state.type === 'Other Exercise'&&this.state.weight >120 && this.state.weight<=140) {
       points = this.state.duration * 0.8;
       alert('Points Earned in Other Exercise: ' + points)
     }
-    else if(this.state.type === 'Other Exercise'&&this.state.weight >140 && this.state.weight<160) {
+    else if(this.state.type === 'Other Exercise'&&this.state.weight >140 && this.state.weight<=160) {
       points = this.state.duration * 1.1;
       alert('Points Earned in Other Exercise: ' + points)
     }
-    else if(this.state.type === 'Other Exercise'&&this.state.weight >160 && this.state.weight<180) {
+    else if(this.state.type === 'Other Exercise'&&this.state.weight >160 && this.state.weight<=180) {
       points = this.state.duration * 1.4;
       alert('Points Earned in Other Exercise: ' + points)
     }
     else if(this.state.type === 'Other Exercise'&&this.state.weight >180 && this.state.weight<200) {
       points = this.state.duration * 1.7;
+      alert('Points Earned in Other Exercise: ' + points)
+    }
+    else if(this.state.type === 'Other Exercise'&&this.state.weight >=200 ) {
+      points = this.state.duration * 2;
       alert('Points Earned in Other Exercise: ' + points)
     }
     else {
