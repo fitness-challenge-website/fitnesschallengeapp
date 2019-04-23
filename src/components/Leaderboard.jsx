@@ -44,7 +44,7 @@ this.onSortPoints=this.onSortPoints.bind(this);
   userList() {
     this.state.users.sort((a, b) => b.totalpoints - a.totalpoints);
       return this.state.users.map(function(currentUser, i){
-          return <User user={currentUser} key={i} />;
+          return <User.totalpoints user={currentUser} key={i} />;
       })
   }
 
