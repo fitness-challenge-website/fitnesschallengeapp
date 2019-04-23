@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Form, Row, Col, InputGroup, Button } from 'react-bootstrap';
 import firebase from 'firebase';
 import axios from 'axios';
+import "./Groups.css";
 
 class Groups extends Component {
 	state = {
@@ -78,125 +79,114 @@ class Groups extends Component {
 
 	render() {
 		return (
-			<Container className='p-3'>
-				{/* Form for joining new group */}
-				<Form
-					id='joinGroupForm'
-					onSubmit={this.handleJoin}
-					className='shadow-lg p-3 mb-5 bg-white'
-					lg={8}
-				>
-					<Form.Row className='align-items-center'>
-						{/* Entry box */}
-						<Form.Group as={Col} controlId='newFollowName'>
-							<Form.Label className='float-left'>
-								Join Group
-							</Form.Label>
-							<InputGroup>
-								<InputGroup.Prepend>
-									<InputGroup.Text>@</InputGroup.Text>
-								</InputGroup.Prepend>
-								<Form.Control
-									id='group_join'
-									type='text'
-									aria-describedby='inputGroupPrepend'
-									placeholder='Group Name'
-									onChange={this.handleChange}
-									required
-								/>
-							</InputGroup>
-							<Form.Text className='float-left'>
-								Enter the name of the group you want to join.
-							</Form.Text>
-						</Form.Group>
-						{/* Submission button */}
-						<Col>
-							<Button
-								variant='outline-primary'
-								type='submit'
-								className='float-left'
-							>
+			<Container className="mainContainer">
+				<Form id='joinGroupForm' onSubmit={this.handleJoin}>
+					<Row className="shadow-lg p-3 mb-5 bg-white">
+						<Col lg={10}>
+							<Form.Row className='align-items-center'>
+					      {/* Entry box */}
+					      <Form.Group as={Col} controlId='newFollowName'>
+					        <Form.Label className='float-left'>
+					          Join Group
+					        </Form.Label>
+					        <InputGroup>
+					          <InputGroup.Prepend>
+					            <InputGroup.Text>@</InputGroup.Text>
+					          </InputGroup.Prepend>
+					          <Form.Control
+					            id='group_join'
+					            type='text'
+					            aria-describedby='inputGroupPrepend'
+					            placeholder='Group Name'
+					            onChange={this.handleChange}
+					            required
+					          />
+					        </InputGroup>
+					        <Form.Text className='float-left'>
+					          Enter the name of the group you want to join.
+					        </Form.Text>
+					      </Form.Group>
+					      {/* Submission button */}
+					    </Form.Row>
+						</Col>
+						<Col lg={2} className="joinGroup">
+							<Button variant='outline-primary' type='submit' className='float-left'>
 								Join
 							</Button>
 						</Col>
-					</Form.Row>
+					</Row>
 				</Form>
-				{/* List of groups we are in */}
-				<Row>
-					<Col className='shadow-lg p-3 mb-5 bg-white'>
-						<h5>Joined Groups</h5>
-						{this.state.groups.map(group => (
-							<Row>
-								{/* Button to select group and list members */}
-								<Col>
-									<Button
-										id={group}
-										onClick={this.handleSelect}
-									>
-										{group.name}
-									</Button>
-								</Col>
-								{/* Button to leave group */}
-								<Col>
-									<Button
-										onClick={this.handleLeave}
-										id={group.gid}
-									>
-										Leave
-									</Button>
-								</Col>
-							</Row>
+
+				<Row className="shadow-lg p-3 mb-5 bg-white">
+					<Col>
+					<h5>Joined Groups</h5>
+					{this.state.groups.map(group => (
+						<Row>
+							{/* Button to select group and list members */}
+							<Col>
+								<Button
+									id={group}
+									onClick={this.handleSelect}
+								>
+									{group.name}
+								</Button>
+							</Col>
+							{/* Button to leave group */}
+							<Col>
+								<Button
+									onClick={this.handleLeave}
+									id={group.gid}
+								>
+									Leave
+								</Button>
+							</Col>
+						</Row>
+					))}
+				</Col>
+				{/* List members of selected group */}
+				{this.state.selected_group ? (
+					<Col>
+						{this.state.selected_group.members.map(member => (
+							<p>{member}</p>
 						))}
 					</Col>
-					{/* List members of selected group */}
-					{this.state.selected_group ? (
-						<Col className='shadow-lg p-3 mb-5 bg-white'>
-							{this.state.selected_group.members.map(member => (
-								<p>{member}</p>
-							))}
-						</Col>
-					) : null}
+				) : null}
 				</Row>
-				<Form
-					id='createGroupForm'
-					onSubmit={this.handleCreate}
-					className='shadow-lg p-3 mb-5 bg-white'
-					lg={8}
-				>
-					<Form.Row className='align-items-center'>
-						{/* Entry box */}
-						<Form.Group as={Col} controlId='newFollowName'>
-							<Form.Label className='float-left'>
-								Create Group
-							</Form.Label>
-							<InputGroup>
-								<InputGroup.Prepend>
-									<InputGroup.Text>@</InputGroup.Text>
-								</InputGroup.Prepend>
-								<Form.Control
-									id='group_create'
-									type='text'
-									aria-describedby='inputGroupPrepend'
-									placeholder='Group Name'
-									onChange={this.handleChange}
-									required
-								/>
-							</InputGroup>
-							<Form.Text className='float-left'>
-								Enter the name of the group you want to create.
-							</Form.Text>
-						</Form.Group>
-						{/* Submission button */}
-						<Col>
-							<Button
-								variant='outline-success'
-								type='submit'
-								className='float-left'
-							>
+
+				<Form id='createGroupForm' onSubmit={this.handleCreate}>
+					<Row className="shadow-lg p-3 mb-5 bg-white">
+						<Col lg={10}>
+							<Form.Row className='align-items-center'>
+					      {/* Entry box */}
+					      <Form.Group as={Col} controlId='newFollowName'>
+					        <Form.Label className='float-left'>
+					          Create Group
+					        </Form.Label>
+					        <InputGroup>
+					          <InputGroup.Prepend>
+					            <InputGroup.Text>@</InputGroup.Text>
+					          </InputGroup.Prepend>
+					          <Form.Control
+					            id='group_create'
+					            type='text'
+					            aria-describedby='inputGroupPrepend'
+					            placeholder='Group Name'
+					            onChange={this.handleChange}
+					            required
+					          />
+					        </InputGroup>
+					        <Form.Text className='float-left'>
+					          Enter the name of the group you want to create.
+					        </Form.Text>
+					      </Form.Group>
+					    </Form.Row>
+						</Col>
+						<Col lg={2} className="joinGroup">
+							<Button variant='outline-success' type='submit' className='float-left'>
 								Create
 							</Button>
 						</Col>
-					</Form.Row>
+					</Row>
 				</Form>
 			</Container>
 		);

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Col, Row, Container, Button, Form, InputGroup } from 'react-bootstrap';
 import axios from 'axios';
 import firebase from 'firebase';
+import "./Friends.css"
 
 class Friends extends Component {
     state = {
@@ -83,53 +84,40 @@ class Friends extends Component {
 
     render() {
         return (
-            <Container className='p-3'>
+            <Container className="mainContainer">
                 {/* Form for following new person */}
-                <Form
-                    id='newFollowForm'
-                    onSubmit={this.handleSubmit}
-                    className='shadow-lg p-3 mb-5 bg-white'
-                    lg={8}
-                >
-                    <Form.Row className='align-items-center'>
-                        {/* Entry box */}
-                        <Form.Group as={Col} controlId='newFollowName'>
-                            <Form.Label className='float-left'>
-                                New Follow
-                            </Form.Label>
-                            <InputGroup>
-                                <InputGroup.Prepend>
-                                    <InputGroup.Text>@</InputGroup.Text>
-                                </InputGroup.Prepend>
-                                <Form.Control
-                                    type='text'
-                                    aria-describedby='inputGroupPrepend'
-                                    placeholder='username'
-                                    onChange={this.handleChange}
-                                    required
-                                />
-                            </InputGroup>
-                            <Form.Text className='float-left'>
-                                Enter the username of the person you want to
-                                follow.
-                            </Form.Text>
-                        </Form.Group>
-                        {/* Submission button */}
-                        <Col>
-                            <Button
-                                variant='outline-primary'
-                                type='submit'
-                                className='float-left'
-                            >
-                                Follow
-                            </Button>
-                        </Col>
-                    </Form.Row>
+                <Form id='newFollowForm' onSubmit={this.handleSubmit}>
+                  <Row className="shadow-lg p-3 mb-5 bg-white">
+                    <Col lg={10}>
+                      <Form.Row className='align-items-center'>
+                          <Form.Group as={Col} controlId='newFollowName'>
+                              <Form.Label className='float-left'>
+                                  Enter a Username to Follow
+                              </Form.Label>
+                              <InputGroup>
+                                  <InputGroup.Prepend>
+                                      <InputGroup.Text>@</InputGroup.Text>
+                                  </InputGroup.Prepend>
+                                  <Form.Control
+                                      type='text'
+                                      aria-describedby='inputGroupPrepend'
+                                      placeholder='Username'
+                                      onChange={this.handleChange}
+                                      required
+                                  />
+                              </InputGroup>
+                          </Form.Group>
+                      </Form.Row>
+                      </Col>
+                      <Col className="followButton">
+                        <Button variant='outline-primary' type='submit'>
+                            Follow
+                        </Button>
+                      </Col>
+                  </Row>
                 </Form>
-                {/* Lists of people we follow and who follow us */}
                 <Row>
-                    {/* People We are following */}
-                    <Col className='shadow-lg p-3 mb-5 bg-white'>
+                    <Col className='shadow-lg p-3 mb-5 bg-white' lg={5}>
                         <h5>Following</h5>
                         {this.state.follows.map(follow => (
                             <Row>
@@ -137,20 +125,16 @@ class Friends extends Component {
                                     <p>{follow.followName}</p>
                                 </Col>
                                 <Col>
-                                    <Button
-                                        key={follow.fid}
-                                        variant='outline-info'
-                                        size='sm'
-                                        onClick={this.handleClick}
-                                    >
+                                    <Button key={follow.fid} variant='outline-info' size='sm' onClick={this.handleClick}>
                                         Unfollow
                                     </Button>
                                 </Col>
                             </Row>
                         ))}
                     </Col>
-                    {/* People following us */}
-                    <Col className='shadow-lg p-3 mb-5 bg-white leftBar'>
+                    <Col lg={2}>
+                    </Col>
+                    <Col className='shadow-lg p-3 mb-5 bg-white' lg={5}>
                         <h5>Followers</h5>
                         {this.state.followers.map(follower => (
                             <Row>
