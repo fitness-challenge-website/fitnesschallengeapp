@@ -38,11 +38,19 @@ this.sortByPoints = this.sortByPoints.bind(this);
           })
   }
 
-  onSort(event, sortKey){
-    const users = this.state.users;
-    users.sort((a,b)=>a[sortKey].localeCompare(b[sortKey]))
-    this.setState({users})
-
+  onSort(event, key) {
+    this.setState({
+      users: this.state.users.sort( (a, b) => (
+        this.state.direction[key] === 'desc'
+          ? a[key].localeCompare(b[key])
+          : b[key].localeCompare(a[key])
+      )),
+      direction: {
+        [key]: this.state.direction[key] === 'desc'
+          ? 'asc'
+          : 'desc'
+      }
+    })
   }
 
   sortByPoints(event, key) {
