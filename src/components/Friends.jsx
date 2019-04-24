@@ -5,82 +5,86 @@ import firebase from 'firebase';
 import "./Friends.css"
 
 class Friends extends Component {
-    state = {
-        followers: [],
-        follows: [],
-        uid: firebase.auth().currentUser.uid,
-        newfollow: '',
-        validated: false,
-    };
+	state = {
+		followers: [],
+		follows: [],
+		uid: firebase.auth().currentUser.uid,
+		newfollow: '',
+		validated: false,
+	};
 
-    // Reads followers in db and stores them in state
-    getFollowers = () => {
-        axios
-            .post('http://localhost:3210/api/getFollowers', {
-                uid: this.state.uid,
-            })
-            .then(res => {
-                let data = res.data;
-                this.setState({
-                    followers: data,
-                });
-            })
-            .catch(err => {
-                //alert('No one is following you. How sad.');
-                console.log(err);
-            });
-    };
+	// Reads followers in db and stores them in state
+	getFollowers = () => {
+		axios
+			.post('http://localhost:3210/api/getFollowers', {
+				following_uid: this.state.uid,
+			})
+			.then(res => {
+				let data = res.data;
+				this.setState({
+					followers: data,
+				});
+			})
+			.catch(err => {
+				//alert('No one is following you. How sad.');
+				console.log(err);
+			});
+	};
 
-    // Reads follows from db and stores them in state
-    getFollows = () => {
-        axios
-            .post('http://localhost:3210/api/getFollows', {
-                uid: this.state.uid,
-            })
-            .then(res => {
-                let data = res.data;
-                this.setState({
-                    follows: data,
-                });
-            })
-            .catch(err => {
-                //alert('You are following no one! What a loner.');
-                console.log(err);
-            });
-    };
+	// Reads follows from db and stores them in state
+	getFollows = () => {
+		axios
+			.post('http://localhost:3210/api/getFollows', {
+				follower_uid: this.state.uid,
+			})
+			.then(res => {
+				let data = res.data;
+				this.setState({
+					follows: data,
+				});
+			})
+			.catch(err => {
+				//alert('You are following no one! What a loner.');
+				console.log(err);
+			});
+	};
 
-    // Gets followers and follows to display on load
-    componentDidMount = () => {
-        this.getFollowers();
-        this.getFollows();
-    };
+	// Gets followers and follows to display on load
+	componentDidMount = () => {
+		this.getFollowers();
+		this.getFollows();
+	};
 
-    // Removes follow from follow list
-    handleClick = e => {
-        axios
-            .post('http://localhost:3210/api/unfollow', { fid: e.target.key })
-            .then(() => this.getFollows())
-            .catch(err => console.log(err));
-    };
+	// Removes follow from follow list
+	handleUnfollow = e => {
+		axios
+			.post('http://localhost:3210/api/unfollow', {
+				following_uid: e.target.key,
+				follower_uid: this.state.uid,
+			})
+			.then(() => this.getFollows())
+			.catch(err => console.log(err));
+	};
 
-    // Used by add follow form, creates follow object for db and then updates follows in state
-    handleSubmit = e => {
-        e.preventDefault();
-        document.getElementById('newFollowForm').reset();
-        axios
-            .post('http://localhost:3210/api/follow', {
-                fid: this.state.newfollow,
-            })
-            .then(() => this.getFollows())
-            .catch(err => console.log(err));
-    };
+	// Used by add follow form, creates follow object for db and then updates follows in state
+	handleFollow = e => {
+		e.preventDefault();
+		document.getElementById('newFollowForm').reset();
+		axios
+			.post('http://localhost:3210/api/follow', {
+				following_uid: this.state.newfollow,
+				follower_uid: this.state.uid,
+			})
+			.then(() => this.getFollows())
+			.catch(err => console.log(err));
+	};
 
-    // Used by add follow form, updates state object with new follow username
-    handleChange = e => {
-        this.setState({
-            newfollow: e.target.value,
-        });
-    };
+	// Used by add follow form, updates state object with new follow username
+	handleChange = e => {
+		this.setState({
+			newfollow: e.target.value,
+		});
+	};
 
     render() {
         return (
