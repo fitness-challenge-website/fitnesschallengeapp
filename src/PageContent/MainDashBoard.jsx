@@ -35,6 +35,15 @@ class MainDashBoard extends Component {
             <h4>Welcome,
               {" " + firebase.auth().currentUser.displayName}
             </h4>
+            <h6>
+              Today's completed activity:
+            </h6>
+            <Row className="activityList">
+              <Col>
+                <p> You haven't completed any activity today! </p>
+              </Col>
+
+            </Row>
           </Col>
 
           <Col className="shadow-lg p-3 mb-5 bg-white leftBar" lg={4}>
