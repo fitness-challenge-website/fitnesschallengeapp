@@ -18,11 +18,14 @@ class Leaderboard extends Component {
 
   constructor(props, context) {
     super(props, context);
-    this.state = {users: []
+    this.state = {users: [],
+      direction: {
+        totalpoints:'desc',
+      }
 
   };
 this.onSort=this.onSort.bind(this);
-this.onSortPoints=this.onSortPoints.bind(this);
+this.sortByPoints = this.sortByPoints.bind(this);
 }
 
   componentDidMount() {
@@ -41,6 +44,23 @@ this.onSortPoints=this.onSortPoints.bind(this);
     this.setState({users})
 
   }
+
+  sortByPoints(event, key) {
+    this.setState({
+      users: this.state.users.sort( (a, b) => (
+        this.state.direction[key] === 'desc'
+          ? a[key] - b[key]
+          : b[key] - a[key]
+      )),
+      direction: {
+        [key]: this.state.direction[key] === 'desc'
+          ? 'asc'
+          : 'desc'
+      }
+    })
+  }
+
+
   userList() {
     this.state.users.sort((a, b) => b.totalpoints - a.totalpoints);
       return this.state.users.map(function(currentUser, i){
@@ -48,11 +68,6 @@ this.onSortPoints=this.onSortPoints.bind(this);
       })
   }
 
-  onSortPoints(event, sortKey){
-    const users = this.state.users;
-    users.sort((a, b) => b.totalpoints - a.totalpoints);
-    this.setState({users})
-  }
 
   render() {
     var newusers=this.state.users;
@@ -65,7 +80,7 @@ this.onSortPoints=this.onSortPoints.bind(this);
                     <th onClick={e=>this.onSort(e, 'username')}>Username</th>
                     <th onClick={e=>this.onSort(e, 'f_name')}>First Name</th>
                     <th onClick={e=>this.onSort(e, 'l_name')}>Last Name</th>
-                    <th onClick={e=>this.onSortPoints(e, 'totalpoints')}>Total Points</th>
+                    <th onClick={e=>this.sortByPoints(e, 'totalpoints')}>Total Points</th>
                 </tr>
             </thead>
             <tbody>
