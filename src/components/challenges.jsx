@@ -1,9 +1,7 @@
 import React, { Component } from "react"
-// import firebase from "firebase"
 import "./challenges.css";
 import { Button, Container, Row, Col } from 'react-bootstrap'
-{/* Pull challenges from the database. Challenges will have IDs associated
-  with them. When a user */}
+
 class Challenges extends Component {
   render() {
     return (
