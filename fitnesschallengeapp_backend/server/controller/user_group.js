@@ -62,5 +62,25 @@ module.exports = {
       res.status(400).send(err);
       console.log(err);
     });
+  },
+  getMembers(req, res){
+    return User_Group.findAll({
+      where:{
+        gid: req.body.gid
+      },
+      include:[
+        {
+          model:User,
+          attributes:['uid', 'f_name', 'l_name', 'username', 'totalpoints'],
+          as: "User"
+        }
+      ]
+    }).then(data => {
+      res.status(200).send(data);
+    }).catch(err => {
+      res.status(400).send(err);
+      console.log(err);
+    })
+
   }
 }
