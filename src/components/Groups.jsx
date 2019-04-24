@@ -7,6 +7,7 @@ import {
 	InputGroup,
 	Button,
 	Alert,
+	Fade,
 } from 'react-bootstrap';
 import firebase from 'firebase';
 import axios from 'axios';
@@ -21,6 +22,7 @@ class Groups extends Component {
 		showAlert: false,
 		action: '',
 		action_group: '',
+		members: [],
 		uid: firebase.auth().currentUser.uid,
 	};
 
@@ -82,10 +84,11 @@ class Groups extends Component {
 			.catch(err => console.log(err));
 	};
 
-	handleLeave = (gid, g_name) => {
+	handleLeave = (ugid, g_name) => {
+		console.log(ugid, g_name);
 		axios
 			.post('http://localhost:3210/api/leaveGroup', {
-				ugid: gid,
+				ugid: ugid,
 				uid: this.state.uid,
 			})
 			.then(() => {
@@ -100,8 +103,19 @@ class Groups extends Component {
 	};
 
 	handleSelect = group => {
+		if (group === this.state.selected_group) return;
+
 		console.log(group);
-		//this.setState({ selected_group: group });
+		axios
+			.post('http://localhost:3210/api/getMembers', {
+				gid: group.gid,
+			})
+			.then(res => {
+				let members = res.data;
+				console.log(members);
+				this.setState({ members: members, selected_group: group });
+			})
+			.catch(err => console.log(err));
 	};
 	handleChange = e => this.setState({ [e.target.id]: e.target.value });
 	handleClose = () => this.setState({ showAlert: false });
@@ -172,11 +186,10 @@ class Groups extends Component {
 									<Button
 										onClick={() =>
 											this.handleLeave(
-												group.gid,
-												group.g_name,
+												group.ugid,
+												group.Group.g_name,
 											)
 										}
-										id={group.gid}
 									>
 										Leave
 									</Button>
@@ -188,8 +201,13 @@ class Groups extends Component {
 					{/* List members of selected group */}
 					{this.state.selected_group ? (
 						<Col>
-							{this.state.selected_group.members.map(member => (
-								<p>{member}</p>
+							<h5>
+								{this.state.selected_group.Group.g_name} Members
+							</h5>
+							{this.state.members.map(member => (
+								<p key={member.User.uid}>
+									{member.User.f_name} {member.User.l_name}
+								</p>
 							))}
 						</Col>
 					) : null}
@@ -238,29 +256,22 @@ class Groups extends Component {
 				</Form>
 
 				{/* Action Notifications */}
-				{this.state.showAlert ? (
+				{this.state.showAlert && (
 					<Alert
-						//dismissible
+						dismissible
 						show={this.state.alert}
 						variant='success'
 						onClose={this.handleClose}
-						transition
+						//transition
 					>
 						<Row className='d-flex justify-content-center align-middle'>
 							<span className='align-middle'>
 								You have successfully {this.state.action}{' '}
 								{this.state.action_group}!
 							</span>
-							<Button
-								onClick={this.handleClose}
-								variant='outline-success'
-								className='m-3'
-							>
-								X
-							</Button>
 						</Row>
 					</Alert>
-				) : null}
+				)}
 			</Container>
 		);
 	}
