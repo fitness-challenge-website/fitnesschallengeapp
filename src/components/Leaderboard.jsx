@@ -18,8 +18,15 @@ class Leaderboard extends Component {
 
   constructor(props, context) {
     super(props, context);
-    this.state = {users: []};
-  }
+    this.state = {users: [],
+      direction: {
+        totalpoints:'asc',
+      }
+
+  };
+this.onSort=this.onSort.bind(this);
+this.sortByPoints = this.sortByPoints.bind(this);
+}
 
   componentDidMount() {
       axios.post('http://localhost:3210/api/listUsers')
@@ -31,28 +38,71 @@ class Leaderboard extends Component {
           })
   }
 
+  onSort(event, key) {
+    this.setState({
+      users: this.state.users.sort( (a, b) => (
+        this.state.direction[key] === 'asc'
+          ? a[key].localeCompare(b[key])
+          : b[key].localeCompare(a[key])
+      )),
+      direction: {
+        [key]: this.state.direction[key] === 'asc'
+          ? 'desc'
+          : 'asc'
+      }
+    })
+  }
+
+  sortByPoints(event, key) {
+    this.setState({
+      users: this.state.users.sort( (a, b) => (
+        this.state.direction[key] === 'asc'
+          ? a[key] - b[key]
+          : b[key] - a[key]
+      )),
+      direction: {
+        [key]: this.state.direction[key] === 'asc'
+          ? 'desc'
+          : 'asc'
+      }
+    })
+  }
+
+
   userList() {
     this.state.users.sort((a, b) => b.totalpoints - a.totalpoints);
       return this.state.users.map(function(currentUser, i){
-          return <User user={currentUser} key={i} />;
+          return <User.totalpoints user={currentUser} key={i} />;
       })
   }
 
+
   render() {
+    var newusers=this.state.users;
 		return (
       <Container className="LeaderboardDisplay">
         <h1>Leaderboard</h1>
         <table className="table table-striped" style={{ marginTop: 20 }} >
             <thead>
                 <tr>
-                    <th>Username</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Total Points</th>
+                    <th onClick={e=>this.onSort(e, 'username')}>Username</th>
+                    <th onClick={e=>this.onSort(e, 'f_name')}>First Name</th>
+                    <th onClick={e=>this.onSort(e, 'l_name')}>Last Name</th>
+                    <th onClick={e=>this.sortByPoints(e, 'totalpoints')}>Total Points</th>
                 </tr>
             </thead>
             <tbody>
-                { this.userList() }
+              {newusers.map(function(currentUser, i){
+                return(
+                  <tr key={i} data-item={currentUser}>
+                    <td data-title="Username">{currentUser.username}</td>
+                    <td data-title="First Name">{currentUser.f_name}</td>
+                    <td data-title="Last Name">{currentUser.l_name}</td>
+                    <td data-title="Total Points">{currentUser.totalpoints}</td>
+                  </tr>
+
+                );
+              })}
             </tbody>
         </table>
       </Container>
