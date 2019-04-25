@@ -6,7 +6,7 @@ import axios from 'axios';
 import firebase from 'firebase';
 
 class UserDash extends Component {
-	state = { user_activities: [] };
+	state = { user_activities: [], loaded: false };
 
 	componentDidMount = () => {
 		axios
@@ -14,7 +14,7 @@ class UserDash extends Component {
 				uid: firebase.auth().currentUser.uid,
 			})
 			.then(res => {
-				this.setState({ user_activities: res.data });
+				this.setState({ user_activities: res.data, loaded: true });
 				console.log('Data:', res.data);
 			})
 			.catch(err => {
@@ -23,6 +23,7 @@ class UserDash extends Component {
 	};
 
 	render() {
+		if (!this.state.loaded) return null;
 		return (
 			<Container>
 				<Row>
