@@ -17,11 +17,11 @@ class Register extends Component {
   }
 
   doCreateUserWithEmailAndPassword = (email, password) => {
-    var email = document.getElementById("enterEmail").value;
-    var password = document.getElementById("enterPass").value;
+    email = document.getElementById("enterEmail").value;
+    password = document.getElementById("enterPass").value;
     firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
         console.log(error);
-        alert("Invalid Email or Password");
+        alert(error);
         window.location.href = "/register";
     });
     this.props.history.push('/newuser');

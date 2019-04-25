@@ -6,7 +6,12 @@ import axios from 'axios';
 import firebase from 'firebase';
 
 class UserDash extends Component {
-    state = { user_activities: [] };
+
+  constructor(props, context) {
+    super(props, context);
+    this.state = { user_activities: [] };
+
+  }
 
     componentDidMount = () => {
         axios
@@ -27,16 +32,16 @@ class UserDash extends Component {
             return null;
         }
         return (
-            <Container>
-                <Row>
-                    <Charts user_activities={this.state.user_activities} />
-                </Row>
-                <Row>
-                    <UserFeed user_activities={this.state.user_activities} />
-                </Row>
-            </Container>
-        );
-    }
+        <Container>
+            <Row>
+                <Charts user_activities={this.state.user_activities} />
+            </Row>
+            <Row>
+                <UserFeed user_activities={this.state.user_activities} />
+            </Row>
+        </Container>
+
+      )}
 }
 
 export default UserDash;

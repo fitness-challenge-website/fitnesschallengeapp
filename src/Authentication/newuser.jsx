@@ -61,19 +61,19 @@ class NewUser extends Component {
                 <Form>
                 <Form.Group>
                   <Form.Label>First Name</Form.Label>
-                  <Form.Control id="editFirstName" type="username" placeholder="Enter First Name"/>
+                  <Form.Control required id="editFirstName" type="username" placeholder="Enter First Name"/>
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>Last Name</Form.Label>
-                  <Form.Control id="editLastName" type="username" placeholder="Enter Last Name"/>
+                  <Form.Control required id="editLastName" type="username" placeholder="Enter Last Name"/>
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>Username</Form.Label>
-                  <Form.Control id="editUsername" type="username" placeholder="Enter a Username"/>
+                  <Form.Control required id="editUsername" type="username" placeholder="Enter a Username"/>
                 </Form.Group>
                   <Form.Group>
                     <Form.Label>Height</Form.Label>
-                    <Form.Control id="editHeight" as="select">
+                    <Form.Control required id="editHeight" as="select">
                       <option>4'0"</option>
                       <option>4'1"</option>
                       <option>4'2"</option>
@@ -115,15 +115,15 @@ class NewUser extends Component {
 
                   <Form.Group>
                     <Form.Label>Weight</Form.Label>
-                    <Form.Control id="editWeight" type="text" placeholder="Weight (in lbs)"/>
+                    <Form.Control required id="editWeight" type="text" placeholder="Weight (in lbs)"/>
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Age</Form.Label>
-                    <Form.Control id="editAge" type="text" placeholder="Enter Age"/>
+                    <Form.Control required id="editAge" type="text" placeholder="Enter Age"/>
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Gender</Form.Label>
-                    <Form.Control id="editGender" as="select">
+                    <Form.Control required id="editGender" as="select">
                       <option>Male</option>
                       <option>Female</option>
                       <option>Other</option>
