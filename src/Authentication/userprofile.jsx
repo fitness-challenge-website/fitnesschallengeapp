@@ -55,9 +55,9 @@ class UserProfile extends Component {
   }
 
   authenticatePassword() {
-    this.reauthenticate();
-    this.handleClose();
-    this.handleShowProfile();
+        this.reauthenticate();
+        this.handleClose();
+        this.handleShowProfile();
   }
 
   handleShowHealth() {
@@ -94,16 +94,11 @@ class UserProfile extends Component {
       console.log(err);
     });
 
-
-    // this.setState({ height: document.getElementById("editHeight").value });
-    // this.setState({ weight: document.getElementById("editWeight").value });
-    // this.setState({ gender: document.getElementById("editGender").value });
     this.handleClose();
-    // window.location.reload();
   }
 
   reauthenticate = (currentPassword) => {
-    currentPassword = document.getElementById("currentPassword").value;
+    currentPassword = document.getElementById("currentUPassword").value;
     var user = firebase.auth().currentUser;
     var cred = firebase.auth.EmailAuthProvider.credential(
         user.email, currentPassword);
@@ -111,29 +106,49 @@ class UserProfile extends Component {
   }
 
   changePassword = (currentPassword, newPassword) => {
-    newPassword = document.getElementById("newPasswordOne").value;
-    var newPasswordCheck = document.getElementById("newPasswordTwo").value;
-    var newEmail = document.getElementById("newEmail").value;
 
-    if (newPassword != null ) {
-      if (newPassword === newPasswordCheck) {
-          var user = firebase.auth().currentUser;
-          user.updatePassword(newPassword).then(() => {
-            this.handleClose();
-            alert("Password Updated!");
-          }).catch((error) => { });
-      } else {
-        alert("Passwords must match!");
-      }
+    currentPassword = document.getElementById("currentUserPassword").value;
+    // console.log(currentPassword);
+    var newPasswordOne = document.getElementById("newPasswordOne").value;
+    var newPasswordTwo = document.getElementById("newPasswordTwo").value;
+    // var newEmail = document.getElementById("newEmail").value;
+
+    var user = firebase.auth().currentUser;
+    var credential;
+
+    if (currentPassword != "") {
+      // Prompt the user to re-provide their sign-in credentials
+
+      credential = firebase.auth.EmailAuthProvider.credential(
+          user.email, currentPassword);
+
+      user.reauthenticateAndRetrieveDataWithCredential(credential).then(function() {
+        // User re-authenticated.
+        if (newPasswordOne != "") {
+          if (newPasswordOne === newPasswordTwo) {
+            user.updatePassword(newPasswordOne).then(function() {
+              // Update successful.
+              alert("Password Updated!");
+              // this.handleClose();
+            }).catch(function(error) {
+              // An error happened.
+              alert(error);
+            });
+
+          } else {
+            alert("Passwords Do Not Match.")
+          }
+        }
+      }).catch(function(error) {
+        // An error happened.
+        alert(error);
+      });
+    } else {
+      alert("Please Enter Current Password!")
     }
 
-    if (newEmail != null) {
-        var user = firebase.auth().currentUser;
-        user.updateEmail(newEmail).then(() => {
-          this.handleClose();
-          alert("Email Updated!");
-        }).catch((error) => { });
-    }
+    // this.handleClose();
+
   }
 
   deleteAccount = (currentPassword) => {
@@ -237,7 +252,7 @@ class UserProfile extends Component {
               <Col lg={3}>
               </Col>
               <Col lg={3}>
-                <Button variant="primary" onClick={this.handleShowPassword}>
+                <Button variant="primary" onClick={this.handleShowProfile}>
                     Edit Profile
                 </Button>
               </Col>
@@ -374,7 +389,19 @@ class UserProfile extends Component {
             <Container>
               <Form>
                 <Form.Group>
+
+                  <Row className="formPadding">
+                    <Col>
+                      <Form.Label>Enter Current Password</Form.Label>
+                    </Col>
+                  </Row>
+
                   <Row>
+                    <Col>
+                      <Form.Control required id="currentUserPassword" type="password" placeholder="Enter Current Password"/>
+                    </Col>
+                  </Row>
+                  <Row className="formPadding">
                     <Col>
                       <Form.Label>Change Password</Form.Label>
                     </Col>
@@ -389,17 +416,8 @@ class UserProfile extends Component {
                       <Form.Control id="newPasswordTwo" type="password" placeholder="Re-Enter New Password" />
                     </Col>
                   </Row>
-                  <Row className="formPadding">
-                    <Col>
-                      <Form.Label>Change Email</Form.Label>
-                    </Col>
-                  </Row>
-                  <Row className="formPaddingTwo">
-                    <Col>
-                      <Form.Control id="newEmail" type="email" placeholder="Enter New Email" />
-                    </Col>
-                  </Row>
-                  <Row className="formPadding text-center">
+
+                  <Row className="formPaddingThree text-center">
                     <Col>
                       <label style={{backgroundColor: 'steelblue', color: 'white', padding: 10, borderRadius: 4, pointer: 'cursor'}}>
                         Upload Avatar
