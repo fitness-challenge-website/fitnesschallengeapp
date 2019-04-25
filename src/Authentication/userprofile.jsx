@@ -87,7 +87,7 @@ class UserProfile extends Component {
       gender: document.getElementById("editGender").value
     })
     .then(res => {
-      let data = res.data;
+      // let data = res.data;
       window.location.reload();
     }).catch(err => {
       // alert("Check If you have a data in the user table.");
@@ -116,7 +116,7 @@ class UserProfile extends Component {
     var user = firebase.auth().currentUser;
     var credential;
 
-    if (currentPassword != "") {
+    if (currentPassword !== "") {
       // Prompt the user to re-provide their sign-in credentials
 
       credential = firebase.auth.EmailAuthProvider.credential(
@@ -124,7 +124,7 @@ class UserProfile extends Component {
 
       user.reauthenticateAndRetrieveDataWithCredential(credential).then(function() {
         // User re-authenticated.
-        if (newPasswordOne != "") {
+        if (newPasswordOne !== "") {
           if (newPasswordOne === newPasswordTwo) {
             user.updatePassword(newPasswordOne).then(function() {
               // Update successful.
@@ -216,7 +216,7 @@ class UserProfile extends Component {
           <Col lg={5} className="profPic">
             {
               firebase.auth().currentUser.photoURL ?
-                <img height="300px" src={firebase.auth().currentUser.photoURL }/>
+                <img height="300px" src={firebase.auth().currentUser.photoURL} alt="User Avatar"/>
               :
                 <img className="shadow-lg" src="http://i.pravatar.cc/300" alt="User Avatar"/>
             }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Container, Row, Col, Dropdown } from 'react-bootstrap';
-import axios from 'axios';
+// import axios from 'axios';
 
 class Charts extends Component {
 	constructor(props) {

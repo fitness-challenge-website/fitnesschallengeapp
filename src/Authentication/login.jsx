@@ -15,8 +15,8 @@ class Login extends Component {
   }
 
   doSignInWithEmailAndPassword = (email, password) => {
-    var email = document.getElementById("enterEmail").value;
-    var password = document.getElementById("enterPass").value;
+    email = document.getElementById("enterEmail").value;
+    password = document.getElementById("enterPass").value;
     firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
         console.log(error);
         alert("Invalid Email or Password");

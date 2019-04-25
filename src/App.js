@@ -18,7 +18,6 @@ import NewUser from './Authentication/newuser'
 import Friends from './components/Friends'
 import Groups from './components/Groups'
 import Register from './Authentication/register'
-import UserProfileTest from "./Authentication/userprofiletest"
 
 
 firebase.initializeApp({
@@ -57,9 +56,8 @@ class App extends Component {
                   <Route path='yearlychallenge' component={YearlyChallenge} />
                   <Route path='/yearlychallenge' component={YearlyChallenge} />
                   <Route path='/newuser' component={NewUser} />
-                  <Route path='/test' component={UserProfileTest} />
-				  <Route path='/friends' component={Friends} />
-				  <Route path='/groups' component={Groups} />
+        				  <Route path='/friends' component={Friends} />
+        				  <Route path='/groups' component={Groups} />
                 </Switch>
           </BrowserRouter>
         </div>
