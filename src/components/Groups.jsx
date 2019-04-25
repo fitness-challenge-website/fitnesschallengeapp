@@ -7,7 +7,6 @@ import {
 	InputGroup,
 	Button,
 	Alert,
-	Fade,
 } from 'react-bootstrap';
 import firebase from 'firebase';
 import axios from 'axios';
