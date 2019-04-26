@@ -13,8 +13,13 @@ module.exports = (sequelize, DataTypes) => {
   Friends.associate = function(models) {
     Friends.belongsTo(models.User, {
       foreignKey: "following_uid",
-      as:'User'
+      as:'following'
     });
+
+    Friends.belongsTo(models.User, {
+      foreignKey: 'follower_uid',
+      as:'follower'
+    })
   };
   return Friends;
 };
