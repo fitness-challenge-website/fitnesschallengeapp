@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import "../index.css"
 // import { Button, Form, Container, Row, Col, Modal } from 'react-bootstrap'
-import { Container } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 // import firebase from "firebase"
 
 const User = props => (
@@ -81,30 +81,34 @@ this.sortByPoints = this.sortByPoints.bind(this);
     var newusers=this.state.users;
 		return (
       <Container className="LeaderboardDisplay">
-        <h1>Leaderboard</h1>
-        <table className="table table-striped" style={{ marginTop: 20 }} >
-            <thead>
-                <tr>
-                    <th onClick={e=>this.onSort(e, 'username')}>Username</th>
-                    <th onClick={e=>this.onSort(e, 'f_name')}>First Name</th>
-                    <th onClick={e=>this.onSort(e, 'l_name')}>Last Name</th>
-                    <th onClick={e=>this.sortByPoints(e, 'totalpoints')}>Total Points</th>
-                </tr>
-            </thead>
-            <tbody>
-              {newusers.map(function(currentUser, i){
-                return(
-                  <tr key={i} data-item={currentUser}>
-                    <td data-title="Username">{currentUser.username}</td>
-                    <td data-title="First Name">{currentUser.f_name}</td>
-                    <td data-title="Last Name">{currentUser.l_name}</td>
-                    <td data-title="Total Points">{currentUser.totalpoints}</td>
-                  </tr>
+        <Row className="shadow-lg p-3 mb-5 bg-white">
+          <Col>
+              <h1>Leaderboard</h1>
+              <table className="table table-striped" style={{ marginTop: 20 }} >
+                  <thead>
+                      <tr>
+                          <th onClick={e=>this.onSort(e, 'username')}>Username</th>
+                          <th onClick={e=>this.onSort(e, 'f_name')}>First Name</th>
+                          <th onClick={e=>this.onSort(e, 'l_name')}>Last Name</th>
+                          <th onClick={e=>this.sortByPoints(e, 'totalpoints')}>Total Points</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    {newusers.map(function(currentUser, i){
+                      return(
+                        <tr key={i} data-item={currentUser}>
+                          <td data-title="Username">{currentUser.username}</td>
+                          <td data-title="First Name">{currentUser.f_name}</td>
+                          <td data-title="Last Name">{currentUser.l_name}</td>
+                          <td data-title="Total Points">{currentUser.totalpoints}</td>
+                        </tr>
 
-                );
-              })}
-            </tbody>
-        </table>
+                      );
+                    })}
+                  </tbody>
+              </table>
+            </Col>
+          </Row>
       </Container>
 		);
 	}
