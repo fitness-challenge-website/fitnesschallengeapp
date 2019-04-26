@@ -18,6 +18,7 @@ import NewUser from './Authentication/newuser'
 import Friends from './components/Friends'
 import Groups from './components/Groups'
 import Register from './Authentication/register'
+import FriendLeaderboard from './components/FriendLeaderboard'
 
 
 firebase.initializeApp({
@@ -58,6 +59,7 @@ class App extends Component {
                   <Route path='/newuser' component={NewUser} />
         				  <Route path='/friends' component={Friends} />
         				  <Route path='/groups' component={Groups} />
+                  <Route path='/friendleaderboard' component={FriendLeaderboard} />
                 </Switch>
           </BrowserRouter>
         </div>

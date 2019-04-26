@@ -40,6 +40,7 @@ class NavBar extends Component {
                 <Nav.Link href="/leaderboard">Leaderboard</Nav.Link>
                 <Nav.Link href="/challenges">Challenges</Nav.Link>
                 <Nav.Link href="/addactivity">Add Activity</Nav.Link>
+                <Nav.Link href="/friendleaderboard">Friend Leaderboard</Nav.Link>
               </Nav>
             </Navbar.Collapse>
             <Navbar.Collapse className="justify-content-end">
