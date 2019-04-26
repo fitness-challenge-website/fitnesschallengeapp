@@ -18,6 +18,7 @@ import NewUser from './Authentication/newuser'
 import Friends from './components/Friends'
 import Groups from './components/Groups'
 import Register from './Authentication/register'
+import HeartMonth from './components/challengesFolder/heartmonth'
 
 
 firebase.initializeApp({
@@ -55,6 +56,7 @@ class App extends Component {
                   <Route path='/monthlychallenge' component={MonthlyChallenge} />
                   <Route path='yearlychallenge' component={YearlyChallenge} />
                   <Route path='/yearlychallenge' component={YearlyChallenge} />
+                  <Route path='/hmonth' component={HeartMonth} />
                   <Route path='/newuser' component={NewUser} />
         				  <Route path='/friends' component={Friends} />
         				  <Route path='/groups' component={Groups} />
