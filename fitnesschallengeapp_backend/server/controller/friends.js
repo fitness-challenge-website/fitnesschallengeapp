@@ -43,7 +43,7 @@ module.exports = {
 
     return false;
   },
-  listFriends(req, res){
+  listFollowings(req, res){
     return Friends.findAll({
       where:{
         follower_uid: req.body.uid
@@ -52,7 +52,26 @@ module.exports = {
         {
           model: User,
           attributes: ['uid', 'f_name', 'l_name', 'totalpoints'],
-          as: "User"
+          as: "following"
+        }
+      ]
+    }).then(data =>{
+      res.status(200).send(data);
+    }).catch(err =>{
+      res.status(400).send(err);
+      console.log(err);
+    })
+  },
+  listFollowers(req, res){
+    return Friends.findAll({
+      where:{
+        following_uid: req.body.uid
+      },
+      include: [
+        {
+          model: User,
+          attributes: ['uid', 'f_name', 'l_name', 'totalpoints'],
+          as: "follower"
         }
       ]
     }).then(data =>{
@@ -62,4 +81,5 @@ module.exports = {
       console.log(err);
     })
   }
+}
 }
