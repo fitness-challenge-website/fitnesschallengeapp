@@ -20,7 +20,7 @@ class Leaderboard extends Component {
     super(props, context);
     this.state = {users: [],
       direction: {
-        totalpoints:'asc',
+        totalpoints:'desc',
       }
 
   };
@@ -41,14 +41,14 @@ this.sortByPoints = this.sortByPoints.bind(this);
   onSort(event, key) {
     this.setState({
       users: this.state.users.sort( (a, b) => (
-        this.state.direction[key] === 'asc'
+        this.state.direction[key] === 'desc'
           ? a[key].localeCompare(b[key])
           : b[key].localeCompare(a[key])
       )),
       direction: {
-        [key]: this.state.direction[key] === 'asc'
-          ? 'desc'
-          : 'asc'
+        [key]: this.state.direction[key] === 'desc'
+          ? 'asc'
+          : 'desc'
       }
     })
   }
@@ -56,18 +56,17 @@ this.sortByPoints = this.sortByPoints.bind(this);
   sortByPoints(event, key) {
     this.setState({
       users: this.state.users.sort( (a, b) => (
-        this.state.direction[key] === 'asc'
-          ? a[key] - b[key]
-          : b[key] - a[key]
+        this.state.direction[key] === 'desc'
+          ? b[key] - a[key]
+          : a[key] - b[key]
       )),
       direction: {
-        [key]: this.state.direction[key] === 'asc'
-          ? 'desc'
-          : 'asc'
+        [key]: this.state.direction[key] === 'desc'
+          ? 'asc'
+          : 'desc'
       }
     })
   }
-
 
   userList() {
     this.state.users.sort((a, b) => b.totalpoints - a.totalpoints);
