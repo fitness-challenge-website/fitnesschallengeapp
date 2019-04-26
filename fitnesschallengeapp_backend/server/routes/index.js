@@ -32,7 +32,8 @@ module.exports = (app) => {
   app.post("/api/follow", frCtrl.follow);
   app.post("/api/unfollow", frCtrl.unfollow);
   app.post("/api/isFriend", frCtrl.isFriend);
-  app.post("/api/listFriends", frCtrl.listFriends);
+  app.post("/api/listFollowings", frCtrl.listFollowings);
+  app.post("/api/listFollowers", frCtrl.listFollowers);
 
   //Badge
   app.post("/api/addBadge", bgCtrl.addBadge);
@@ -54,4 +55,5 @@ module.exports = (app) => {
   app.post("/api/leaveGroup", usergrpCtrl.leaveGroup);
   app.post("/api/isBelongTo", usergrpCtrl.isBelongTo);
   app.post("/api/getMyGroups", usergrpCtrl.getMyGroups);
+  app.post("/api/getMembers", usergrpCtrl.getMembers);
 }
