@@ -73,7 +73,7 @@ class Challenges extends Component {
                 </Row>
                 <Row className="imagePadding">
                   <Col>
-                    <Button variant="primary">View</Button>
+                    <Button variant="primary" href="/hmonth">View</Button>
                   </Col>
                 </Row>
               </Col>

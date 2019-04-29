@@ -4,6 +4,7 @@ import Charts from './Charts';
 import { Container, Row } from 'react-bootstrap';
 import axios from 'axios';
 import firebase from 'firebase';
+import './Leaderboard.css';
 
 class UserDash extends Component {
 	state = { user_activities: [], loaded: false };
