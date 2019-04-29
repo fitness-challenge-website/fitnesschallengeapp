@@ -4,6 +4,7 @@ import Charts from './Charts';
 import { Container, Row } from 'react-bootstrap';
 import axios from 'axios';
 import firebase from 'firebase';
+import './Leaderboard.css';
 
 class UserDash extends Component {
 
@@ -32,11 +33,11 @@ class UserDash extends Component {
             return null;
         }
         return (
-        <Container>
-            <Row>
+        <Container className="mainContainer">
+            <Row className="shadow-lg p-3 mb-5 bg-white">
                 <Charts user_activities={this.state.user_activities} />
             </Row>
-            <Row>
+            <Row className="shadow-lg p-3 mb-5 bg-white">
                 <UserFeed user_activities={this.state.user_activities} />
             </Row>
         </Container>
