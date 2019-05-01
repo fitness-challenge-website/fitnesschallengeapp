@@ -34,7 +34,7 @@ class AddActivity extends Component {
         weight: data.weight
       });
     }).catch(err => {
-      
+
       console.log(err);
     });
 
