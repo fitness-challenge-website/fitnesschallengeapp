@@ -8,6 +8,7 @@ import {
 	Button,
 	Alert,
 } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import firebase from 'firebase';
 import axios from 'axios';
 import './Groups.css';
@@ -97,6 +98,9 @@ class Groups extends Component {
 					action: 'left',
 					action_group: g_name,
 				});
+				if (ugid === this.state.selected_group.ugid) {
+					this.setState({ selected_group: '' });
+				}
 			})
 			.catch(err => console.log(err));
 	};
@@ -204,9 +208,12 @@ class Groups extends Component {
 								{this.state.selected_group.Group.g_name} Members
 							</h5>
 							{this.state.members.map(member => (
-								<p key={member.User.uid}>
+								<Link
+									key={member.User.uid}
+									to={'/userdash/' + member.User.uid}
+								>
 									{member.User.f_name} {member.User.l_name}
-								</p>
+								</Link>
 							))}
 						</Col>
 					) : null}

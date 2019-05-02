@@ -224,8 +224,8 @@ class UserProfile extends Component {
           </Col>
 
           <Col className="shadow-lg p-3 mb-5 bg-white contentDiv" lg={6}>
-            <h3 class="name"> {firebase.auth().currentUser.displayName} </h3>
-            <h6 class="email"> {firebase.auth().currentUser.email} </h6>
+            <h3 className="name"> {firebase.auth().currentUser.displayName} </h3>
+            <h6 className="email"> {firebase.auth().currentUser.email} </h6>
 
             <Row className="displayInfo">
               <Col>

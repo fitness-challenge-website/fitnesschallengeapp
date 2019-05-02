@@ -36,7 +36,7 @@ class NavBar extends Component {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
-                <Nav.Link href="/userdash">Dashboard</Nav.Link>
+                <Nav.Link href={"/userdash/" + firebase.auth().currentUser.uid}>Dashboard</Nav.Link>
                 <Nav.Link href="/leaderboard">Leaderboard</Nav.Link>
                 <Nav.Link href="/challenges">Challenges</Nav.Link>
                 <Nav.Link href="/addactivity">Add Activity</Nav.Link>
