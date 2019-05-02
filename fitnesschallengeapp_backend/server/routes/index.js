@@ -32,8 +32,7 @@ module.exports = (app) => {
   app.post("/api/follow", frCtrl.follow);
   app.post("/api/unfollow", frCtrl.unfollow);
   app.post("/api/isFriend", frCtrl.isFriend);
-  app.post("/api/listFollowings", frCtrl.listFollowings);
-  app.post("/api/listFollowers", frCtrl.listFollowers);
+  app.post("/api/listFriends", frCtrl.listFriends);
 
   //Badge
   app.post("/api/addBadge", bgCtrl.addBadge);
