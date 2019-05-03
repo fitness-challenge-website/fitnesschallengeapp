@@ -47,7 +47,7 @@ class App extends Component {
                 <Switch>
                   <Route exact path='/' component={MainDashBoard} />
                   <Route path='/login' component={Login} />
-                  <Route path='/userdash' component={UserDash} />
+                  <Route path='/userdash/:uid' component={UserDash} />
                   <Route path='/profile' component={UserProfile} />
                   <Route path='/addactivity' component={AddActivity} />
                   <Route path='/leaderboard' component={Leaderboard} />

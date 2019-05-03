@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
-import { Col, Row, Container, Button, Form, InputGroup } from 'react-bootstrap';
+import {
+	Col,
+	Row,
+	Container,
+	Button,
+	Form,
+	InputGroup,
+	Alert,
+} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import firebase from 'firebase';
-import "./Friends.css"
+import './Friends.css';
 
 class Friends extends Component {
 	state = {
@@ -11,6 +20,8 @@ class Friends extends Component {
 		uid: firebase.auth().currentUser.uid,
 		newfollow: '',
 		validated: false,
+		showAlert: false,
+		alertAction: '',
 	};
 
 	// Reads followers in db and stores them in state
@@ -62,7 +73,10 @@ class Friends extends Component {
 				following_uid: e.target.key,
 				follower_uid: this.state.uid,
 			})
-			.then(() => this.getFollows())
+			.then(() => {
+				this.getFollows();
+				this.setState({ showAlert: true, alertAction: 'unfollowed' });
+			})
 			.catch(err => console.log(err));
 	};
 
@@ -75,7 +89,10 @@ class Friends extends Component {
 				following_uid: this.state.newfollow,
 				follower_uid: this.state.uid,
 			})
-			.then(() => this.getFollows())
+			.then(() => {
+				this.getFollows();
+				this.setState({ showAlert: true, alertAction: 'followed' });
+			})
 			.catch(err => console.log(err));
 	};
 
@@ -86,70 +103,98 @@ class Friends extends Component {
 		});
 	};
 
-    render() {
-        return (
-            <Container className="mainContainer">
-                {/* Form for following new person */}
-                <Form id='newFollowForm' onSubmit={this.handleSubmit}>
-                  <Row className="shadow-lg p-3 mb-5 bg-white">
-                    <Col lg={10}>
-                      <Form.Row className='align-items-center'>
-                          <Form.Group as={Col} controlId='newFollowName'>
-                              <Form.Label className='float-left'>
-                                  Enter a Username to Follow
-                              </Form.Label>
-                              <InputGroup>
-                                  <InputGroup.Prepend>
-                                      <InputGroup.Text>@</InputGroup.Text>
-                                  </InputGroup.Prepend>
-                                  <Form.Control
-                                      type='text'
-                                      aria-describedby='inputGroupPrepend'
-                                      placeholder='Username'
-                                      onChange={this.handleChange}
-                                      required
-                                  />
-                              </InputGroup>
-                          </Form.Group>
-                      </Form.Row>
-                      </Col>
-                      <Col className="followButton">
-                        <Button variant='outline-primary' type='submit'>
-                            Follow
-                        </Button>
-                      </Col>
-                  </Row>
-                </Form>
-                <Row>
-                    <Col className='shadow-lg p-3 mb-5 bg-white' lg={5}>
-                        <h5>Following</h5>
-                        {this.state.follows.map(follow => (
-                            <Row>
-                                <Col>
-                                    <p>{follow.followName}</p>
-                                </Col>
-                                <Col>
-                                    <Button key={follow.fid} variant='outline-info' size='sm' onClick={this.handleClick}>
-                                        Unfollow
-                                    </Button>
-                                </Col>
-                            </Row>
-                        ))}
-                    </Col>
-                    <Col lg={2}>
-                    </Col>
-                    <Col className='shadow-lg p-3 mb-5 bg-white' lg={5}>
-                        <h5>Followers</h5>
-                        {this.state.followers.map(follower => (
-                            <Row>
-                                <p>{follower.followerName}</p>
-                            </Row>
-                        ))}
-                    </Col>
-                </Row>
-            </Container>
-        );
-    }
+	handleClose = () => this.setState({ showAlert: false });
+
+	render() {
+		return (
+			<Container className='mainContainer'>
+				{/* Form for following new person */}
+				<Form id='newFollowForm' onSubmit={this.handleSubmit}>
+					<Row className='shadow-lg p-3 mb-5 bg-white'>
+						<Col lg={10}>
+							<Form.Row className='align-items-center'>
+								<Form.Group as={Col} controlId='newFollowName'>
+									<Form.Label className='float-left'>
+										Enter a Username to Follow
+									</Form.Label>
+									<InputGroup>
+										<InputGroup.Prepend>
+											<InputGroup.Text>@</InputGroup.Text>
+										</InputGroup.Prepend>
+										<Form.Control
+											type='text'
+											aria-describedby='inputGroupPrepend'
+											placeholder='Username'
+											onChange={this.handleChange}
+											required
+										/>
+									</InputGroup>
+								</Form.Group>
+							</Form.Row>
+						</Col>
+						<Col className='followButton'>
+							<Button variant='outline-primary' type='submit'>
+								Follow
+							</Button>
+						</Col>
+					</Row>
+				</Form>
+				<Row>
+					<Col className='shadow-lg p-3 mb-5 bg-white' lg={5}>
+						<h5>Following</h5>
+						{this.state.follows.map(follow => (
+							<Row>
+								<Col>
+									<Link to={'/userdash/' + follow.uid}>
+										{follow.followerName}
+									</Link>
+								</Col>
+								<Col>
+									<Button
+										key={follow.fid}
+										variant='outline-info'
+										size='sm'
+										onClick={this.handleClick}
+									>
+										Unfollow
+									</Button>
+								</Col>
+							</Row>
+						))}
+					</Col>
+					<Col lg={2} />
+					<Col className='shadow-lg p-3 mb-5 bg-white' lg={5}>
+						<h5>Followers</h5>
+						{this.state.followers.map(follower => (
+							<Row>
+								<Link to={'/userdash/' + follower.uid}>
+									{follower.followerName}
+								</Link>
+							</Row>
+						))}
+					</Col>
+				</Row>
+
+				{/* Follow Notifications */}
+				{this.state.showAlert && (
+					<Alert
+						dismissible
+						show={this.state.alert}
+						variant='success'
+						onClose={this.handleClose}
+						//transition
+					>
+						<Row className='d-flex justify-content-center align-middle'>
+							<span className='align-middle'>
+								You have successfully {this.state.alertAction}{' '}
+								{this.state.newfollow}!
+							</span>
+						</Row>
+					</Alert>
+				)}
+			</Container>
+		);
+	}
 }
 
 export default Friends;

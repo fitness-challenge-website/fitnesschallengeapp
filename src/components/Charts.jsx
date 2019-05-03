@@ -71,6 +71,14 @@ class Charts extends Component {
 			format = 'MMMM YY';
 		}
 
+		//Get number of points user has before time in question
+		cumulativeData[0] = this.getInitialActivities(
+			unit,
+			moment().subtract(numPoints, unit),
+		);
+		console.log(cumulativeData[0]);
+
+		//Get point accumulation over the time in question
 		for (let i = 0; i < numPoints; i++) {
 			labels[numPoints - i - 1] = moment()
 				.subtract(i, unit)
@@ -79,12 +87,12 @@ class Charts extends Component {
 				unit,
 				moment().subtract(numPoints - i, unit),
 			);
-			if (i === 0) {
-				cumulativeData[0] = data[0];
-			} else {
+			if (i !== 0) {
 				cumulativeData[i] = cumulativeData[i - 1] + data[i];
 			}
 		}
+
+		//Update charts with the accumulation data
 		this.updateChartData(labels, timescale, data, cumulativeData);
 	};
 
@@ -121,6 +129,14 @@ class Charts extends Component {
 		).length;
 	};
 
+	//Returns the number of activities completed before a given number of the given timescale.
+	getInitialActivities = (timescale, date) => {
+		const moment = require('moment');
+		return this.props.user_activities.filter(
+			activity => moment(activity.updatedAt).diff(date, timescale) <= 0,
+		).length;
+	};
+
 	handleClick = e => {
 		this.setState({
 			timescale: e.target.id,
@@ -129,7 +145,6 @@ class Charts extends Component {
 	};
 
 	render() {
-		//console.log('Activities:', this.props.user_activities)
 		return (
 			<Container>
 				<div className='TimeScaleSelect'>
@@ -168,6 +183,30 @@ class Charts extends Component {
 									display: true,
 									position: 'right',
 								},
+								scales: {
+									yAxes: [
+										{
+											ticks: {
+												min: 0,
+												max:
+													2 *
+														this.state.chartData
+															.datasets[0].data[
+															this.state.chartData
+																.datasets[0]
+																.data.length - 1
+														] +
+													1,
+												stepSize: 1,
+											},
+										},
+									],
+								},
+								elements: {
+									point: {
+										radius: 0,
+									},
+								},
 							}}
 						/>
 					</Col>
@@ -184,6 +223,32 @@ class Charts extends Component {
 								legend: {
 									display: true,
 									position: 'right',
+								},
+								scales: {
+									yAxes: [
+										{
+											ticks: {
+												min: 0,
+												max:
+													2 *
+														this.state
+															.cumulativeData
+															.datasets[0].data[
+															this.state
+																.cumulativeData
+																.datasets[0]
+																.data.length - 1
+														] +
+													1,
+												stepSize: 1,
+											},
+										},
+									],
+								},
+								elements: {
+									point: {
+										radius: 0,
+									},
 								},
 							}}
 						/>
