@@ -85,7 +85,7 @@ class Charts extends Component {
 				.format(format);
 			data[i] = this.getNumActivities(
 				unit,
-				moment().subtract(numPoints - i, unit),
+				moment().subtract(numPoints - i - 1, unit),
 			);
 			if (i !== 0) {
 				cumulativeData[i] = cumulativeData[i - 1] + data[i];
